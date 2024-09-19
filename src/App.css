@@ -60,8 +60,12 @@ body {
 
 .header img {
   max-height: 50px;
-  max-width: fit-content;
-} 
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
 
 .header .title {
   text-align: center;
