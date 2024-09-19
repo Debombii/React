@@ -59,9 +59,12 @@ body {
 } 
 
 .header img {
-  max-height: 50px;
-  max-width: fit-content;
-} 
+  max-height: none;
+  max-width: none; 
+  width: auto;
+  height: auto;    
+}
+
 
 .header .title {
   text-align: center;
