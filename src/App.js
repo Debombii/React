@@ -46,13 +46,13 @@ const ChangelogGenerator = () => {
   const extractContent = (html) => {
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
-        return contentMatch[0];
+      return contentMatch[0];
     }
     return '';
   };
 
   const generateHtml = () => {
-    const { color } = companyStyles[company] || companyStyles['MRG'];
+    const { color } = companyStyles[company] || companyStyles['GERP'];
 
     const html = `
     <!DOCTYPE html>
@@ -167,17 +167,17 @@ const ChangelogGenerator = () => {
     formData.append('company', selectedCompany);  // Agrega la compañía seleccionada al FormData
 
     fetch('https://flask-nine-theta.vercel.app/upload-file', {
-  method: 'POST',
-  body: formData
-})
-  .then(response => response.json())
-  .then(result => {
-    console.log(result);
-  })
-  .catch(error => {
-    console.error('Error al subir el archivo y ejecutar el script:', error);
-  });
-
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error('Error al subir el archivo y ejecutar el script:', error);
+      });
+  };
   
   return (
     <div>
@@ -200,7 +200,7 @@ const ChangelogGenerator = () => {
             Empresa:
             <select
               value={company}
-              onChange={(e) => setCompany(e.target.value)} // Solo actualiza el estado de la empresa
+              onChange={(e) => setCompany(e.target.value)}
               required
               className="input2"
             >
