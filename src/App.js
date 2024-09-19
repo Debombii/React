@@ -146,7 +146,7 @@ const ChangelogGenerator = () => {
             </select>
           </label>
           <label className="label">
-            Descripción (HTML):
+            Descripción:
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n" // Reemplaza esto con tu propia clave de API de TinyMCE
               value={description}
