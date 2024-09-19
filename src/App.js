@@ -166,7 +166,7 @@ const ChangelogGenerator = () => {
     formData.append('file', blob, 'changelog.html');
     formData.append('company', selectedCompany);  // Agrega la compañía seleccionada al FormData
 
-    fetch('https://flask-5lpo6v4ca-debombiis-projects.vercel.app//upload-file', {
+    fetch('https://flask-5lpo6v4ca-debombiis-projects.vercel.app/upload-file', {
       method: 'POST',
       body: formData
     })
