@@ -3,7 +3,6 @@ import './App.css';
 
 const ChangelogGenerator = () => {
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [newFeatures, setNewFeatures] = useState('');
   const [versionNotes, setVersionNotes] = useState('');
@@ -26,6 +25,24 @@ const ChangelogGenerator = () => {
       color: '#0c0844',
       iconUrl: 'https://www.rubiconsulting.es/wp-content/uploads/2019/08/Logo2-01.png'
     }
+  };
+
+  // Generar una fecha en formato DD/MM/YYYY
+  const getCurrentDate = () => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  // Generar una versión basada en el mes, el año y tres números aleatorios
+  const generateVersion = () => {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes en formato MM
+    const year = String(today.getFullYear()).slice(-2); // Últimos dos dígitos del año
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(3, '0'); // Tres números aleatorios
+    return `${month}${year}-${randomNumbers}`;
   };
 
   const escapeHtml = (html) => {
@@ -53,6 +70,8 @@ const ChangelogGenerator = () => {
 
   const generateHtml = () => {
     const { color } = companyStyles[company] || companyStyles['MRG'];
+    const currentDate = getCurrentDate();
+    const version = generateVersion();
 
     const html = `
     <!DOCTYPE html>
@@ -135,7 +154,7 @@ const ChangelogGenerator = () => {
             <div class='content'>
                 <div class='version'>
                     <h2 id="${title.trim().replace(/\s+/g, '-')}">${title}</h2>
-                    <p class='date' id="date">${date}</p>
+                    <p class='date' id="date">${currentDate}</p>
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
@@ -180,7 +199,6 @@ const ChangelogGenerator = () => {
     });
 };
 
-  
   return (
     <div>
       <header className="header">
@@ -193,10 +211,6 @@ const ChangelogGenerator = () => {
           <label className="label">
             Versión (Distintiva):
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required className="input" />
-          </label>
-          <label className="label">
-            Fecha:
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required className="input" />
           </label>
           <label className="label">
             Empresa:
