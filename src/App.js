@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Editor } from '@tinymce/tinymce-react';
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState('');
@@ -215,7 +216,24 @@ const ChangelogGenerator = () => {
           </label>
           <label className="label">
             Descripción (HTML):
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} required className="textarea"></textarea>
+            <Editor
+              apiKey="YOUR_TINYMCE_API_KEY" // Reemplaza esto con tu propia clave de API de TinyMCE
+              value={description}
+              init={{
+                height: 300,
+                menubar: false,
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help'
+              }}
+              onEditorChange={(newValue) => setDescription(newValue)}
+              required
+            />
           </label>
           <label className="label">
             Nuevas Funcionalidades (una por línea):
