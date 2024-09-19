@@ -27,24 +27,6 @@ const ChangelogGenerator = () => {
     }
   };
 
-  // Generar una fecha en formato DD/MM/YYYY
-  const getCurrentDate = () => {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-
-  // Generar una versión basada en el mes, el año y tres números aleatorios
-  const generateVersion = () => {
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes en formato MM
-    const year = String(today.getFullYear()).slice(-2); // Últimos dos dígitos del año
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(3, '0'); // Tres números aleatorios
-    return `${month}${year}-${randomNumbers}`;
-  };
-
   const escapeHtml = (html) => {
     return html
       .replace(/&/g, "&amp;")
@@ -68,10 +50,17 @@ const ChangelogGenerator = () => {
     return '';
   };
 
+  const generateVersion = () => {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes en formato MM
+    const year = String(today.getFullYear()).slice(-2); // Últimos dos dígitos del año
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(3, '0'); // Tres números aleatorios
+    return `${month}${year}-${randomNumbers}`;
+  };
+
   const generateHtml = () => {
     const { color } = companyStyles[company] || companyStyles['MRG'];
-    const currentDate = getCurrentDate();
-    const version = generateVersion();
+    const version = generateVersion(); // Generar versión automáticamente
 
     const html = `
     <!DOCTYPE html>
@@ -154,7 +143,7 @@ const ChangelogGenerator = () => {
             <div class='content'>
                 <div class='version'>
                     <h2 id="${title.trim().replace(/\s+/g, '-')}">${title}</h2>
-                    <p class='date' id="date">${currentDate}</p>
+                    <p class='date' id="date">${new Date().toLocaleDateString('es-ES')}</p>
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
@@ -209,8 +198,12 @@ const ChangelogGenerator = () => {
         <h1 className="title">Generador de Log de Cambios</h1>
         <form onSubmit={(e) => { e.preventDefault(); generateHtml(); }} className="form">
           <label className="label">
-            Versión (Distintiva):
+            Título:
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required className="input" />
+          </label>
+          <label className="label">
+            Fecha:
+            <input type="date" value={new Date().toISOString().split('T')[0]} readOnly className="input" />
           </label>
           <label className="label">
             Empresa:
