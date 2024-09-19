@@ -46,13 +46,13 @@ const ChangelogGenerator = () => {
   const extractContent = (html) => {
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
-      return contentMatch[0];
+        return contentMatch[0];
     }
     return '';
   };
 
   const generateHtml = () => {
-    const { color } = companyStyles[company] || companyStyles['GERP'];
+    const { color } = companyStyles[company] || companyStyles['MRG'];
 
     const html = `
     <!DOCTYPE html>
@@ -166,7 +166,7 @@ const ChangelogGenerator = () => {
     formData.append('file', blob, 'changelog.html');
     formData.append('company', selectedCompany);  // Agrega la compañía seleccionada al FormData
 
-    fetch('https://flask-nine-theta.vercel.app/upload-file', {
+    fetch('https://flask-5lpo6v4ca-debombiis-projects.vercel.app/upload-file', {
       method: 'POST',
       body: formData
     })
@@ -200,7 +200,7 @@ const ChangelogGenerator = () => {
             Empresa:
             <select
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e) => setCompany(e.target.value)} // Solo actualiza el estado de la empresa
               required
               className="input2"
             >
