@@ -166,18 +166,18 @@ const ChangelogGenerator = () => {
     formData.append('file', blob, 'changelog.html');
     formData.append('company', selectedCompany);  // Agrega la compañía seleccionada al FormData
 
-    fetch('https://flask-nine-theta.vercel.app//upload-file', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error('Error al subir el archivo y ejecutar el script:', error);
-      });
-  };
+    fetch('https://flask-nine-theta.vercel.app/upload-file', {
+  method: 'POST',
+  body: formData
+})
+  .then(response => response.json())
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.error('Error al subir el archivo y ejecutar el script:', error);
+  });
+
   
   return (
     <div>
