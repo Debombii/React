@@ -46,13 +46,13 @@ const ChangelogGenerator = () => {
   const extractContent = (html) => {
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
-      return contentMatch[0];
+        return contentMatch[0];
     }
     return '';
   };
 
   const generateHtml = () => {
-    const { color } = companyStyles[company] || companyStyles['GERP'];
+    const { color } = companyStyles[company] || companyStyles['MRG'];
 
     const html = `
     <!DOCTYPE html>
@@ -158,24 +158,33 @@ const ChangelogGenerator = () => {
     setSelectedCompany(company);
   };
 
-  const downloadHtml = () => {
+  const sendJson = () => {
     const versionDiv = bodyContent.match(/<div class='version'>([\s\S]*?)<\/div>/)[0];
-    const blob = new Blob([versionDiv], { type: 'text/html' });
+    
+    // Construimos el objeto JSON
+    const jsonPayload = {
+      company: selectedCompany,
+      title,
+      date,
+      description,
+      newFeatures,
+      versionNotes,
+      versionDiv
+    };
 
-    const formData = new FormData();
-    formData.append('file', blob, 'changelog.html');
-    formData.append('company', selectedCompany);  // Agrega la compañía seleccionada al FormData
-
-    fetch('https://flask-nine-theta.vercel.app/upload-file', {
+    fetch('https://flask-5lpo6v4ca-debombiis-projects.vercel.app/upload-json', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonPayload),  // Enviamos el JSON directamente
     })
       .then(response => response.json())
       .then(result => {
         console.log(result);
       })
       .catch(error => {
-        console.error('Error al subir el archivo y ejecutar el script:', error);
+        console.error('Error al enviar el JSON:', error);
       });
   };
   
@@ -200,7 +209,7 @@ const ChangelogGenerator = () => {
             Empresa:
             <select
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e) => setCompany(e.target.value)} // Solo actualiza el estado de la empresa
               required
               className="input2"
             >
@@ -240,12 +249,12 @@ const ChangelogGenerator = () => {
             <textarea className="body-source-textarea" readOnly value={bodyContent} />
             <div className="button-container">
               <button
-                onClick={downloadHtml}
+                onClick={sendJson}
                 className={`download-button ${isHovered === 'download' ? 'download-button-hover' : ''}`}
                 onMouseEnter={() => setIsHovered('download')}
                 onMouseLeave={() => setIsHovered('')}
               >
-                Descargar Archivo
+                Enviar JSON
               </button>
             </div>
           </div>
