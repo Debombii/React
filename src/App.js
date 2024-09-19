@@ -84,73 +84,6 @@ const ChangelogGenerator = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>${version}</title>
         <style>
-        :root {
-              --main-bg-color: #f4f4f4;
-              --main-text-color: #333;
-              --highlight-color: ${color};
-              --light-text-color: #777;
-              --border-color: #ddd;
-              --box-shadow-color: rgba(0, 0, 0, 0.1);
-              --container-max-width: 1200px;
-              --index-width: 250px;
-          }
-          body {
-              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              margin: 0;
-              padding: 0;
-              background-color: var(--main-bg-color);
-              color: var(--main-text-color);
-              line-height: 1.6;
-          }
-          .header {
-              display: flex;
-              justify-content: right;
-              padding: 20px;
-              box-shadow: 0 2px 4px var(--box-shadow-color);
-          }
-          .container {
-              display: flex;
-              flex-direction: row;
-              max-width: var(--container-max-width);
-              margin: 0 auto;
-              padding: 20px;
-              background-color: var(--main-bg-color);
-          }
-          .content {
-              flex: 1;
-              margin-right: 30px;
-          }
-          h1 {
-              text-align: center;
-              color: ${color};
-              margin-bottom: 30px;
-          }
-          .version {
-              margin-bottom: 40px;
-              padding: 20px;
-              background-color: #fff;
-              border-radius: 5px;
-              box-shadow: 0 2px 4px var(--box-shadow-color);
-          }
-          .version h2 {
-              color: ${color};
-              border-bottom: 2px solid ${color};
-              padding-bottom: 5px;
-              font-size: 1.5rem;
-          }
-          .version .date {
-              font-size: 0.9rem;
-              color: var(--light-text-color);
-              margin-bottom: 15px;
-          }
-          .version ul {
-              list-style-type: disc;
-              padding-left: 20px;
-          }
-          .version ul li {
-              margin: 8px 0;
-          }
-        </style>
     </head>
     <body>
         <div class='container'>
@@ -164,7 +97,7 @@ const ChangelogGenerator = () => {
                     <ul>
                         ${newFeatures.split('\n').map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
-                    <h3 style='color: ${color};'>Notas de la Versión</h3>
+                    <h3 class="Maincolor">Notas de la Versión</h3>
                     <p>${versionNotes}</p>
                 </div>
             </div>
