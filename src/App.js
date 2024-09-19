@@ -159,35 +159,27 @@ const ChangelogGenerator = () => {
   };
 
   const sendJson = () => {
-    const versionDiv = bodyContent.match(/<div class='version'>([\s\S]*?)<\/div>/)[0];
-    
-    // Construimos el objeto JSON
     const jsonPayload = {
-      company: selectedCompany,
-      title,
-      date,
-      description,
-      newFeatures,
-      versionNotes,
-      versionDiv
+        company: selectedCompany,  // Empresa seleccionada
+        bodyContent: bodyContent   // Contenido HTML generado
     };
 
     fetch('https://flask-nine-theta.vercel.app/upload-file', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(jsonPayload),
-})
-
-      .then(response => response.json())
-      .then(result => {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonPayload),  // Enviar el JSON
+    })
+    .then(response => response.json())
+    .then(result => {
         console.log(result);
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         console.error('Error al enviar el JSON:', error);
-      });
-  };
+    });
+};
+
   
   return (
     <div>
