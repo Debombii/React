@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 
 const ChangelogGenerator = () => {
-  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [newFeatures, setNewFeatures] = useState('');
   const [versionNotes, setVersionNotes] = useState('');
@@ -68,7 +67,7 @@ const ChangelogGenerator = () => {
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>${title}</title>
+        <title>${version}</title>
         <style>
         :root {
               --main-bg-color: #f4f4f4;
@@ -142,7 +141,7 @@ const ChangelogGenerator = () => {
         <div class='container'>
             <div class='content'>
                 <div class='version'>
-                    <h2 id="${title.trim().replace(/\s+/g, '-')}">${title}</h2>
+                    <h2 id="${version.trim().replace(/\s+/g, '-')}">${version}</h2>
                     <p class='date' id="date">${new Date().toLocaleDateString('es-ES')}</p>
                     <h3>Descripción</h3>
                     ${description}
@@ -197,10 +196,6 @@ const ChangelogGenerator = () => {
       <div className="container">
         <h1 className="title">Generador de Log de Cambios</h1>
         <form onSubmit={(e) => { e.preventDefault(); generateHtml(); }} className="form">
-          <label className="label">
-            Título:
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required className="input" />
-          </label>
           <label className="label">
             Fecha:
             <input type="date" value={new Date().toISOString().split('T')[0]} readOnly className="input" />
