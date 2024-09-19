@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -11,6 +11,20 @@ const ChangelogGenerator = () => {
   const [bodyContent, setBodyContent] = useState('');
   const [isHovered, setIsHovered] = useState('');
   const [selectedCompany, setSelectedCompany] = useState('');
+
+  // Inject TinyMCE script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js';
+    script.referrerPolicy = 'origin';
+    script.async = true;
+    document.head.appendChild(script);
+
+    // Cleanup function to remove the script when component unmounts
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   const companyStyles = {
     MRG: {
@@ -45,7 +59,7 @@ const ChangelogGenerator = () => {
   const extractContent = (html) => {
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
-        return contentMatch[0];
+      return contentMatch[0];
     }
     return '';
   };
@@ -168,25 +182,25 @@ const ChangelogGenerator = () => {
 
   const sendJson = () => {
     const jsonPayload = {
-        company: selectedCompany,  // Empresa seleccionada
-        bodyContent: bodyContent   // Contenido HTML generado
+      company: selectedCompany,  // Empresa seleccionada
+      bodyContent: bodyContent   // Contenido HTML generado
     };
 
     fetch('https://flask-nine-theta.vercel.app/upload-file', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(jsonPayload),  // Enviar el JSON
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonPayload),  // Enviar el JSON
     })
     .then(response => response.json())
     .then(result => {
-        console.log(result);
+      console.log(result);
     })
     .catch(error => {
-        console.error('Error al enviar el JSON:', error);
+      console.error('Error al enviar el JSON:', error);
     });
-};
+  };
 
   return (
     <div>
