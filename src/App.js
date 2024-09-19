@@ -219,7 +219,7 @@ const ChangelogGenerator = () => {
             Empresa:
             <select
               value={company}
-              onChange={(e) => setCompany(e.target.value)} // Solo actualiza el estado de la empresa
+              onChange={(e) => setCompany(e.target.value)} //actualiza el estado de la empresa
               required
               className="input2"
             >
@@ -231,7 +231,7 @@ const ChangelogGenerator = () => {
           <label className="label">
             Descripción (HTML):
             <Editor
-              apiKey="YOUR_TINYMCE_API_KEY" // Reemplaza esto con tu propia clave de API de TinyMCE
+              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n" // Reemplaza esto con tu propia clave de API de TinyMCE
               value={description}
               init={{
                 height: 300,
