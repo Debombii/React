@@ -6,11 +6,10 @@ const ChangelogGenerator = () => {
   const [description, setDescription] = useState('');
   const [newFeatures, setNewFeatures] = useState('');
   const [versionNotes, setVersionNotes] = useState('');
-  const [company, setCompany] = useState('GERP');
+  const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState('');
   const [bodyContent, setBodyContent] = useState('');
   const [isHovered, setIsHovered] = useState('');
-  const [selectedCompany, setSelectedCompany] = useState('');
 
   // Inject TinyMCE script
   useEffect(() => {
@@ -92,14 +91,11 @@ const ChangelogGenerator = () => {
 
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
-    
-    // Guarda la empresa seleccionada
-    setSelectedCompany(company);
   };
 
   const sendJson = () => {
     const jsonPayload = {
-      company: selectedCompany,  // Empresa seleccionada
+      companies: selectedCompanies, // Empresas seleccionadas
       bodyContent: bodyContent   // Contenido HTML generado
     };
 
@@ -119,6 +115,13 @@ const ChangelogGenerator = () => {
     });
   };
 
+  const handleCompanyChange = (e) => {
+    const { value, checked } = e.target;
+    setSelectedCompanies(prev =>
+      checked ? [...prev, value] : prev.filter(company => company !== value)
+    );
+  };
+
   return (
     <div>
       <header className="header">
@@ -134,16 +137,35 @@ const ChangelogGenerator = () => {
           </label>
           <label className="label">
             Proyectos:
-            <select
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              required
-              className="input2"
-            >
-              <option value="MRG">MRG</option>
-              <option value="GERP">GERP</option>
-              <option value="Rubicon">Rubicon</option>
-            </select>
+            <div className="checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  value="MRG"
+                  checked={selectedCompanies.includes('MRG')}
+                  onChange={handleCompanyChange}
+                />
+                MRG
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="GERP"
+                  checked={selectedCompanies.includes('GERP')}
+                  onChange={handleCompanyChange}
+                />
+                GERP
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="Rubicon"
+                  checked={selectedCompanies.includes('Rubicon')}
+                  onChange={handleCompanyChange}
+                />
+                Rubicon
+              </label>
+            </div>
           </label>
           <label className="label">
             Descripción:
