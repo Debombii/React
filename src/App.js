@@ -172,7 +172,7 @@ const ChangelogGenerator = () => {
       versionDiv
     };
 
-    fetch('https://flask-nine-theta.vercel.app/upload-json', {
+    fetch('https://flask-nine-theta.vercel.app/upload-file', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
