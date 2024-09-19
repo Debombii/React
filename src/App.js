@@ -26,21 +26,6 @@ const ChangelogGenerator = () => {
     };
   }, []);
 
-  const companyStyles = {
-    MRG: {
-      color: '#07b3b3',
-      iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeClMWAdH73ZBmOkYRx_U-dyRu_ifleD1Fg&s'
-    },
-    GERP: {
-      color: '#c50000',
-      iconUrl: 'https://gerp-software.es/wp-content/uploads/2022/02/logo_gerp_sinso.png'
-    },
-    Rubicon: {
-      color: '#0c0844',
-      iconUrl: 'https://www.rubiconsulting.es/wp-content/uploads/2019/08/Logo2-01.png'
-    }
-  };
-
   const escapeHtml = (html) => {
     return html
       .replace(/&/g, "&amp;")
@@ -73,7 +58,6 @@ const ChangelogGenerator = () => {
   };
 
   const generateHtml = () => {
-    const { color } = companyStyles[company] || companyStyles['MRG'];
     const version = generateVersion(); // Generar versión automáticamente
 
     const html = `
