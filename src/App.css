@@ -59,7 +59,7 @@ body {
 } 
 
 .header img {
-  max-height: none;
+  max-height: 50px;
   max-width: none; 
   width: auto;
   height: auto;    
