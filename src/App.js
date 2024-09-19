@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { Editor } from '@tinymce/tinymce-react';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { Editor } from "@tinymce/tinymce-react";
 
 const ChangelogGenerator = () => {
-  const [description, setDescription] = useState('');
-  const [newFeatures, setNewFeatures] = useState('');
-  const [versionNotes, setVersionNotes] = useState('');
+  const [description, setDescription] = useState("");
+  const [newFeatures, setNewFeatures] = useState("");
+  const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
-  const [generatedHtml, setGeneratedHtml] = useState('');
-  const [bodyContent, setBodyContent] = useState('');
-  const [isHovered, setIsHovered] = useState('');
+  const [generatedHtml, setGeneratedHtml] = useState("");
+  const [bodyContent, setBodyContent] = useState("");
+  const [isHovered, setIsHovered] = useState("");
 
   // Inject TinyMCE script
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js';
-    script.referrerPolicy = 'origin';
+    const script = document.createElement("script");
+    script.src = "https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js";
+    script.referrerPolicy = "origin";
     script.async = true;
     document.head.appendChild(script);
 
@@ -45,14 +45,17 @@ const ChangelogGenerator = () => {
     if (contentMatch) {
       return contentMatch[0];
     }
-    return '';
+    return "";
   };
 
   const generateVersion = () => {
     const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes en formato MM
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Mes en formato MM
     const year = String(today.getFullYear()).slice(-2); // Últimos dos dígitos del año
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(3, '0'); // Tres números aleatorios
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
+      3,
+      "0"
+    ); // Tres números aleatorios
     return `${month}${year}-${randomNumbers}`;
   };
 
@@ -72,13 +75,20 @@ const ChangelogGenerator = () => {
         <div class='container'>
             <div class='content'>
                 <div class='version'>
-                    <h2 id="${version.trim().replace(/\s+/g, '-')}">${version}</h2>
-                    <p class='date' id="date">${new Date().toLocaleDateString('es-ES')}</p>
+                    <h2 id="${version
+                      .trim()
+                      .replace(/\s+/g, "-")}">${version}</h2>
+                    <p class='date' id="date">${new Date().toLocaleDateString(
+                      "es-ES"
+                    )}</p>
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
                     <ul>
-                        ${newFeatures.split('\n').map(feature => `<li>${feature}</li>`).join('')}
+                        ${newFeatures
+                          .split("\n")
+                          .map((feature) => `<li>${feature}</li>`)
+                          .join("")}
                     </ul>
                     <h3 class="Maincolor">Notas de la Versión</h3>
                     <p>${versionNotes}</p>
@@ -96,44 +106,58 @@ const ChangelogGenerator = () => {
   const sendJson = () => {
     const jsonPayload = {
       companies: selectedCompanies, // Empresas seleccionadas
-      bodyContent: bodyContent   // Contenido HTML generado
+      bodyContent: bodyContent, // Contenido HTML generado
     };
 
-    fetch('https://flask-nine-theta.vercel.app/upload-file', {
-      method: 'POST',
+    fetch("https://flask-nine-theta.vercel.app/upload-file", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(jsonPayload),  // Enviar el JSON
+      body: JSON.stringify(jsonPayload), // Enviar el JSON
     })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
-    })
-    .catch(error => {
-      console.error('Error al enviar el JSON:', error);
-    });
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error("Error al enviar el JSON:", error);
+      });
   };
 
   const handleCompanyChange = (e) => {
     const { value, checked } = e.target;
-    setSelectedCompanies(prev =>
-      checked ? [...prev, value] : prev.filter(company => company !== value)
+    setSelectedCompanies((prev) =>
+      checked ? [...prev, value] : prev.filter((company) => company !== value)
     );
   };
 
   return (
     <div>
       <header className="header">
-        <img src="https://www.rubiconsulting.es/wp-content/uploads/2019/08/Logo2-01.png" alt="Logotipo del generador" />
+        <img
+          src="https://www.rubiconsulting.es/wp-content/uploads/2019/08/Logo2-01.png"
+          alt="Logotipo del generador"
+        />
         <h1 className="title">Generador de Log de Cambios</h1>
       </header>
       <div className="container">
         <h1 className="title">Generador de Log de Cambios</h1>
-        <form onSubmit={(e) => { e.preventDefault(); generateHtml(); }} className="form">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            generateHtml();
+          }}
+          className="form"
+        >
           <label className="label">
             Fecha:
-            <input type="date" value={new Date().toISOString().split('T')[0]} readOnly className="input" />
+            <input
+              type="date"
+              value={new Date().toISOString().split("T")[0]}
+              readOnly
+              className="input"
+            />
           </label>
           <label className="label">
             Proyectos:
@@ -142,27 +166,30 @@ const ChangelogGenerator = () => {
                 <input
                   type="checkbox"
                   value="MRG"
-                  checked={selectedCompanies.includes('MRG')}
+                  checked={selectedCompanies.includes("MRG")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 MRG
               </label>
               <label>
                 <input
                   type="checkbox"
                   value="GERP"
-                  checked={selectedCompanies.includes('GERP')}
+                  checked={selectedCompanies.includes("GERP")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 GERP
               </label>
               <label>
                 <input
                   type="checkbox"
                   value="Rubicon"
-                  checked={selectedCompanies.includes('Rubicon')}
+                  checked={selectedCompanies.includes("Rubicon")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 Rubicon
               </label>
             </div>
@@ -176,13 +203,14 @@ const ChangelogGenerator = () => {
                 height: 300,
                 menubar: false,
                 plugins: [
-                  'advlist autolink lists link image charmap print preview anchor',
-                  'searchreplace visualblocks code fullscreen',
-                  'insertdatetime media table paste code help wordcount'
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount",
                 ],
-                toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                toolbar:
+                  "undo redo | formatselect | bold italic backcolor | \
                   alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help'
+                  bullist numlist outdent indent | removeformat | help",
               }}
               onEditorChange={(newValue) => setDescription(newValue)}
               required
@@ -190,18 +218,30 @@ const ChangelogGenerator = () => {
           </label>
           <label className="label">
             Nuevas Funcionalidades (una por línea):
-            <textarea value={newFeatures} onChange={(e) => setNewFeatures(e.target.value)} required className="textarea"></textarea>
+            <textarea
+              value={newFeatures}
+              onChange={(e) => setNewFeatures(e.target.value)}
+              required
+              className="textarea"
+            ></textarea>
           </label>
           <label className="label">
             Notas de la versión:
-            <textarea value={versionNotes} onChange={(e) => setVersionNotes(e.target.value)} required className="textarea"></textarea>
+            <textarea
+              value={versionNotes}
+              onChange={(e) => setVersionNotes(e.target.value)}
+              required
+              className="textarea"
+            ></textarea>
           </label>
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${isHovered === 'generate' ? 'button-hover' : ''}`}
-              onMouseEnter={() => setIsHovered('generate')}
-              onMouseLeave={() => setIsHovered('')}
+              className={`button ${
+                isHovered === "generate" ? "button-hover" : ""
+              }`}
+              onMouseEnter={() => setIsHovered("generate")}
+              onMouseLeave={() => setIsHovered("")}
             >
               Generar HTML
             </button>
@@ -210,15 +250,25 @@ const ChangelogGenerator = () => {
         {generatedHtml && (
           <div className="generated-html">
             <h2 className="generated-title">HTML Generado:</h2>
-            <textarea className="generated-textarea" readOnly value={generatedHtml} />
+            <textarea
+              className="generated-textarea"
+              readOnly
+              value={generatedHtml}
+            />
             <h2 className="generated-title">Código Fuente del Body:</h2>
-            <textarea className="body-source-textarea" readOnly value={bodyContent} />
+            <textarea
+              className="body-source-textarea"
+              readOnly
+              value={bodyContent}
+            />
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={`download-button ${isHovered === 'download' ? 'download-button-hover' : ''}`}
-                onMouseEnter={() => setIsHovered('download')}
-                onMouseLeave={() => setIsHovered('')}
+                className={`download-button ${
+                  isHovered === "download" ? "download-button-hover" : ""
+                }`}
+                onMouseEnter={() => setIsHovered("download")}
+                onMouseLeave={() => setIsHovered("")}
               >
                 Enviar JSON
               </button>

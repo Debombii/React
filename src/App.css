@@ -115,12 +115,11 @@ body {
     transform: translateY(0);
   } 
 }
-
 /* Estilo general para el grupo de checkboxes */
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espacio entre las casillas */
+  gap: 12px; /* Espacio entre las casillas */
 }
 
 /* Estilo individual para cada casilla */
@@ -128,41 +127,58 @@ body {
   display: flex;
   align-items: center;
   font-size: 16px;
-}
-
-/* Estilo para el input tipo checkbox */
-.checkbox-group input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px; /* Espacio entre el checkbox y la etiqueta */
+  color: #333; /* Color del texto */
   cursor: pointer; /* Cambia el cursor al pasar sobre el checkbox */
 }
 
-/* Estilo para la casilla seleccionada */
-.checkbox-group input[type="checkbox"]:checked {
-  background-color: #007bff; /* Color de fondo cuando está seleccionado */
-  border: 2px solid #007bff; /* Borde cuando está seleccionado */
+/* Ocultar el checkbox por defecto */
+.checkbox-group input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
-/* Personalización del checkbox cuando está seleccionado */
-.checkbox-group input[type="checkbox"]:checked::before {
-  content: '\2713'; /* Marca de verificación en Unicode */
-  color: #fff; /* Color de la marca de verificación */
-  font-size: 16px;
+/* Estilo personalizado para el contenedor del checkbox */
+.checkbox-group .custom-checkbox {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  line-height: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #f0f0f0; /* Color de fondo por defecto */
+  border: 2px solid #ccc; /* Borde por defecto */
+  transition: background-color 0.3s, border-color 0.3s; /* Transiciones suaves */
+  margin-right: 10px; /* Espacio entre el checkbox y la etiqueta */
 }
 
-/* Estilo adicional para etiquetas del checkbox */
-.checkbox-group label {
-  color: #333; /* Color del texto */
+/* Estilo para el contenedor del checkbox cuando está seleccionado */
+.checkbox-group input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: #007bff; /* Color de fondo cuando está seleccionado */
+  border-color: #007bff; /* Borde cuando está seleccionado */
 }
 
-/* Estilo para el contenedor de la etiqueta del checkbox */
-.checkbox-group label input[type="checkbox"]:focus {
+/* Marca de verificación */
+.checkbox-group input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -50%) rotate(45deg); /* Rotar y centrar la marca de verificación */
+}
+
+/* Estilo para el contenedor del checkbox cuando está en foco */
+.checkbox-group input[type="checkbox"]:focus + .custom-checkbox {
   outline: 2px solid #007bff; /* Borde cuando el checkbox está en foco */
+}
+
+/* Estilo adicional para el hover */
+.checkbox-group .custom-checkbox:hover {
+  background-color: #e6e6e6; /* Color de fondo cuando se pasa el ratón */
 }
 
 /* Estilo del título */
