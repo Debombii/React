@@ -132,6 +132,49 @@
                 height: auto;
             }
         }
+        img {
+            max-height: 50px;
+            max-width: fit-content; 
+            display: block;
+            float: right;
+            margin-right: 10px;
+          }
+          
+          @media (min-width: 1025px) {
+            /* Para pantallas grandes como desktops */
+            img {
+              max-width: 300px;
+              transform: scale(0.7);
+              transform-origin: top left;
+            }
+          }
+          
+          @media (max-width: 1024px) {
+            /* Para pantallas más pequeñas como laptops con resolución baja */
+            img {
+              max-width: 300px;
+              transform: scale(0.6);
+              transform-origin: top left;
+            }
+          }
+          
+          @media (max-width: 768px) {
+            /* Para tablets */
+            img {
+              max-width: 250px;
+              transform: scale(0.5);
+              transform-origin: top left; 
+            }
+          }
+          
+          @media (max-width: 480px) {
+            /* Para móviles */
+            img {
+              max-width: 200px;
+              transform: scale(0.4); 
+              transform-origin: top left;
+            }
+          }
     </style>
 </head>
 <body>
