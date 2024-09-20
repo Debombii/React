@@ -7,9 +7,9 @@ const MainApp = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/MRG" element={<Navigate to="./template_MRG.html" />} />
-        <Route path="/GERP" element={<Navigate to="./template_GERP.html" />} />
-        <Route path="/RUBICON" element={<Navigate to="./template_Rubi.html" />} />
+        <Route path="/MRG" element={<Navigate to="/template_MRG.html" />} />
+        <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
+        <Route path="/RUBICON" element={<Navigate to="/template_Rubi.html" />} />
         {/* Agrega más rutas según sea necesario */}
         <Route path="/" element={<App />} /> {/* Ruta principal */}
       </Routes>
