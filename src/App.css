@@ -69,7 +69,7 @@ body {
 @media (min-width: 1025px) {
   /* Para pantallas grandes como desktops */
   .header img {
-    transform: scale(0.7); /* Escala la imagen al 70% de su tamaño original */
+    transform: scale(0.5); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
 }
