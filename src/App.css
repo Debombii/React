@@ -60,7 +60,7 @@ body {
 
 .header img {
   max-height: 50px;
-  max-width: 100%; /* Ajusta el ancho de la imagen para no exceder el contenedor */
+  max-width: fit-content; 
   display: block;
   float: left;
   margin-right: 10px;
@@ -70,7 +70,7 @@ body {
   /* Para pantallas más pequeñas como laptops con resolución baja */
   .header img {
     max-height: 40px;
-    max-width: 100%; /* Ajusta también el ancho en pantallas pequeñas */
+    max-width: fit-content; /* Ajusta también el ancho en pantallas pequeñas */
     margin-right: 8px;
   }
 }
@@ -79,7 +79,7 @@ body {
   /* Para tablets */
   .header img {
     max-height: 30px;
-    max-width: 100%; /* Sigue asegurando que no crezca demasiado */
+    max-width: fit-content; /* Sigue asegurando que no crezca demasiado */
     margin-right: 6px;
   }
 }
@@ -88,7 +88,7 @@ body {
   /* Para móviles */
   .header img {
     max-height: 25px;
-    max-width: 100%; /* Limita el ancho para pantallas móviles */
+    max-width: fit-content; /* Limita el ancho para pantallas móviles */
     margin-right: 5px;
   }
 }
