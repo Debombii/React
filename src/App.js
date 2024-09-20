@@ -5,7 +5,6 @@ import { Editor } from "@tinymce/tinymce-react";
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
   const [newFeatures, setNewFeatures] = useState("");
-  const [solvedErrors, setSolvedErrors] = useState(""); // Nuevo estado para Errores Solucionados
   const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
@@ -89,13 +88,6 @@ const ChangelogGenerator = () => {
                         ${newFeatures
                           .split("\n")
                           .map((feature) => `<li>${feature}</li>`)
-                          .join("")}
-                    </ul>
-                    <h3>Errores Solucionados</h3>
-                    <ul>
-                        ${solvedErrors
-                          .split("\n")
-                          .map((error) => `<li>${error}</li>`)
                           .join("")}
                     </ul>
                     <h3 class="Maincolor">Notas de la Versión</h3>
@@ -229,15 +221,6 @@ const ChangelogGenerator = () => {
             <textarea
               value={newFeatures}
               onChange={(e) => setNewFeatures(e.target.value)}
-              required
-              className="textarea"
-            ></textarea>
-          </label>
-          <label className="label">
-            Errores Solucionados (uno por línea):
-            <textarea
-              value={solvedErrors}
-              onChange={(e) => setSolvedErrors(e.target.value)}
               required
               className="textarea"
             ></textarea>
