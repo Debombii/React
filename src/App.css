@@ -59,9 +59,13 @@ body {
 } 
 
 .header img {
-  max-height: fit-content;
-  max-width: fit-content;
-} 
+  max-height: 50 px;
+  max-width: fit-content; 
+  display: block; 
+  float: left;
+  margin-right: 10px;
+}
+
 
 .header .title {
   text-align: center;
