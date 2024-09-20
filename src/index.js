@@ -1,23 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import App from "./App";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import App from "./App"; // Asegúrate de que App.js exporte tu componente ChangelogGenerator
 
 const MainApp = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/MRG">
-          <Redirect to="/template_MRG.html" />
-        </Route>
-        <Route path="/GERP">
-          <Redirect to="/template_GERP.html" />
-        </Route>
-        <Route path="/RUBICON">
-          <Redirect to="/template_Rubi.html" />
-        </Route>
-        <Route path="/" component={App} /> {/* Ruta principal */}
-      </Switch>
+      <Routes>
+        <Route path="/MRG" element={<Navigate to="/template_MRG.html" />} />
+        <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
+        <Route path="/RUBICON" element={<Navigate to="/template_Rubi.html" />} />
+        {/* Agrega más rutas según sea necesario */}
+        <Route path="/" element={<App />} /> {/* Ruta principal */}
+      </Routes>
     </Router>
   );
 };
