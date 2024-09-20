@@ -77,7 +77,7 @@ body {
 @media (max-width: 1024px) {
   /* Para pantallas más pequeñas como laptops con resolución baja */
   .header img {
-    max-height: 30px;
+    max-width: 30px;
     transform: scale(0.6); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
@@ -86,7 +86,7 @@ body {
 @media (max-width: 768px) {
   /* Para tablets */
   .header img {
-    max-height: 30px;
+    max-width: 30px;
     transform: scale(0.5); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
@@ -95,7 +95,7 @@ body {
 @media (max-width: 480px) {
   /* Para móviles */
   .header img {
-    max-height: 30px;
+    max-width: 30px;
     transform: scale(0.4); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
