@@ -117,7 +117,7 @@ const ChangelogGenerator = () => {
       bodyContent: bodyContent, // Contenido HTML generado
     };
 
-    fetch("https://flask-nine-theta.vercel.app/upload-file", {
+    fetch("https://flask-cyan.vercel.app//upload-file", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
