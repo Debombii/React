@@ -1,8 +1,8 @@
 {
     "rewrites": [
-      { "source": "/MRG", "destination": "src/template_MRG.html" },
-      { "source": "/GERP", "destination": "src/template_Rubi.html" },
-      { "source": "/RUBICON", "destination": "src/template_GERP.html" }
+      { "source": "/MRG", "destination": "template_MRG.html" },
+      { "source": "/GERP", "destination": "template_Rubi.html" },
+      { "source": "/RUBICON", "destination": "template_GERP.html" }
     ]
   }
   
