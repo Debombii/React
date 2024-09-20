@@ -117,7 +117,7 @@ const ChangelogGenerator = () => {
       bodyContent: bodyContent, // Contenido HTML generado
     };
 
-    fetch("https://flask-cyan.vercel.app/upload-file", {
+    fetch("https://flask-five-jade.vercel.app//upload-file", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
