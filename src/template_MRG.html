@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Versión</title>
+    <style>
+        :root {
+            --main-bg-color: #f4f4f4;
+            --main-text-color: #333;
+            --highlight-color: #26adde;
+            --light-text-color: #777;
+            --border-color: #ddd;
+            --box-shadow-color: rgba(0, 0, 0, 0.1);
+            --container-max-width: 1200px;
+            --index-width: 250px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-bg-color);
+            color: var(--main-text-color);
+            line-height: 1.6;
+        }
+        .header {
+            display: flex;
+            justify-content: center; /* Centra el logotipo */
+            padding: 20px;
+            background: var(--main-bg-color);
+            box-shadow: 0 2px 4px var(--box-shadow-color);
+        }
+        .header img {
+            max-height: 60px; /* Ajusta la altura máxima según sea necesario */
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .content {
+            flex: 1;
+            margin-right: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+        .version {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px var(--box-shadow-color);
+        }
+        .version h2 {
+            color: var(--highlight-color);
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 5px;
+            font-size: 1.5rem;
+        }
+        .version h3.Maincolor{
+            color: var(--highlight-color);
+            padding-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .version .date {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+        }
+        .version ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .version ul li {
+            margin: 8px 0;
+        }
+        .index {
+            position: sticky;
+            top: 20px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px var(--box-shadow-color);
+            align-self: flex-start;
+            width: var(--index-width);
+            height: 100vh;
+            margin-right: 20px;
+        }
+        .index h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .index ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .index ul li {
+            margin-bottom: 10px;
+        }
+        .index ul li a {
+            text-decoration: none;
+            color: var(--highlight-color);
+            font-weight: bold;
+            display: block;
+            transition: color 0.3s;
+        }
+        .index ul li a:hover {
+            color: var(--highlight-color);
+        }
+        .index ul li a:focus {
+            outline: 2px solid var(--highlight-color);
+            outline-offset: 2px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .index {
+                position: static;
+                width: 100%;
+                margin-top: 20px;
+                margin-right: 0;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeClMWAdH73ZBmOkYRx_U-dyRu_ifleD1Fg&s" alt="Logotipo de la empresa">
+    </div>
+    <div class="container">
+        <div class="index">
+            <h2>Índice</h2>
+            <ul id="indice">
+            </ul>
+        </div>
+        <div class="content">
+            <div class='version'>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

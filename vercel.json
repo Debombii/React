@@ -1,6 +1,8 @@
 {
     "rewrites": [
-      { "source": "/test", "destination": "/test.html" }
+      { "source": "/MRG", "destination": "src/template_MRG.html" },
+      { "source": "/GERP", "destination": "src/template_Rubi.html" },
+      { "source": "/RUBICON", "destination": "src/template_GERP.html" }
     ]
   }
   
