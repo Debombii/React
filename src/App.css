@@ -60,12 +60,35 @@ body {
 
 .header img {
   max-height: 50px;
-  max-width: fit-content; 
-  display: block; 
+  max-width: fit-content;
+  display: block;
   float: left;
   margin-right: 10px;
 }
 
+@media (max-width: 1024px) {
+  /* Para pantallas más pequeñas como laptops con resolución baja */
+  .header img {
+    max-height: 40px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Para tablets */
+  .header img {
+    max-height: 30px;
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Para móviles */
+  .header img {
+    max-height: 25px;
+    margin-right: 5px;
+  }
+}
 
 .header .title {
   text-align: center;
