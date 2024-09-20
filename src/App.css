@@ -86,7 +86,7 @@ body {
 @media (max-width: 768px) {
   /* Para tablets */
   .header img {
-    max-width: 300px;
+    max-width: 250px;
     transform: scale(0.5); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
@@ -95,7 +95,7 @@ body {
 @media (max-width: 480px) {
   /* Para móviles */
   .header img {
-    max-width: 300px;
+    max-width: 200px;
     transform: scale(0.4); /* Escala la imagen al 70% de su tamaño original */
     transform-origin: top left; /* Asegura que la imagen se escale desde la esquina superior izquierda */
   }
