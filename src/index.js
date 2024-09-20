@@ -1,17 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ChangelogGenerator from "./ChangelogGenerator";
+import TestPage from "./TestPage"; // Importa tu nuevo componente para el subdominio
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/Test" component={TestPage} />
+        <Route path="/" component={ChangelogGenerator} /> {/* Ruta principal */}
+      </Switch>
+    </Router>
+  );
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
