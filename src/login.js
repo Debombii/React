@@ -23,17 +23,17 @@ const Login = () => {
         <form onSubmit={handleLogin}>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Conbtraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button type="submit">Iniciar sesión</button>
         </form>
       </div>
   );
