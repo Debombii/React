@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   return (
-      <div>
+      <div  class="body">
           <div class="login_circles"></div>
         <div className="login-box">
             <h2 class="login">Login</h2>
