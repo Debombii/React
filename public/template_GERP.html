@@ -45,12 +45,12 @@
         }
         
         .content {
-            flex: 0 1 auto;
+            flex: 1 1 0;
             margin-right: 30px;
             white-space: pre-wrap; 
             overflow-wrap: break-word; 
             word-wrap: break-word; 
-            max-width: 100%; 
+            max-width: calc(100% - var(--index-width) - 30px);
             box-sizing: border-box; 
         }
         
@@ -107,8 +107,8 @@
             box-shadow: 0 2px 4px var(--box-shadow-color);
             align-self: flex-start;
             width: var(--index-width);
-            height: auto; 
             min-height: 100vh;
+            height: auto;
             margin-right: 20px;
         }
         
@@ -154,7 +154,7 @@
                 width: 100%;
                 margin-top: 20px;
                 margin-right: 0;
-                height: auto;
+                height: auto; 
             }
         }
         
