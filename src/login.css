@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-.circles {
+.login_circles {
     position: absolute;
     top: 0;
     left: 0;
@@ -39,27 +39,7 @@
     }
 }
 
-@media (max-width: 767px) {
-    .context h1 {
-        font-size: 2.5rem;
-    }
-
-    .context h3 {
-        font-size: 1rem;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    .context h1 {
-        font-size: 3rem;
-    }
-
-    .context h3 {
-        font-size: 1.2rem;
-    }
-}
-
-body {
+body.login{
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -79,17 +59,17 @@ body {
     width: 300px;
   }
   
-  h2 {
+  h2.login {
     color: #0c0844;
     margin-bottom: 20px;
     transition: color 0.3s ease;
   }
   
-  h2:hover {
+  h2.login:hover {
     color: #e5390c;
   }
   
-  input {
+  input.login {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -98,11 +78,11 @@ body {
     box-sizing: border-box;
   }
   
-  input::placeholder {
+  input.login::placeholder {
     color: #ccc;
   }
   
-  button {
+  button.login {
     width: 100%;
     padding: 10px;
     background-color: #e5390c;
@@ -113,7 +93,7 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
+  button.login:hover {
     background-color: #0c0844;
     color: #f4f4f4;
   }

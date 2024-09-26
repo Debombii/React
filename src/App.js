@@ -5,7 +5,7 @@ import { Editor } from "@tinymce/tinymce-react";
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
   const [newFeatures, setNewFeatures] = useState("");
-  const [solvedErrors, setSolvedErrors] = useState(""); // Nuevo estado para Errores Solucionados
+  const [solvedErrors, setSolvedErrors] = useState("");
   const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
