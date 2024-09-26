@@ -54,9 +54,9 @@ const ChangelogGenerator = () => {
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = String(today.getFullYear()).slice(-2); 
     const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
-      3,
+      4,
       "0"
-    ); // Tres números aleatorios
+    );
     return `${month}${year}-${randomNumbers}`;
   };
 
