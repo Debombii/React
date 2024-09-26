@@ -27,32 +27,32 @@
         .header {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* Centrado verticalmente */
             padding: 20px;
-            background: var(--highlight-color); 
+            background: var(--highlight-color); /* Fondo destacado */
             box-shadow: 0 2px 4px var(--box-shadow-color);
         }
         
         .header img {
             max-height: 60px;
-            margin-right: 20px;
+            margin-right: 20px; /* Espaciado a la derecha */
         }
         
         .container {
             display: flex;
             flex-direction: row;
             max-width: var(--container-max-width);
-            margin: 20px auto;
+            margin: 20px auto; /* Espaciado superior e inferior */
             padding: 0;
-            background-color: #ffffff; 
-            border-radius: 8px; 
+            background-color: #ffffff; /* Fondo blanco para el contenedor */
+            border-radius: 8px; /* Bordes redondeados */
             box-shadow: 0 4px 8px var(--box-shadow-color);
         }
         
         .content {
             flex: 1 1 0;
             margin-right: 30px;
-            padding: 20px;
+            padding: 20px; /* Padding interno */
             white-space: pre-wrap; 
             overflow-wrap: break-word; 
             word-wrap: break-word; 
@@ -62,7 +62,7 @@
         
         h1 {
             text-align: center;
-            color: var(--highlight-color);
+            color: var(--highlight-color); /* Título con color destacado */
             margin-bottom: 30px;
         }
         
@@ -105,7 +105,7 @@
         .index {
             position: sticky;
             top: 20px;
-            background: #fff;
+            background: #ffffff;
             border: 1px solid var(--border-color);
             padding: 15px;
             border-radius: 5px;
@@ -118,8 +118,8 @@
         }
         
         .index h2 {
-            font-size: 1.5rem;
-            color: var(--highlight-color);
+            font-size: 1.5rem; /* Aumentado el tamaño */
+            color: var(--highlight-color); /* Título del índice con color destacado */
             margin-bottom: 15px;
         }
         
@@ -135,14 +135,14 @@
         
         .index ul li a {
             text-decoration: none;
-            color: var(--main-text-color);
+            color: var(--main-text-color); /* Color de texto principal */
             font-weight: bold;
             display: block;
             transition: color 0.3s;
         }
         
         .index ul li a:hover {
-            color: var(--highlight-color);
+            color: var(--highlight-color); /* Cambio a color destacado en hover */
         }
         
         .index ul li a:focus {
@@ -165,10 +165,10 @@
         }
         
         img {
-            max-height: 60px;
+            max-height: 60px; /* Ajustado para mayor visibilidad */
             max-width: fit-content;
             display: block;
-            margin-left: 10px;
+            margin-left: 10px; /* Ajustado para centrar la imagen */
         }
         
         @media (min-width: 1025px) {
@@ -202,7 +202,6 @@
                 transform-origin: top left;
             }
         }
-        
     </style>
 </head>
 <body>
