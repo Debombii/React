@@ -2,21 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
-import Login from './Login';
-import ProtectedRoute from './ProtectedRoute';
+import Login from './login';
+import ProtectedRoute from './protectedRoute';
 
 const MainApp = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} /> {/* Ruta de Login */}
+        <Route path="/login" element={<Login />} /> {}
 
-        {/* Rutas protegidas */}
+        {}
         <Route 
           path="/" 
           element={
             <ProtectedRoute>
-              <App /> {/* Ruta principal solo accesible si está autenticado */}
+              <App /> {}
             </ProtectedRoute>
           } 
         />
