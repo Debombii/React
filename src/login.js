@@ -19,7 +19,7 @@ const Login = () => {
 
   return (
       <div>
-          <div class="circles"></div>
+          <div class="login_circles"></div>
         <div className="login-box">
             <h2 class="login">Login</h2>
             <form onSubmit={handleLogin}>
