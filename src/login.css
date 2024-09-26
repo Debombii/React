@@ -1,3 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(to right, #000428, #004e92);
+}
+
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.circles::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 20%, transparent 80%);
+    animation: animate 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .context h1 {
+        font-size: 2.5rem;
+    }
+
+    .context h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .context h1 {
+        font-size: 3rem;
+    }
+
+    .context h3 {
+        font-size: 1.2rem;
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
