@@ -18,7 +18,6 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
       <div className="login-box">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
@@ -37,7 +36,6 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
       </div>
-    </div>
   );
 };
 
