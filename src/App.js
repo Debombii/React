@@ -51,8 +51,8 @@ const ChangelogGenerator = () => {
 
   const generateVersion = () => {
     const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Mes en formato MM
-    const year = String(today.getFullYear()).slice(-2); // Últimos dos dígitos del año
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const year = String(today.getFullYear()).slice(-2); 
     const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
       3,
       "0"
@@ -61,7 +61,7 @@ const ChangelogGenerator = () => {
   };
 
   const generateHtml = () => {
-    const version = generateVersion(); // Generar versión automáticamente
+    const version = generateVersion();
 
     const html = `
     <!DOCTYPE html>
@@ -122,11 +122,13 @@ const ChangelogGenerator = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(jsonPayload), // Enviar el JSON
+      body: JSON.stringify(jsonPayload),
     })
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
+        // Recargar la página después de enviar la solicitud
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error al enviar el JSON:", error);
