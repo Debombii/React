@@ -22,6 +22,9 @@
             background-color: var(--main-bg-color);
             color: var(--main-text-color);
             line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .header {
@@ -34,14 +37,16 @@
         
         .header img {
             max-height: 60px;
+            width: auto; 
         }
         
         .container {
             display: flex;
-            flex-direction: row;
+            flex: 1; 
             max-width: var(--container-max-width);
             margin: 0 auto;
             padding: 20px;
+            overflow: hidden;
         }
         
         .content {
@@ -103,6 +108,7 @@
             width: var(--index-width);
             height: 100vh;
             margin-right: 20px;
+            overflow-y: auto; 
         }
         
         .index h2 {
@@ -146,14 +152,14 @@
                 position: static;
                 width: 100%;
                 margin-top: 20px;
-                margin-right: 0;
                 height: auto;
+                margin-right: 0;
             }
         }
         
         img {
             max-height: 50px;
-            max-width: fit-content;
+            max-width: 100%; 
             display: block;
             float: right;
             margin-right: 10px;
@@ -201,9 +207,41 @@
         <div class="index">
             <h2>Índice</h2>
             <ul id="indice">
+                <li><a href="#version1">Versión 1.0</a></li>
+                <li><a href="#version2">Versión 2.0</a></li>
+                <li><a href="#version3">Versión 3.0</a></li>
+                <!-- Agrega más elementos aquí -->
             </ul>
         </div>
         <div class="content">
+            <div class="version" id="version1">
+                <h2>Versión 1.0</h2>
+                <p class="date">Fecha de lanzamiento: 01-01-2024</p>
+                <ul>
+                    <li>Características nuevas</li>
+                    <li>Mejoras de rendimiento</li>
+                    <li>Corrección de errores</li>
+                </ul>
+            </div>
+            <div class="version" id="version2">
+                <h2>Versión 2.0</h2>
+                <p class="date">Fecha de lanzamiento: 01-02-2024</p>
+                <ul>
+                    <li>Actualización de la interfaz</li>
+                    <li>Funciones mejoradas</li>
+                    <li>Compatibilidad con nuevos dispositivos</li>
+                </ul>
+            </div>
+            <div class="version" id="version3">
+                <h2>Versión 3.0</h2>
+                <p class="date">Fecha de lanzamiento: 01-03-2024</p>
+                <ul>
+                    <li>Integración con nuevas herramientas</li>
+                    <li>Mejoras de seguridad</li>
+                    <li>Funcionalidades adicionales</li>
+                </ul>
+            </div>
+            <!-- Agrega más versiones aquí -->
         </div>
     </div>
 </body>
