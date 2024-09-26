@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Login from './login';
@@ -9,14 +10,12 @@ const MainApp = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} /> {}
-
-        {}
+        <Route path="/login" element={<Login />} />
         <Route 
           path="/" 
           element={
             <ProtectedRoute>
-              <App /> {}
+              <App />
             </ProtectedRoute>
           } 
         />
