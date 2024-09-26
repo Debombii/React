@@ -113,8 +113,8 @@ const ChangelogGenerator = () => {
 
   const sendJson = () => {
     const jsonPayload = {
-      companies: selectedCompanies, // Empresas seleccionadas
-      bodyContent: bodyContent, // Contenido HTML generado
+      companies: selectedCompanies,
+      bodyContent: bodyContent,
     };
 
     fetch("https://flask-five-jade.vercel.app/upload-file", {

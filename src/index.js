@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import App from "./App"; // Asegúrate de que App.js exporte tu componente ChangelogGenerator
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import App from "./App"; // Asegúrate de que App.js exporte tu componente principal
+
+const RedirectToHTML = ({ template }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirigir a la página HTML deseada
+    window.location.href = `/template_${template}.html`;
+  }, [template, navigate]);
+
+  // Mientras se redirige, puedes mostrar un mensaje o nada
+  return null;
+};
 
 const MainApp = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/MRG" element={<Navigate to="/template_MRG.html" />} />
-        <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
-        <Route path="/RUBICON" element={<Navigate to="/template_Rubi.html" />} />
+        <Route path="/MRG" element={<RedirectToHTML template="MRG" />} />
+        <Route path="/GERP" element={<RedirectToHTML template="GERP" />} />
+        <Route path="/RUBICON" element={<RedirectToHTML template="Rubi" />} />
         {/* Agrega más rutas según sea necesario */}
-        <Route path="/" element={<App />} /> {/* Ruta principal */}
+        <Route path="/" element={<App />} /> {/* Ruta principal */} 
       </Routes>
     </Router>
   );
