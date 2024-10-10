@@ -47,6 +47,10 @@ body {
 
 /* Estilo de la cabecera */
 .header {
+  width: 100%;          /* O el ancho que necesites */
+  max-height: 200px;   /* Ajusta según el tamaño deseado */
+  overflow: hidden;     /* Para ocultar cualquier contenido desbordado */
+  text-align: center;   /* Centra el contenido del header */
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -58,12 +62,12 @@ body {
 }
 
 .header img {
-  max-height: 50px;
-  max-width: fit-content;
-  display: block;
-  float: left;
-  margin-right: 10px;
+  max-width: 100%;  /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto;     /* Mantiene la relación de aspecto original */
+  display: block;   /* Asegura que no haya espacios debajo de la imagen */
+  margin: 0 auto;  /* Centra la imagen en el contenedor */
 }
+
 
 @media (min-width: 1025px) {
   .header img {
