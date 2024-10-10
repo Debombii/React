@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.css"; // Asegúrate de que el CSS esté incluido aquí
 import { Editor } from "@tinymce/tinymce-react";
 
 const ChangelogGenerator = () => {
@@ -11,7 +11,7 @@ const ChangelogGenerator = () => {
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
   const [isHovered, setIsHovered] = useState("");
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -69,6 +69,7 @@ const ChangelogGenerator = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>${version}</title>
         <style>
+        </style>
     </head>
     <body>
         <div class='container'>
