@@ -268,7 +268,9 @@ const ChangelogGenerator = () => {
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${isHovered === "generate" ? "button-hover" : ""}`}
+              className={`button ${
+                isHovered === "generate" ? "button-hover" : ""
+              }`}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
@@ -293,7 +295,9 @@ const ChangelogGenerator = () => {
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={`download-button ${isHovered === "download" ? "download-button-hover" : ""}`}
+                className={`download-button ${
+                  isHovered === "download" ? "download-button-hover" : ""
+                }`}
                 onMouseEnter={() => setIsHovered("download")}
                 onMouseLeave={() => setIsHovered("")}
               >
@@ -302,11 +306,12 @@ const ChangelogGenerator = () => {
             </div>
           </div>
         )}
-        {/* Mostrar la rueda de carga si isLoading es verdadero */}
         {isLoading && (
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <p>Cargando...</p>
+          <div className="loading-overlay">
+            <div className="loading-popup">
+              <div className="loading-spinner"></div>
+              <p>Cargando...</p>
+            </div>
           </div>
         )}
       </div>
