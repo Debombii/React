@@ -27,3 +27,6 @@ El flujo de trabajo de **LogGenerator** se compone de los siguientes pasos:
 
 Este repositorio contiene la parte frontend del proyecto, responsable de la generación de contenido HTML y la comunicación con el backend. Para más detalles sobre el procesamiento y la lógica de backend, revisa el [repositorio de Flask](https://github.com/Debombii/Flask).
 
+## Creación de Empresa nueva
+
+Es muy probable que necesites crear un nuevo proyecto y por lo tanto una gestión de una nueva plantilla. **Pero no hay ningún problema** ya que he gestionado el código para que con solo 7 pasos puedas crear tu nueva entrada sin problemas, [En esta guía](https://docs.google.com/document/d/1FJkGZeFGGX6IhcqQpkYy2j4xcTR6P78GvKSfRUwdbt4/edit?usp=sharing)
