@@ -8,7 +8,7 @@
   --border-color: #ddd;
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --container-max-width: 1200px;
-}
+} 
 
 .drop-zone {
   border: 2px dashed #ccc;
@@ -35,6 +35,7 @@
   cursor: pointer;
 }
 
+
 /* Estilo del cuerpo */
 body {
   font-family: Arial, sans-serif;
@@ -43,7 +44,8 @@ body {
   background-color: var(--highlight-color);
   color: var(--main-text-color);
   line-height: 1.6;
-}
+} 
+
 .header {
   display: flex;                /* Utiliza flexbox para organizar los elementos */
   flex-direction: column;       /* Organiza los elementos en columna */
@@ -71,9 +73,8 @@ body {
   text-align: center;           /* Alinea el texto del título al centro */
 }
 
-
-
 @media (min-width: 1025px) {
+  /* Para pantallas grandes como desktops */
   .header img {
     max-width: 300px;
     transform: scale(0.7);
@@ -82,6 +83,7 @@ body {
 }
 
 @media (max-width: 1024px) {
+  /* Para pantallas más pequeñas como laptops con resolución baja */
   .header img {
     max-width: 300px;
     transform: scale(0.6);
@@ -90,20 +92,24 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Para tablets */
   .header img {
     max-width: 250px;
     transform: scale(0.5);
-    transform-origin: top left;
+    transform-origin: top left; 
   }
 }
 
 @media (max-width: 480px) {
+  /* Para móviles */
   .header img {
     max-width: 200px;
-    transform: scale(0.4);
-    transform-origin: top left;
+    transform: scale(0.4); 
+    transform-origin: top left; 
   }
 }
+
+
 
 .header .title {
   text-align: center;
@@ -123,6 +129,8 @@ body {
   color: var(--secondary-color);
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
+
+
 
 /* Estilo del contenedor */
 .container {
@@ -153,9 +161,8 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
+  } 
 }
-
 /* Estilo general para el grupo de checkboxes */
 .checkbox-group {
   display: flex;
@@ -168,7 +175,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: #333;
+  color: #333; 
   cursor: pointer;
 }
 
@@ -187,9 +194,9 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; 
   border: 2px solid #ccc;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s; 
   margin-right: 10px;
 }
 
@@ -219,7 +226,7 @@ body {
 
 /* Estilo adicional para el hover */
 .checkbox-group .custom-checkbox:hover {
-  background-color: #e6e6e6;
+  background-color: #e6e6e6; 
 }
 
 /* Estilo del título */
@@ -228,51 +235,49 @@ body {
   color: var(--highlight-color);
   font-size: 24px;
   margin-bottom: 20px;
-}
+} 
 
 /* Estilo del formulario */
 .form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-}
+} 
 
 /* Estilo de los label */
 .label {
   font-weight: bold;
   margin-bottom: 5px;
-}
+} 
 
 /* Estilo de los input */
 .input {
   width: 98%;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid #ddd; 
+  background-color: #fff; 
   font-size: 16px;
   color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
-
 .input2 {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid #ddd; 
+  background-color: #fff; 
   font-size: 16px;
   color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
-
 /* Estado cuando el input está en foco */
 .input:focus {
   padding: 12px;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9;
-  outline: none;
+  background-color: #f9f9f9; 
+  outline: none; 
 }
 
 /* Estilo para el estado deshabilitado del input */
@@ -281,6 +286,7 @@ body {
   border: 1px solid #ced4da;
   color: #6c757d;
 }
+
 
 /* Estilo de los textarea */
 .textarea {
@@ -292,80 +298,196 @@ body {
   min-height: 100px;
   resize: vertical;
   transition: padding 0.3s ease, box-shadow 0.3s ease;
-}
+} 
 
 .textarea:focus {
   padding: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
+} 
 
 /* Estilo del contenedor del botón */
 .button-container {
   display: flex;
   justify-content: center;
+} 
+
+/* Estilo del botón */
+.button {
+  background-color: var(--highlight-color);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+} 
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} 
+
+/* Estilo del bloque del HTML generado */
+.generated-html {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+} 
+
+.generated-html:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} 
+
+/* Estilo de los títulos de la sección del HTML generado */
+.generated-title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+} 
+
+/* Estilo de los contenedores del código HTML generado */
+.generated-textarea, .body-source-textarea {
+  width: 99%;
+  height: 200px;
+  overflow: auto;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-family: monospace;
+  font-size: 14px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+} 
+
+/* Estilo del botón de descargar el fichero */
+.download-button {
+  background-color: #4100ba;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+} 
+
+.download-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Animación de rebote */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Estilo del botón */
 .button {
   background-color: var(--highlight-color);
   color: white;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  width: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: bounce 0.6s ease;
 }
 
 .button:hover {
-  background-color: var(--secondary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de la tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+/* Animación de "fade in" con rotación */
+@keyframes fadeInRotate {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
 }
 
-th, td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f4f4f4;
-}
-
-/* Estilo para las filas alternas */
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-/* Estilo del pie de página */
-.footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #f4f4f4;
-  margin-top: 20px;
-  color: var(--light-text-color);
-}
-
-/* Estilo de enlaces */
-a {
-  color: var(--highlight-color);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Estilo de la sección de mensaje */
-.message {
+.generated-html {
   margin-top: 20px;
   padding: 15px;
-  border-radius: 5px;
-  border: 1px solid var(--border-color);
   background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInRotate 1s ease;
+}
+
+.generated-html:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-overlay {
+  position: fixed; /* Cubrirá toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Usar flexbox para centrar */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  z-index: 999; /* Asegurarte de que esté por encima de otros elementos */
+}
+
+.loading-popup {
+  text-align: center; /* Centrar el texto */
+  color: white; /* Color del texto */
+}
+
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px); /* Desplazamiento hacia arriba */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loading-spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3); /* Color blanco con transparencia */
+  border-top: 8px solid white; /* Color de la parte superior */
+  border-radius: 50%; /* Hacerlo circular */
+  width: 40px; /* Ancho del spinner */
+  height: 40px; /* Alto del spinner */
+  animation: spin 1s linear infinite; /* Animación */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Estilo del texto de carga */
+.loading-popup p {
+  margin-top: 15px; /* Espaciado entre el spinner y el texto */
+  font-size: 18px; /* Tamaño del texto */
+  color: #333; /* Color más oscuro para mejor legibilidad */
+  font-weight: 500; /* Negrita para mayor énfasis */
 }
