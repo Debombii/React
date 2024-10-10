@@ -44,12 +44,10 @@ body {
   color: var(--main-text-color);
   line-height: 1.6;
 }
-
-/* Estilo de la cabecera */
 .header {
   display: flex;                /* Utiliza flexbox para organizar los elementos */
-  justify-content: center;      /* Centra los elementos horizontalmente */
-  align-items: center;          /* Alinea los elementos verticalmente */
+  flex-direction: column;       /* Organiza los elementos en columna */
+  align-items: center;          /* Centra los elementos horizontalmente */
   padding: 10px;                /* Espacio interno opcional */
   background-color: #f0f0f0;   /* Color de fondo opcional para visualización */
 }
@@ -60,7 +58,9 @@ body {
 }
 
 .title {
-  margin-left: 20px;            /* Espacio entre la imagen y el título */
+  margin-top: 10px;             /* Espacio entre la imagen y el título */
+  font-size: 24px;              /* Tamaño de la fuente del título */
+  text-align: center;           /* Alinea el texto del título al centro */
 }
 
 
