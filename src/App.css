@@ -431,32 +431,36 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Overlay para el popup de carga */
 .loading-overlay {
-  position: fixed; 
+  position: fixed; /* Fijo para cubrir toda la ventana */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000; 
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
+  display: flex; /* Utilizamos flexbox para centrar el contenido */
+  align-items: center; /* Alinear verticalmente al centro */
+  justify-content: center; /* Alinear horizontalmente al centro */
+  z-index: 1000; /* Asegura que el overlay esté por encima de otros elementos */
 }
 
+/* Estilo del popup */
 .loading-popup {
-  background-color: #fff; 
-  border-radius: 12px; 
-  padding: 40px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s; 
+  background-color: #fff; /* Fondo blanco */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 40px; /* Padding más grande */
+  text-align: center; /* Texto centrado */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  animation: fadeIn 0.3s; /* Animación de aparición */
+  position: relative; /* Relativo para el posicionamiento de elementos internos */
 }
 
+/* Animación de aparición */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px); /* Desplazamiento hacia arriba */
   }
   to {
     opacity: 1;
@@ -464,15 +468,17 @@ body {
   }
 }
 
+/* Estilo del spinner */
 .loading-spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db; 
+  border: 8px solid #f3f3f3; /* Color de fondo */
+  border-top: 8px solid #3498db; /* Color de la rueda */
   border-radius: 50%;
-  width: 60px; 
-  height: 60px; 
-  animation: spin 1s linear infinite;
+  width: 60px; /* Tamaño de la rueda */
+  height: 60px; /* Tamaño de la rueda */
+  animation: spin 1s linear infinite; /* Animación de rotación */
 }
 
+/* Animación de rotación */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -480,8 +486,8 @@ body {
 
 /* Estilo del texto de carga */
 .loading-popup p {
-  margin-top: 15px; 
-  font-size: 18px; 
-  color: #333; 
-  font-weight: 500; 
+  margin-top: 15px; /* Espaciado entre el spinner y el texto */
+  font-size: 18px; /* Tamaño del texto */
+  color: #333; /* Color más oscuro para mejor legibilidad */
+  font-weight: 500; /* Negrita para mayor énfasis */
 }
