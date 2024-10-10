@@ -35,7 +35,6 @@
   cursor: pointer;
 }
 
-
 /* Estilo del cuerpo */
 body {
   font-family: Arial, sans-serif;
@@ -50,7 +49,7 @@ body {
 .header {
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: flex-start; /* Cambiado de left a flex-start */
   padding: 20px;
   margin-bottom: 20px;
   background: var(--main-bg-color);
@@ -60,7 +59,8 @@ body {
 
 .header img {
   max-height: 50px;
-  max-width: fit-content; 
+  width: auto; /* Mantiene la proporción de la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
   display: block;
   float: left;
   margin-right: 10px;
@@ -102,8 +102,6 @@ body {
   }
 }
 
-
-
 .header .title {
   text-align: center;
   color: var(--highlight-color);
@@ -122,8 +120,6 @@ body {
   color: var(--secondary-color);
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* Estilo del contenedor */
 .container {
@@ -156,6 +152,7 @@ body {
     transform: translateY(0);
   } 
 }
+
 /* Estilo general para el grupo de checkboxes */
 .checkbox-group {
   display: flex;
@@ -264,223 +261,63 @@ body {
   color: var(--main-text-color);
   transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
+
 /* Estado cuando el input está en foco */
 .input:focus {
   padding: 12px;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: #f9f9f9; 
-  outline: none; 
 }
 
 /* Estilo para el estado deshabilitado del input */
 .input:disabled {
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  color: #6c757d;
+  background-color: #e9ecef; 
 }
 
-
-/* Estilo de los textarea */
-.textarea {
-  width: 99%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  min-height: 100px;
-  resize: vertical;
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.textarea:focus {
-  padding: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo del contenedor del botón */
-.button-container {
-  display: flex;
-  justify-content: center;
-} 
-
-/* Estilo del botón */
+/* Estilo de los botones */
 .button {
-  background-color: var(--highlight-color);
-  color: white;
-  padding: 10px 15px;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
-  border-radius: 4px;
+  color: #fff;
+  background-color: var(--highlight-color);
   cursor: pointer;
-  font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
 
+/* Efecto hover para los botones */
 .button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
+  background-color: var(--secondary-color);
+  transform: scale(1.05); 
+}
 
-/* Estilo del bloque del HTML generado */
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
+/* Estilo para la lista */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
 
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo de los títulos de la sección del HTML generado */
-.generated-title {
-  font-size: 20px;
-  text-align: center;
+/* Estilo para los elementos de la lista */
+.list li {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 12px;
   margin-bottom: 10px;
-} 
-
-/* Estilo de los contenedores del código HTML generado */
-.generated-textarea, .body-source-textarea {
-  width: 99%;
-  height: 200px;
-  overflow: auto;
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  font-family: monospace;
-  font-size: 14px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-} 
-
-/* Estilo del botón de descargar el fichero */
-.download-button {
-  background-color: #4100ba;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.download-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-/* Animación de rebote */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  transition: background-color 0.3s ease; 
 }
 
-/* Estilo del botón */
-.button {
-  background-color: var(--highlight-color);
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: bounce 0.6s ease;
+/* Efecto hover para los elementos de la lista */
+.list li:hover {
+  background-color: #e2e2e2; 
 }
 
-.button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Animación de "fade in" con rotación */
-@keyframes fadeInRotate {
-  0% {
-    opacity: 0;
-    transform: rotate(-10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-}
-
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInRotate 1s ease;
-}
-
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.loading-overlay {
-  position: fixed; /* Cubrirá toda la pantalla */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-  display: flex; /* Usar flexbox para centrar */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  z-index: 999; /* Asegurarte de que esté por encima de otros elementos */
-}
-
-.loading-popup {
-  text-align: center; /* Centrar el texto */
-  color: white; /* Color del texto */
-}
-
-
-/* Animación de aparición */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px); /* Desplazamiento hacia arriba */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.loading-spinner {
-  border: 8px solid rgba(255, 255, 255, 0.3); /* Color blanco con transparencia */
-  border-top: 8px solid white; /* Color de la parte superior */
-  border-radius: 50%; /* Hacerlo circular */
-  width: 40px; /* Ancho del spinner */
-  height: 40px; /* Alto del spinner */
-  animation: spin 1s linear infinite; /* Animación */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-/* Estilo del texto de carga */
-.loading-popup p {
-  margin-top: 15px; /* Espaciado entre el spinner y el texto */
-  font-size: 18px; /* Tamaño del texto */
-  color: #333; /* Color más oscuro para mejor legibilidad */
-  font-weight: 500; /* Negrita para mayor énfasis */
+/* Estilo para las imágenes dentro del contenedor */
+.container img {
+  max-width: 100%; /* Se asegura que la imagen no sobrepase el contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-top: 15px; /* Espaciado entre la imagen y el contenido superior */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor si es necesario */
 }
