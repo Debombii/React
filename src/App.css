@@ -32,7 +32,6 @@
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 /* Estilo del cuerpo */
@@ -49,7 +48,7 @@ body {
 .header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Cambiado de left a flex-start */
+  align-items: left;
   padding: 20px;
   margin-bottom: 20px;
   background: var(--main-bg-color);
@@ -59,8 +58,7 @@ body {
 
 .header img {
   max-height: 50px;
-  width: auto; /* Mantiene la proporción de la imagen */
-  height: auto; /* Mantiene la proporción de la imagen */
+  max-width: fit-content; 
   display: block;
   float: left;
   margin-right: 10px;
@@ -251,6 +249,7 @@ body {
   color: var(--main-text-color);
   transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
+
 .input2 {
   width: 100%;
   padding: 12px;
@@ -272,52 +271,92 @@ body {
 
 /* Estilo para el estado deshabilitado del input */
 .input:disabled {
-  background-color: #e9ecef; 
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  color: #6c757d;
 }
 
-/* Estilo de los botones */
-.button {
-  padding: 12px;
-  border-radius: 8px;
+/* Estilo de los textarea */
+.textarea {
+  width: 99%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  min-height: 100px;
+  resize: vertical;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+} 
+
+.textarea:focus {
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para los botones */
+button {
+  padding: 10px 20px;
   border: none;
-  color: #fff;
-  background-color: var(--highlight-color);
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; 
-}
-
-/* Efecto hover para los botones */
-.button:hover {
-  background-color: var(--secondary-color);
-  transform: scale(1.05); 
-}
-
-/* Estilo para la lista */
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-}
-
-/* Estilo para los elementos de la lista */
-.list li {
-  background-color: #f9f9f9;
   border-radius: 5px;
-  padding: 12px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s ease; 
+  background-color: #007bff; 
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s; 
+} 
+
+button:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05);
 }
 
-/* Efecto hover para los elementos de la lista */
-.list li:hover {
-  background-color: #e2e2e2; 
+/* Estilo para las imágenes */
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; 
+  overflow: hidden;
 }
 
-/* Estilo para las imágenes dentro del contenedor */
-.container img {
-  max-width: 100%; /* Se asegura que la imagen no sobrepase el contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  border-radius: 5px; /* Bordes redondeados */
-  margin-top: 15px; /* Espaciado entre la imagen y el contenido superior */
-  object-fit: cover; /* Asegura que la imagen cubra el contenedor si es necesario */
+.img-container img {
+  max-width: 100%; /* Para que la imagen no sobrepase el contenedor */
+  max-height: 400px; /* Ajustar según sea necesario */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px var(--box-shadow-color); /* Sombra para el efecto  */
+  transition: transform 0.3s ease; /* Transición para el efecto de hover */
+}
+
+/* Efecto hover para imágenes */
+.img-container img:hover {
+  transform: scale(1.05); /* Escalar un poco al pasar el mouse */
+}
+
+/* Estilo para el footer */
+.footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--light-text-color);
+} 
+
+/* Media queries para responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px; /* Ajusta el padding para dispositivos más pequeños */
+  }
+
+  .header .title {
+    font-size: 28px; /* Ajusta el tamaño de fuente del título */
+  }
+
+  .input, .input2, .textarea {
+    font-size: 14px; /* Ajusta el tamaño de fuente de inputs y textarea */
+  }
+
+  button {
+    padding: 8px 16px; /* Ajusta el padding de botones */
+    font-size: 14px; /* Ajusta el tamaño de fuente de botones */
+  }
 }
