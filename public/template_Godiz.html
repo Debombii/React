@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notas de Versión</title>
+    
+    <!-- Añadiendo el favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
     <style>
         :root {
             --main-bg-color: #f4f4f4;
@@ -14,10 +19,11 @@
             --box-shadow-color: rgba(0, 0, 0, 0.1);
             --container-max-width: 1500px;
             --index-width: 250px;
+            --logo: url('godiz.png');
             --header-bg-color: #ffffff;
         }
         html {
-    scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -73,13 +79,11 @@
             box-shadow: 0 2px 4px var(--box-shadow-color);
         }
         
-        
         h1 {
             text-align: center;
             color: var(--highlight-color);
             margin-bottom: 30px;
         }
-
         
         .version h2 {
             color: var(--highlight-color);
@@ -216,7 +220,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="godiz.png" alt="Logotipo de la empresa">
+        <img id="logo" src="" alt="Logotipo de la empresa">
     </div>
     <div class="container">
         <div class="index">
@@ -227,5 +231,11 @@
         <div class="content">
         </div>
     </div>
+
+    <script>
+        const logoUrl = getComputedStyle(document.documentElement).getPropertyValue('--logo').trim();
+        
+        document.getElementById('logo').src = logoUrl.slice(5, -2);
+    </script>
 </body>
 </html>
