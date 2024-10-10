@@ -43,6 +43,7 @@ body {
   background-color: var(--highlight-color);
   color: var(--main-text-color);
   line-height: 1.6;
+}-height: 1.6;
 }
 .header {
   display: flex;                /* Utiliza flexbox para organizar los elementos */
