@@ -61,7 +61,8 @@ body {
   height: auto;                 /* Mantiene la relación de aspecto */
   display: block;
   float: left;
-  margin-right: 70%;
+  margin-right: 65%;
+  margin-left: 5%;
 }
 
 .title {
