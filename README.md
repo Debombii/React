@@ -29,4 +29,4 @@ Este repositorio contiene la parte frontend del proyecto, responsable de la gene
 
 ## Creación de nuevo Proyecto/Empresa
 
-Es muy probable que necesites crear un nuevo proyecto y por lo tanto una gestión de una nueva plantilla. **Pero no hay ningún problema** ya que he gestionado el código para que con solo 7 pasos puedas crear tu nueva entrada sin problemas, [En esta guía](https://docs.google.com/document/d/1FJkGZeFGGX6IhcqQpkYy2j4xcTR6P78GvKSfRUwdbt4/edit?usp=sharing)
+Es muy probable que necesites crear un nuevo proyecto y por lo tanto una gestión de una nueva plantilla. **Pero no hay ningún problema** ya que he gestionado el código para que con solo 7 pasos puedas crear tu nueva entrada sin problemas, [En esta guía](https://docs.google.com/document/d/1FJkGZeFGGX6IhcqQpkYy2j4xcTR6P78GvKSfRUwdbt4/edit?usp=sharing).
