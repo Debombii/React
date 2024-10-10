@@ -8,7 +8,7 @@
   --border-color: #ddd;
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --container-max-width: 1200px;
-} 
+}
 
 .drop-zone {
   border: 2px dashed #ccc;
@@ -32,6 +32,7 @@
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Estilo del cuerpo */
@@ -42,7 +43,7 @@ body {
   background-color: var(--highlight-color);
   color: var(--main-text-color);
   line-height: 1.6;
-} 
+}
 
 /* Estilo de la cabecera */
 .header {
@@ -54,18 +55,17 @@ body {
   background: var(--main-bg-color);
   box-shadow: 0 2px 4px var(--box-shadow-color);
   transition: padding 0.3s ease, margin-bottom 0.3s ease;
-} 
+}
 
 .header img {
   max-height: 50px;
-  max-width: fit-content; 
+  max-width: fit-content;
   display: block;
   float: left;
   margin-right: 10px;
 }
 
 @media (min-width: 1025px) {
-  /* Para pantallas grandes como desktops */
   .header img {
     max-width: 300px;
     transform: scale(0.7);
@@ -74,7 +74,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-  /* Para pantallas más pequeñas como laptops con resolución baja */
   .header img {
     max-width: 300px;
     transform: scale(0.6);
@@ -83,20 +82,18 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* Para tablets */
   .header img {
     max-width: 250px;
     transform: scale(0.5);
-    transform-origin: top left; 
+    transform-origin: top left;
   }
 }
 
 @media (max-width: 480px) {
-  /* Para móviles */
   .header img {
     max-width: 200px;
-    transform: scale(0.4); 
-    transform-origin: top left; 
+    transform: scale(0.4);
+    transform-origin: top left;
   }
 }
 
@@ -148,7 +145,7 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0);
-  } 
+  }
 }
 
 /* Estilo general para el grupo de checkboxes */
@@ -163,7 +160,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: #333; 
+  color: #333;
   cursor: pointer;
 }
 
@@ -182,9 +179,9 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   border: 2px solid #ccc;
-  transition: background-color 0.3s, border-color 0.3s; 
+  transition: background-color 0.3s, border-color 0.3s;
   margin-right: 10px;
 }
 
@@ -214,7 +211,7 @@ body {
 
 /* Estilo adicional para el hover */
 .checkbox-group .custom-checkbox:hover {
-  background-color: #e6e6e6; 
+  background-color: #e6e6e6;
 }
 
 /* Estilo del título */
@@ -223,42 +220,42 @@ body {
   color: var(--highlight-color);
   font-size: 24px;
   margin-bottom: 20px;
-} 
+}
 
 /* Estilo del formulario */
 .form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-} 
+}
 
 /* Estilo de los label */
 .label {
   font-weight: bold;
   margin-bottom: 5px;
-} 
+}
 
 /* Estilo de los input */
 .input {
   width: 98%;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd; 
-  background-color: #fff; 
+  border: 1px solid #ddd;
+  background-color: #fff;
   font-size: 16px;
   color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
+  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .input2 {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd; 
-  background-color: #fff; 
+  border: 1px solid #ddd;
+  background-color: #fff;
   font-size: 16px;
   color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
+  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 /* Estado cuando el input está en foco */
@@ -266,7 +263,8 @@ body {
   padding: 12px;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
+  outline: none;
 }
 
 /* Estilo para el estado deshabilitado del input */
@@ -286,77 +284,80 @@ body {
   min-height: 100px;
   resize: vertical;
   transition: padding 0.3s ease, box-shadow 0.3s ease;
-} 
+}
 
 .textarea:focus {
   padding: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los botones */
-button {
+/* Estilo del contenedor del botón */
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilo del botón */
+.button {
+  background-color: var(--highlight-color);
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff; 
-  color: #fff;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.2s; 
-} 
-
-button:hover {
-  background-color: #0056b3; 
-  transform: scale(1.05);
+  transition: background-color 0.3s ease;
 }
 
-/* Estilo para las imágenes */
-.img-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0; 
-  overflow: hidden;
+.button:hover {
+  background-color: var(--secondary-color);
 }
 
-.img-container img {
-  max-width: 100%; /* Para que la imagen no sobrepase el contenedor */
-  max-height: 400px; /* Ajustar según sea necesario */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px var(--box-shadow-color); /* Sombra para el efecto  */
-  transition: transform 0.3s ease; /* Transición para el efecto de hover */
+/* Estilo de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-/* Efecto hover para imágenes */
-.img-container img:hover {
-  transform: scale(1.05); /* Escalar un poco al pasar el mouse */
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Estilo para el footer */
+th {
+  background-color: #f4f4f4;
+}
+
+/* Estilo para las filas alternas */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Estilo del pie de página */
 .footer {
   text-align: center;
-  padding: 10px;
+  padding: 20px;
+  background-color: #f4f4f4;
   margin-top: 20px;
-  font-size: 14px;
   color: var(--light-text-color);
-} 
+}
 
-/* Media queries para responsive design */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px; /* Ajusta el padding para dispositivos más pequeños */
-  }
+/* Estilo de enlaces */
+a {
+  color: var(--highlight-color);
+  text-decoration: none;
+}
 
-  .header .title {
-    font-size: 28px; /* Ajusta el tamaño de fuente del título */
-  }
+a:hover {
+  text-decoration: underline;
+}
 
-  .input, .input2, .textarea {
-    font-size: 14px; /* Ajusta el tamaño de fuente de inputs y textarea */
-  }
-
-  button {
-    padding: 8px 16px; /* Ajusta el padding de botones */
-    font-size: 14px; /* Ajusta el tamaño de fuente de botones */
-  }
+/* Estilo de la sección de mensaje */
+.message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
 }
