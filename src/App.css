@@ -48,9 +48,10 @@ body {
   display: flex;                /* Utiliza flexbox para organizar los elementos */
   flex-direction: column;       /* Organiza los elementos en columna */
   align-items: center;          /* Centra los elementos horizontalmente */
-  justify-content: center;      /* Centra los elementos verticalmente */
   padding: 20px;                /* Espacio interno opcional */
-  background-color: var(--main-bg-color);
+  background-color: #f0f0f0;   /* Color de fondo opcional para visualización */
+  margin-bottom: 20px;
+  background: var(--main-bg-color);
   box-shadow: 0 2px 4px var(--box-shadow-color);
   transition: padding 0.3s ease, margin-bottom 0.3s ease;
 }
@@ -58,8 +59,9 @@ body {
 .header img {
   max-width: 100%;              /* Asegura que la imagen no exceda el ancho del contenedor */
   height: auto;                 /* Mantiene la relación de aspecto */
-  display: block;               /* Cambia a block para que funcione correctamente con flexbox */
-  margin: 0 auto;               /* Centra la imagen horizontalmente */
+  display: block;
+  float: left;
+  margin-right: 10px;
 }
 
 .title {
