@@ -11,16 +11,14 @@ const ChangelogGenerator = () => {
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
   const [isHovered, setIsHovered] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
 
-  // Inject TinyMCE script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js";
     script.referrerPolicy = "origin";
     script.async = true;
     document.head.appendChild(script);
-
-    // Cleanup function to remove the script when component unmounts
     return () => {
       document.head.removeChild(script);
     };
@@ -52,7 +50,7 @@ const ChangelogGenerator = () => {
   const generateVersion = () => {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
-    const year = String(today.getFullYear()).slice(-2); 
+    const year = String(today.getFullYear()).slice(-2);
     const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
       4,
       "0"
@@ -117,6 +115,8 @@ const ChangelogGenerator = () => {
       bodyContent: bodyContent,
     };
 
+    setIsLoading(true);
+
     fetch("https://flask-five-jade.vercel.app/upload-file", {
       method: "POST",
       headers: {
@@ -127,11 +127,13 @@ const ChangelogGenerator = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        // Recargar la página después de enviar la solicitud
         window.location.reload();
       })
       .catch((error) => {
         console.error("Error al enviar el JSON:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -182,7 +184,7 @@ const ChangelogGenerator = () => {
                 <div className="custom-checkbox"></div>
                 MRG
               </label>
-                  <label>
+              <label>
                 <input
                   type="checkbox"
                   value="Godiz"
@@ -298,6 +300,13 @@ const ChangelogGenerator = () => {
                 Enviar JSON
               </button>
             </div>
+          </div>
+        )}
+        {/* Mostrar la rueda de carga si isLoading es verdadero */}
+        {isLoading && (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Cargando...</p>
           </div>
         )}
       </div>
