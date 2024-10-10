@@ -32,9 +32,7 @@
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 }
-
 
 /* Estilo del cuerpo */
 body {
@@ -102,8 +100,6 @@ body {
   }
 }
 
-
-
 .header .title {
   text-align: center;
   color: var(--highlight-color);
@@ -122,8 +118,6 @@ body {
   color: var(--secondary-color);
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* Estilo del contenedor */
 .container {
@@ -156,6 +150,7 @@ body {
     transform: translateY(0);
   } 
 }
+
 /* Estilo general para el grupo de checkboxes */
 .checkbox-group {
   display: flex;
@@ -254,6 +249,7 @@ body {
   color: var(--main-text-color);
   transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
+
 .input2 {
   width: 100%;
   padding: 12px;
@@ -264,13 +260,13 @@ body {
   color: var(--main-text-color);
   transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
 }
+
 /* Estado cuando el input está en foco */
 .input:focus {
   padding: 12px;
   border: 1px solid var(--highlight-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: #f9f9f9; 
-  outline: none; 
 }
 
 /* Estilo para el estado deshabilitado del input */
@@ -279,7 +275,6 @@ body {
   border: 1px solid #ced4da;
   color: #6c757d;
 }
-
 
 /* Estilo de los textarea */
 .textarea {
@@ -291,203 +286,96 @@ body {
   min-height: 100px;
   resize: vertical;
   transition: padding 0.3s ease, box-shadow 0.3s ease;
-} 
+}
 
+/* Estado cuando el textarea está en foco */
 .textarea:focus {
-  padding: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-} 
+  border: 2px solid var(--highlight-color);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
 
-/* Estilo del contenedor del botón */
-.button-container {
-  display: flex;
-  justify-content: center;
-} 
-
-/* Estilo del botón */
+/* Estilo de los botones */
 .button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
   background-color: var(--highlight-color);
   color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
+/* Hover en los botones */
 .button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo del bloque del HTML generado */
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo de los títulos de la sección del HTML generado */
-.generated-title {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 10px;
-} 
-
-/* Estilo de los contenedores del código HTML generado */
-.generated-textarea, .body-source-textarea {
-  width: 99%;
-  height: 200px;
-  overflow: auto;
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  font-family: monospace;
-  font-size: 14px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-} 
-
-/* Estilo del botón de descargar el fichero */
-.download-button {
-  background-color: #4100ba;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.download-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-/* Animación de rebote */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
 }
 
-/* Estilo del botón */
-.button {
-  background-color: var(--highlight-color);
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: bounce 0.6s ease;
-}
-
-.button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Animación de "fade in" con rotación */
-@keyframes fadeInRotate {
-  0% {
-    opacity: 0;
-    transform: rotate(-10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-}
-
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInRotate 1s ease;
-}
-
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Overlay para el popup de carga */
-.loading-overlay {
-  position: fixed; /* Fijo para cubrir toda la ventana */
+/* Estilo del popup de carga */
+.loading-popup {
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
-  display: flex; /* Utilizamos flexbox para centrar el contenido */
-  align-items: center; /* Alinear verticalmente al centro */
-  justify-content: center; /* Alinear horizontalmente al centro */
-  z-index: 1000; /* Asegura que el overlay esté por encima de otros elementos */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease forwards;
 }
 
-/* Estilo del popup */
-.loading-popup {
-  background-color: #fff; /* Fondo blanco */
-  border-radius: 12px; /* Bordes redondeados */
-  padding: 40px; /* Padding más grande */
-  text-align: center; /* Texto centrado */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-  animation: fadeIn 0.3s; /* Animación de aparición */
-  position: relative; /* Relativo para el posicionamiento de elementos internos */
-}
-
-/* Animación de aparición */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px); /* Desplazamiento hacia arriba */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Estilo del spinner */
-.loading-spinner {
-  border: 8px solid #f3f3f3; /* Color de fondo */
-  border-top: 8px solid #3498db; /* Color de la rueda */
+/* Spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--border-color);
+  border-top: 5px solid var(--highlight-color);
   border-radius: 50%;
-  width: 60px; /* Tamaño de la rueda */
-  height: 60px; /* Tamaño de la rueda */
-  animation: spin 1s linear infinite; /* Animación de rotación */
+  animation: spin 1s linear infinite;
 }
 
-/* Animación de rotación */
+/* Animación del spinner */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* Estilo del texto de carga */
-.loading-popup p {
-  margin-top: 15px; /* Espaciado entre el spinner y el texto */
-  font-size: 18px; /* Tamaño del texto */
-  color: #333; /* Color más oscuro para mejor legibilidad */
-  font-weight: 500; /* Negrita para mayor énfasis */
+/* Estilo del mensaje de carga */
+.loading-message {
+  font-size: 20px;
+  margin-top: 20px;
+  color: var(--highlight-color);
+}
+
+/* Estilo para las alertas */
+.alert {
+  padding: 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Estilo para alerta de éxito */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Estilo para alerta de error */
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Estilo para alerta de información */
+.alert-info {
+  background-color: #cce5ff;
+  color: #004085;
 }
