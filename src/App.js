@@ -308,13 +308,14 @@ const ChangelogGenerator = () => {
           </div>
         )}
         {isLoading && (
-          <div className="loading-overlay">
-            <div className="loading-popup">
-              <div className="loading-spinner"></div>
-              <p>Cargando...</p>
-            </div>
-          </div>
-        )}
+  <div className="loading-overlay">
+    <div className="loading-popup">
+      <div className="loading-spinner"></div>
+      <p>Cargando...</p>
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );
