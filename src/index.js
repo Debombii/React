@@ -23,6 +23,7 @@ const MainApp = () => {
         <Route path="/MRG" element={<Navigate to="/template_MRG.html" />} />
         <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
         <Route path="/RUBICON" element={<Navigate to="/template_Rubi.html" />} />
+        <Route path="/GODIZ" element={<Navigate to="/template_Godiz.html" />} />
       </Routes>
     </Router>
   );
