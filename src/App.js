@@ -310,4 +310,3 @@ const ChangelogGenerator = () => {
 };
 
 export default ChangelogGenerator;
-
