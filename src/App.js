@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./App.css"; // Asegúrate de que el CSS esté incluido aquí
+import React, { useState } from "react";
+import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
 
 const ChangelogGenerator = () => {
@@ -12,17 +12,6 @@ const ChangelogGenerator = () => {
   const [bodyContent, setBodyContent] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js";
-    script.referrerPolicy = "origin";
-    script.async = true;
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
 
   const escapeHtml = (html) => {
     return html
@@ -308,14 +297,13 @@ const ChangelogGenerator = () => {
           </div>
         )}
         {isLoading && (
-  <div className="loading-overlay">
-    <div className="loading-popup">
-      <div className="loading-spinner"></div>
-      <p>Cargando...</p>
-    </div>
-  </div>
-)}
-
+          <div className="loading-overlay">
+            <div className="loading-popup">
+              <div className="loading-spinner"></div>
+              <p>Cargando...</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
