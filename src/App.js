@@ -177,6 +177,16 @@ const ChangelogGenerator = () => {
               <label>
                 <input
                   type="checkbox"
+                  value="OCC"
+                  checked={selectedCompanies.includes("OCC")}
+                  onChange={handleCompanyChange}
+                />
+                <div className="custom-checkbox"></div>
+                OCC
+              </label>
+              <label>
+                <input
+                  type="checkbox"
                   value="Godiz"
                   checked={selectedCompanies.includes("Godiz")}
                   onChange={handleCompanyChange}
