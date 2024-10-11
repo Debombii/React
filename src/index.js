@@ -24,6 +24,7 @@ const MainApp = () => {
         <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
         <Route path="/RUBICON" element={<Navigate to="/template_Rubi.html" />} />
         <Route path="/GODIZ" element={<Navigate to="/template_Godiz.html" />} />
+        <Route path="/GODIZ" element={<Navigate to="/template_OCC.html" />} />
       </Routes>
     </Router>
   );
