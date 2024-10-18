@@ -7,8 +7,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const ADMIN_USER = process.env.NEXT_PUBLIC_ADMIN_USER;
-  const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+  const ADMIN_USER =os.getenv('NEXT_PUBLIC_ADMIN_PASSWORD')
+  const ADMIN_PASSWORD = os.getenv('NEXT_PUBLIC_ADMIN_USER')
 
   const handleLogin = (e) => {
     e.preventDefault();
