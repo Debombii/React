@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const ADMIN_USER =process.env.REACT_APP_ADMIN_USER;
+  const ADMIN_USER =process.env.REACT_APP_ADMIN_USR;
   const ADMIN_PASSWORD = process.env.REACT_APP_ADMIN_PASSWORD;
 
   const handleLogin = (e) => {
