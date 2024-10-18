@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
-const ADMIN_USER = process.env.REACT_APP_ADMIN_USER || 'admin';
-const ADMIN_PASS_HASH = '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5';
+const ADMIN_USER = 'admin';
+const ADMIN_PASS_HASH = '6c853c174618416760f056d5d32e68bb71b38be3493ad947a88027e7c2c677b4';
 
 const Login = () => {
   const [username, setUsername] = useState('');
