@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
