@@ -10,7 +10,7 @@ const ChangelogGenerator = () => {
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
-  const [title, setTitle] = useState(""); // Nuevo estado para el título
+  const [title, setTitle] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -72,9 +72,9 @@ const ChangelogGenerator = () => {
                       "es-ES"
                     )}</p>
                     <h3>Título</h3>
-                    <p>${title}</p> <!-- Título agregado -->
+                    <p>${title}</p>
                     <h3 class="Maincolor">Notas de la Versión</h3>
-                    <p>${versionNotes}</p> <!-- Notas de la versión -->
+                    <p>${versionNotes}</p>
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
