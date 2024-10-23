@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Login from './login';
 import ProtectedRoute from './protectedRoute';
-import LogManager from './logManager'; 
+import LogManager from './LogManager'; 
 
 const MainApp = () => {
   return (
