@@ -53,7 +53,13 @@ const LogManager = () => {
 
   return (
     <div className="log-manager-container">
-      <h2>Gestión de Logs</h2>
+      <header className="header">
+        <img
+          src="https://www.rubiconsulting.es/wp-content/uploads/2019/08/Logo2-01.png"
+          alt="Logotipo del generador"
+        />
+        <h1 className="title">Gestión de Logs</h1>
+      </header>
 
       <div>
         <label htmlFor="empresa">Selecciona una empresa: </label>
