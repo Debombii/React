@@ -77,8 +77,7 @@ const generateHtml = () => {
                 <div class='version'>
                     <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                     <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
-                    <h3>Título</h3>
-                    <p>${title}</p>
+                    <h3>${title}</h3>
                     <h3 class="Maincolor">Notas de la Versión</h3>
                     <p>${versionNotes}</p>
                     <h3>Descripción</h3>
