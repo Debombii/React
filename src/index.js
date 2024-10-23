@@ -22,7 +22,7 @@ const MainApp = () => {
         />
         <Route path="/logs" element={
           <ProtectedRoute>
-            <logManager />
+            <LogManager />
           </ProtectedRoute>
         } />
 
