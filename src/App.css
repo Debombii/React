@@ -49,7 +49,7 @@ body {
 } 
 
 .header {
-  display: flex;                /* Utiliza flexbox para organizar los elementos */
+  display: flex;
   flex-direction: column;       /* Organiza los elementos en columna */
   align-items: center;          /* Centra los elementos horizontalmente */
   padding: 20px;                /* Espacio interno opcional */
