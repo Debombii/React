@@ -5,7 +5,7 @@ import axios from 'axios';
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
-  const [tituloSeleccionado, setTituloSeleccionado] = useState('');
+  const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
   const [mensaje, setMensaje] = useState('');
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
@@ -31,14 +31,14 @@ const LogManager = () => {
       return;
     }
 
-    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar el log "${tituloSeleccionado}"?`);
+    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar el log "${tituloSeleccionado.titulo}"?`);
     if (!confirmacion) return;
 
     try {
-      await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { empresa, titulo: tituloSeleccionado });
+      await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { empresa, titulo: tituloSeleccionado.titulo });
       setMensaje('Log eliminado exitosamente.');
-      setTitulos(titulos.filter(titulo => titulo !== tituloSeleccionado));
-      setTituloSeleccionado('');
+      setTitulos(titulos.filter(titulo => titulo.id !== tituloSeleccionado.id)); // Filtramos por id
+      setTituloSeleccionado(null); // Reiniciar selección
     } catch (error) {
       setMensaje('Error al eliminar el log. Inténtalo de nuevo.');
     }
@@ -69,16 +69,16 @@ const LogManager = () => {
         <div className="log-list-container">
           <h3>Lista de Logs</h3>
           <ul>
-            {titulos.map((titulo, index) => (
-              <li key={index}>
+            {titulos.map((titulo) => (
+              <li key={titulo.id}>
                 <label>
                   <input
                     type="radio"
                     name="titulo"
-                    value={titulo}
-                    onChange={(e) => setTituloSeleccionado(e.target.value)}
+                    value={titulo.id}
+                    onChange={() => setTituloSeleccionado(titulo)} // Guardamos el objeto completo
                   />
-                  {titulo}
+                  {titulo.titulo} - {titulo.fecha} {/* Mostrar título y fecha */}
                 </label>
               </li>
             ))}
