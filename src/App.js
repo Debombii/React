@@ -157,7 +157,7 @@ const ChangelogGenerator = () => {
       <div className="container">
         <img
           src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
-          alt="Ir a Logs"
+          alt="Eliminar Logs"
           className="redirect-icon"
           onClick={handleRedirect}
           style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
