@@ -48,10 +48,20 @@ const ChangelogGenerator = () => {
     return `${month}${year}-${randomNumbers}`;
   };
 
-  const generateHtml = () => {
-    const version = generateVersion();
+const generateHtml = () => {
+  const version = generateVersion();
 
-    const html = `
+  const processedNewFeatures = newFeatures
+    .split("\n")
+    .map((feature) => feature.trim())
+    .filter((feature) => feature.length > 0);
+
+  const processedSolvedErrors = solvedErrors
+    .split("\n")
+    .map((error) => error.trim())
+    .filter((error) => error.length > 0);
+
+  const html = `
     <!DOCTYPE html>
     <html lang='es'>
     <head>
@@ -65,12 +75,8 @@ const ChangelogGenerator = () => {
         <div class='container'>
             <div class='content'>
                 <div class='version'>
-                    <h2 id="${version
-                      .trim()
-                      .replace(/\s+/g, "-")}">${version}</h2>
-                    <p class='date' id="date">${new Date().toLocaleDateString(
-                      "es-ES"
-                    )}</p>
+                    <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                    <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                     <h3>Título</h3>
                     <p>${title}</p>
                     <h3 class="Maincolor">Notas de la Versión</h3>
@@ -79,28 +85,22 @@ const ChangelogGenerator = () => {
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
                     <ul>
-                        ${newFeatures
-                          .split("\n")
-                          .map((feature) => `<li>${feature}</li>`)
-                          .join("")}
+                        ${processedNewFeatures.map((feature) => `<li>${feature}</li>`).join("")}
                     </ul>
                     <h3>Errores Solucionados</h3>
                     <ul>
-                        ${solvedErrors
-                          .split("\n")
-                          .map((error) => `<li>${error}</li>`)
-                          .join("")}
+                        ${processedSolvedErrors.map((error) => `<li>${error}</li>`).join("")}
                     </ul>
                 </div>
             </div>
         </div>
     </body>
     </html>
-    `;
+  `;
 
-    setGeneratedHtml(html);
-    setBodyContent(unescapeHtml(extractContent(html)));
-  };
+  setGeneratedHtml(html);
+  setBodyContent(unescapeHtml(extractContent(html)));
+};
 
   const sendJson = () => {
     const jsonPayload = {
