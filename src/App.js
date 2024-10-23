@@ -48,56 +48,56 @@ const ChangelogGenerator = () => {
     return `${month}${year}-${randomNumbers}`;
   };
 
-const generateHtml = () => {
-  const version = generateVersion();
+  const generateHtml = () => {
+    const version = generateVersion();
 
-  const processedNewFeatures = newFeatures
-    .split("\n")
-    .map((feature) => feature.trim())
-    .filter((feature) => feature.length > 0);
+    const processedNewFeatures = newFeatures
+      .split("\n")
+      .map((feature) => feature.trim())
+      .filter((feature) => feature.length > 0)
+      .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
+      .join("");
 
-  const processedSolvedErrors = solvedErrors
-    .split("\n")
-    .map((error) => error.trim())
-    .filter((error) => error.length > 0);
+    const processedSolvedErrors = solvedErrors
+      .split("\n")
+      .map((error) => error.trim())
+      .filter((error) => error.length > 0)
+      .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
+      .join("");
 
-  const html = `
-    <!DOCTYPE html>
-    <html lang='es'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>${version}</title>
-        <style>
-        </style>
-    </head>
-    <body>
-        <div class='container'>
-            <div class='content'>
-                <div class='version'>
-                    <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
-                    <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
-                    <h3 class="titulo" id="${title}">${title}</h3>
-                    <h3>Descripción</h3>
-                    ${description}
-                    <h3>Nuevas funcionalidades</h3>
-                    <ul>
-                        ${processedNewFeatures.map((feature) => `<li>${feature}</li>`).join("")}
-                    </ul>
-                    <h3>Errores Solucionados</h3>
-                    <ul>
-                        ${processedSolvedErrors.map((error) => `<li>${error}</li>`).join("")}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </body>
-    </html>
-  `;
+    const html = `
+      <!DOCTYPE html>
+      <html lang='es'>
+      <head>
+          <meta charset='UTF-8'>
+          <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+          <title>${version}</title>
+          <style>
+          </style>
+      </head>
+      <body>
+          <div class='container'>
+              <div class='content'>
+                  <div class='version'>
+                      <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                      <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
+                      <h3 class="titulo" id="${title}">${title}</h3>
+                      <h3>Descripción</h3>
+                      ${description}
+                      <h3>Nuevas funcionalidades</h3>
+                      ${processedNewFeatures}
+                      <h3>Errores Solucionados</h3>
+                      ${processedSolvedErrors}
+                  </div>
+              </div>
+          </div>
+      </body>
+      </html>
+    `;
 
-  setGeneratedHtml(html);
-  setBodyContent(unescapeHtml(extractContent(html)));
-};
+    setGeneratedHtml(html);
+    setBodyContent(unescapeHtml(extractContent(html)));
+  };
 
   const sendJson = () => {
     const jsonPayload = {
@@ -249,21 +249,47 @@ const generateHtml = () => {
           </label>
           <label className="label">
             Nuevas Funcionalidades (una por línea):
-            <textarea
+            <Editor
+              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={newFeatures}
-              onChange={(e) => setNewFeatures(e.target.value)}
+              init={{
+                height: 300,
+                menubar: false,
+                plugins: [
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount",
+                ],
+                toolbar:
+                  "undo redo | formatselect | bold italic backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help",
+              }}
+              onEditorChange={(newValue) => setNewFeatures(newValue)}
               required
-              className="textarea"
-            ></textarea>
+            />
           </label>
           <label className="label">
             Errores Solucionados (uno por línea):
-            <textarea
+            <Editor
+              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={solvedErrors}
-              onChange={(e) => setSolvedErrors(e.target.value)}
+              init={{
+                height: 300,
+                menubar: false,
+                plugins: [
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount",
+                ],
+                toolbar:
+                  "undo redo | formatselect | bold italic backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help",
+              }}
+              onEditorChange={(newValue) => setSolvedErrors(newValue)}
               required
-              className="textarea"
-            ></textarea>
+            />
           </label>
           <div className="button-container">
             <button
