@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./App.css";
 import axios from 'axios';
 
 const LogManager = () => {
@@ -44,7 +45,7 @@ const LogManager = () => {
   };
 
   return (
-    <div>
+    <div className="log-manager-container">
       <h2>Gestión de Logs</h2>
 
       <div>
@@ -62,10 +63,10 @@ const LogManager = () => {
         <button onClick={handleBuscarLogs}>Buscar</button>
       </div>
 
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p className="message">{mensaje}</p>}
 
       {titulos.length > 0 && (
-        <div>
+        <div className="log-list-container">
           <h3>Lista de Logs</h3>
           <ul>
             {titulos.map((titulo, index) => (
@@ -83,7 +84,7 @@ const LogManager = () => {
             ))}
           </ul>
 
-          <button onClick={handleEliminarLog}>Eliminar Log</button>
+          <button className="danger-button" onClick={handleEliminarLog}>Eliminar Log</button>
         </div>
       )}
     </div>
