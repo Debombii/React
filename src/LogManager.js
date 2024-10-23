@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./App.css";
+import "./App.css"; // Asegúrate de que el archivo CSS exista
 import axios from 'axios';
 
 const LogManager = () => {
@@ -20,9 +20,16 @@ const LogManager = () => {
     try {
       setCargando(true); // Activar el estado de carga
       const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
-      setTitulos(response.data.titulos);
-      setMensaje('');
+      
+      // Asegúrate de que la respuesta tenga la estructura esperada
+      if (response.data && response.data.titulos) {
+        setTitulos(response.data.titulos);
+        setMensaje('');
+      } else {
+        setMensaje('No se encontraron logs.');
+      }
     } catch (error) {
+      console.error(error); // Para mayor claridad sobre el error
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
@@ -45,6 +52,7 @@ const LogManager = () => {
       setTitulos(titulos.filter(titulo => titulo.id !== tituloSeleccionado.id)); 
       setTituloSeleccionado(null); // Reiniciar selección
     } catch (error) {
+      console.error(error); // Para mayor claridad sobre el error
       setMensaje('Error al eliminar el log. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
@@ -104,7 +112,7 @@ const LogManager = () => {
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Ir a Logs"
         className="redirect-icon"
-        onClick={() => window.location.href = '/logs'} // Suponiendo que necesitas redirigir a /logs
+        onClick={() => window.location.href = '/logs'} // Asegúrate de que esta ruta exista
         style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
       />
     </div>
