@@ -17,7 +17,7 @@ const LogManager = () => {
     }
 
     try {
-      const response = await axios.post('/listar-titulos', { empresa });
+      const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
       setTitulos(response.data.titulos);
       setMensaje('');
     } catch (error) {
@@ -35,7 +35,7 @@ const LogManager = () => {
     if (!confirmacion) return;
 
     try {
-      await axios.post('/eliminar-log', { empresa, titulo: tituloSeleccionado });
+      await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { empresa, titulo: tituloSeleccionado });
       setMensaje('Log eliminado exitosamente.');
       setTitulos(titulos.filter(titulo => titulo !== tituloSeleccionado));
       setTituloSeleccionado('');
