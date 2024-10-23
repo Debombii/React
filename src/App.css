@@ -1,4 +1,3 @@
-/* Variables de color y estilo generales */
 :root {
   --main-bg-color: #f4f4f4;
   --main-text-color: #333;
@@ -8,6 +7,9 @@
   --border-color: #ddd;
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --container-max-width: 1200px;
+  --button-bg-color: #07b3b3;
+  --button-hover-color: #05a1a1;
+  --danger-color: #e53935;
 } 
 
 .drop-zone {
@@ -35,7 +37,6 @@
   cursor: pointer;
 }
 
-
 /* Estilo del cuerpo */
 body {
   font-family: Arial, sans-serif;
@@ -47,20 +48,18 @@ body {
 } 
 
 .header {
-  display: flex;                /* Utiliza flexbox para organizar los elementos */
-  flex-direction: column;       /* Organiza los elementos en columna */
-  align-items: center;          /* Centra los elementos horizontalmente */
-  padding: 20px;                /* Espacio interno opcional */
-  background-color: #f0f0f0;   /* Color de fondo opcional para visualización */
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
   background: var(--main-bg-color);
   box-shadow: 0 2px 4px var(--box-shadow-color);
   transition: padding 0.3s ease, margin-bottom 0.3s ease;
 }
 
 .header img {
-  max-width: 100%;              /* Asegura que la imagen no exceda el ancho del contenedor */
-  height: auto;                 /* Mantiene la relación de aspecto */
+  max-width: 100%;
+  height: auto;
   display: block;
   float: left;
   margin-right: 65%;
@@ -68,13 +67,12 @@ body {
 }
 
 .title {
-  margin-top: 10px;             /* Espacio entre la imagen y el título */
-  font-size: 24px;              /* Tamaño de la fuente del título */
-  text-align: center;           /* Alinea el texto del título al centro */
+  margin-top: 10px;
+  font-size: 24px;
+  text-align: center;
 }
 
 @media (min-width: 1025px) {
-  /* Para pantallas grandes como desktops */
   .header img {
     max-width: 300px;
     transform: scale(0.7);
@@ -83,7 +81,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-  /* Para pantallas más pequeñas como laptops con resolución baja */
   .header img {
     max-width: 300px;
     transform: scale(0.6);
@@ -92,7 +89,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* Para tablets */
   .header img {
     max-width: 250px;
     transform: scale(0.5);
@@ -101,15 +97,12 @@ body {
 }
 
 @media (max-width: 480px) {
-  /* Para móviles */
   .header img {
     max-width: 200px;
     transform: scale(0.4); 
     transform-origin: top left; 
   }
 }
-
-
 
 .header .title {
   text-align: center;
@@ -130,8 +123,6 @@ body {
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-
 /* Estilo del contenedor */
 .container {
   font-family: 'Roboto', sans-serif;
@@ -145,14 +136,12 @@ body {
   animation: fadeIn 0.8s ease forwards;
 }
 
-/* Hover en .container */
 .container:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   background-color: rgb(247, 247, 247);
 }
 
-/* Nueva animación fadeIn */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -163,30 +152,143 @@ body {
     transform: translateY(0);
   } 
 }
-/* Estilo general para el grupo de checkboxes */
+
+/* LogManager container */
+.log-manager-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--main-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--box-shadow-color);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Heading */
+.log-manager-container h2 {
+  font-size: 28px;
+  text-align: center;
+  color: var(--highlight-color);
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Select empresa */
+.log-manager-container select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+  color: var(--main-text-color);
+}
+
+.log-manager-container select:focus {
+  border-color: var(--highlight-color);
+  box-shadow: 0 0 5px var(--highlight-color);
+  outline: none;
+}
+
+/* Log list container */
+.log-list-container {
+  margin-top: 20px;
+}
+
+.log-list-container h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--highlight-color);
+}
+
+.log-list-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.log-list-container ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.log-list-container ul li:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+}
+
+/* Radio buttons inside the log list */
+.log-list-container ul li input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Buttons */
+.log-manager-container button {
+  background-color: var(--button-bg-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.log-manager-container button:hover {
+  background-color: var(--button-hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Danger button for deletion */
+.danger-button {
+  background-color: var(--danger-color);
+}
+
+.danger-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Message styles */
+.log-manager-container .message {
+  font-size: 16px;
+  color: var(--secondary-color);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Checkbox group */
 .checkbox-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Estilo individual para cada casilla */
 .checkbox-group label {
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: #333; 
+  color: #333;
   cursor: pointer;
 }
 
-/* Ocultar el checkbox por defecto */
 .checkbox-group input[type="checkbox"] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-/* Estilo personalizado para el contenedor del checkbox */
 .checkbox-group .custom-checkbox {
   position: relative;
   display: flex;
@@ -194,300 +296,25 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   border: 2px solid #ccc;
-  transition: background-color 0.3s, border-color 0.3s; 
+  transition: background-color 0.3s, border-color 0.3s;
   margin-right: 10px;
 }
 
-/* Estilo para el contenedor del checkbox cuando está seleccionado */
 .checkbox-group input[type="checkbox"]:checked + .custom-checkbox {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-/* Marca de verificación */
 .checkbox-group input[type="checkbox"]:checked + .custom-checkbox::after {
-  content: "";
+  content: '';
   position: absolute;
-  top: 50%;
   left: 50%;
-  width: 12px;
-  height: 12px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
+  top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-}
-
-/* Estilo para el contenedor del checkbox cuando está en foco */
-.checkbox-group input[type="checkbox"]:focus + .custom-checkbox {
-  outline: 2px solid #007bff;
-}
-
-/* Estilo adicional para el hover */
-.checkbox-group .custom-checkbox:hover {
-  background-color: #e6e6e6; 
-}
-
-/* Estilo del título */
-.title {
-  text-align: center;
-  color: var(--highlight-color);
-  font-size: 24px;
-  margin-bottom: 20px;
-} 
-
-/* Estilo del formulario */
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-} 
-
-/* Estilo de los label */
-.label {
-  font-weight: bold;
-  margin-bottom: 5px;
-} 
-
-/* Estilo de los input */
-.input {
-  width: 98%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd; 
-  background-color: #fff; 
-  font-size: 16px;
-  color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
-}
-.input2 {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd; 
-  background-color: #fff; 
-  font-size: 16px;
-  color: var(--main-text-color);
-  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
-}
-/* Estado cuando el input está en foco */
-.input:focus {
-  padding: 12px;
-  border: 1px solid var(--highlight-color);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9; 
-  outline: none; 
-}
-
-/* Estilo para el estado deshabilitado del input */
-.input:disabled {
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  color: #6c757d;
-}
-
-
-/* Estilo de los textarea */
-.textarea {
-  width: 99%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  min-height: 100px;
-  resize: vertical;
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.textarea:focus {
-  padding: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo del contenedor del botón */
-.button-container {
-  display: flex;
-  justify-content: center;
-} 
-
-/* Estilo del botón */
-.button {
-  background-color: var(--highlight-color);
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo del bloque del HTML generado */
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} 
-
-/* Estilo de los títulos de la sección del HTML generado */
-.generated-title {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 10px;
-} 
-
-/* Estilo de los contenedores del código HTML generado */
-.generated-textarea, .body-source-textarea {
-  width: 99%;
-  height: 200px;
-  overflow: auto;
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  font-family: monospace;
-  font-size: 14px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-} 
-
-/* Estilo del botón de descargar el fichero */
-.download-button {
-  background-color: #4100ba;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
-
-.download-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-/* Animación de rebote */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Estilo del botón */
-.button {
-  background-color: var(--highlight-color);
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: bounce 0.6s ease;
-}
-
-.button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Animación de "fade in" con rotación */
-@keyframes fadeInRotate {
-  0% {
-    opacity: 0;
-    transform: rotate(-10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-}
-
-.generated-html {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInRotate 1s ease;
-}
-
-.generated-html:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.loading-overlay {
-  position: fixed; /* Cubrirá toda la pantalla */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-  display: flex; /* Usar flexbox para centrar */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  z-index: 999; /* Asegurarte de que esté por encima de otros elementos */
-}
-
-.loading-popup {
-  text-align: center; /* Centrar el texto */
-  color: white; /* Color del texto */
-}
-
-
-/* Animación de aparición */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px); /* Desplazamiento hacia arriba */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.loading-spinner {
-  border: 8px solid rgba(255, 255, 255, 0.3); /* Color blanco con transparencia */
-  border-top: 8px solid white; /* Color de la parte superior */
-  border-radius: 50%; /* Hacerlo circular */
-  width: 40px; /* Ancho del spinner */
-  height: 40px; /* Alto del spinner */
-  animation: spin 1s linear infinite; /* Animación */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-/* Estilo del texto de carga */
-.loading-popup p {
-  margin-top: 15px; /* Espaciado entre el spinner y el texto */
-  font-size: 18px; /* Tamaño del texto */
-  color: #333; /* Color más oscuro para mejor legibilidad */
-  font-weight: 500; /* Negrita para mayor énfasis */
+  width: 12px;
+  height: 6px;
+  border: solid #fff;
+  border-width: 0 0 2px 2px;
 }
