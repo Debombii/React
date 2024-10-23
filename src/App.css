@@ -499,6 +499,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
   padding: 30px;
@@ -594,11 +595,20 @@ body {
 
 /* Danger button for deletion */
 .danger-button {
-  background-color: var(--danger-color);
+  background-color: red; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cursor tipo puntero */
 }
 
 .danger-button:hover {
   background-color: #d32f2f;
+}
+
+.danger-button:disabled {
+  background-color: lightgray; /* Color cuando está deshabilitado */
+  cursor: not-allowed; /* Cursor de no permitido */
 }
 
 /* Message styles */
