@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Login from './login';
 import ProtectedRoute from './protectedRoute';
+import LogManager from './LogManager'; 
 
 const MainApp = () => {
   return (
@@ -19,6 +20,11 @@ const MainApp = () => {
             </ProtectedRoute>
           } 
         />
+        <Route path="/logs" element={
+          <ProtectedRoute>
+            <LogManager />
+          </ProtectedRoute>
+        } />
 
         <Route path="/MRG" element={<Navigate to="/template_MRG.html" />} />
         <Route path="/GERP" element={<Navigate to="/template_GERP.html" />} />
@@ -32,3 +38,4 @@ const MainApp = () => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<MainApp />);
+
