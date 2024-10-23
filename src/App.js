@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'; // Importa Link para la navegación
+import { Link } from 'react-router-dom';
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
@@ -149,19 +151,13 @@ const ChangelogGenerator = () => {
         <h1 className="title">Generador de Log de Cambios</h1>
       </header>
       
-      {/* Botones de navegación */}
-      <div className="navigation-container">
-        <Link to="/logs" className="nav-button logs-button">Logs</Link>
-        <div className="button-group">
-          <Link to="/mrg" className="nav-button">MRG</Link>
-          <Link to="/gerp" className="nav-button">GERP</Link>
-          <Link to="/rubicon" className="nav-button">Rubicon</Link>
-          <Link to="/occ" className="nav-button">OCC</Link>
-          <Link to="/godiz" className="nav-button">Godiz</Link>
-        </div>
-      </div>
-      
       <div className="container">
+            <div className="navigation-container">
+          <Link to="/logs" className="nav-button logs-button">
+            <FontAwesomeIcon icon={faTrash} className="trash-icon" />
+            Logs
+          </Link>
+        </div>
         <h1 className="title">Generador de Log de Cambios</h1>
         <form
           onSubmit={(e) => {
