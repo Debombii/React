@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'; // Importa Link para la navegación
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
 
@@ -41,36 +42,33 @@ const ChangelogGenerator = () => {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = String(today.getFullYear()).slice(-2);
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
-      4,
-      "0"
-    );
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(4, "0");
     return `${month}${year}-${randomNumbers}`;
   };
 
- const generateHtml = () => {
+  const generateHtml = () => {
     const version = generateVersion();
 
     const cleanContent = (content) => {
-        // Reemplaza <p><p> y </p></p> anidados, dejando solo un nivel de <p>
-        return content
-            .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
-            .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
+      // Reemplaza <p><p> y </p></p> anidados, dejando solo un nivel de <p>
+      return content
+        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
+        .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
     };
 
     const processedNewFeatures = cleanContent(newFeatures
-        .split("\n")
-        .map((feature) => feature.trim())
-        .filter((feature) => feature.length > 0)
-        .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
-        .join(""));
+      .split("\n")
+      .map((feature) => feature.trim())
+      .filter((feature) => feature.length > 0)
+      .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
+      .join(""));
 
     const processedSolvedErrors = cleanContent(solvedErrors
-        .split("\n")
-        .map((error) => error.trim())
-        .filter((error) => error.length > 0)
-        .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
-        .join(""));
+      .split("\n")
+      .map((error) => error.trim())
+      .filter((error) => error.length > 0)
+      .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
+      .join(""));
 
     const html = `
       <!DOCTYPE html>
@@ -104,7 +102,7 @@ const ChangelogGenerator = () => {
 
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
-};
+  };
 
   const sendJson = () => {
     const jsonPayload = {
@@ -150,6 +148,19 @@ const ChangelogGenerator = () => {
         />
         <h1 className="title">Generador de Log de Cambios</h1>
       </header>
+      
+      {/* Botones de navegación */}
+      <div className="navigation-container">
+        <Link to="/logs" className="nav-button logs-button">Logs</Link>
+        <div className="button-group">
+          <Link to="/mrg" className="nav-button">MRG</Link>
+          <Link to="/gerp" className="nav-button">GERP</Link>
+          <Link to="/rubicon" className="nav-button">Rubicon</Link>
+          <Link to="/occ" className="nav-button">OCC</Link>
+          <Link to="/godiz" className="nav-button">Godiz</Link>
+        </div>
+      </div>
+      
       <div className="container">
         <h1 className="title">Generador de Log de Cambios</h1>
         <form
