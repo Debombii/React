@@ -48,22 +48,29 @@ const ChangelogGenerator = () => {
     return `${month}${year}-${randomNumbers}`;
   };
 
-  const generateHtml = () => {
+ const generateHtml = () => {
     const version = generateVersion();
 
-    const processedNewFeatures = newFeatures
-      .split("\n")
-      .map((feature) => feature.trim())
-      .filter((feature) => feature.length > 0)
-      .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
-      .join("");
+    const cleanContent = (content) => {
+        // Reemplaza <p><p> y </p></p> anidados, dejando solo un nivel de <p>
+        return content
+            .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
+            .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
+    };
 
-    const processedSolvedErrors = solvedErrors
-      .split("\n")
-      .map((error) => error.trim())
-      .filter((error) => error.length > 0)
-      .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
-      .join("");
+    const processedNewFeatures = cleanContent(newFeatures
+        .split("\n")
+        .map((feature) => feature.trim())
+        .filter((feature) => feature.length > 0)
+        .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
+        .join(""));
+
+    const processedSolvedErrors = cleanContent(solvedErrors
+        .split("\n")
+        .map((error) => error.trim())
+        .filter((error) => error.length > 0)
+        .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
+        .join(""));
 
     const html = `
       <!DOCTYPE html>
@@ -97,7 +104,7 @@ const ChangelogGenerator = () => {
 
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
-  };
+};
 
   const sendJson = () => {
     const jsonPayload = {
