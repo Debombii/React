@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const logManager = () => {
+const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
   const [tituloSeleccionado, setTituloSeleccionado] = useState('');
@@ -90,4 +90,4 @@ const logManager = () => {
   );
 };
 
-export default logManager;
+export default LogManager;
