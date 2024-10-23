@@ -7,6 +7,7 @@ const LogManager = () => {
   const [titulos, setTitulos] = useState([]);
   const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
   const [mensaje, setMensaje] = useState('');
+  const [cargando, setCargando] = useState(false); 
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
@@ -17,11 +18,14 @@ const LogManager = () => {
     }
 
     try {
+      setCargando(true); // Activar el estado de carga
       const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
       setTitulos(response.data.titulos);
       setMensaje('');
     } catch (error) {
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
+    } finally {
+      setCargando(false);
     }
   };
 
@@ -35,12 +39,15 @@ const LogManager = () => {
     if (!confirmacion) return;
 
     try {
+      setCargando(true); // Activar el estado de carga
       await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { empresa, titulo: tituloSeleccionado.titulo });
       setMensaje('Log eliminado exitosamente.');
-      setTitulos(titulos.filter(titulo => titulo.id !== tituloSeleccionado.id)); // Filtramos por id
+      setTitulos(titulos.filter(titulo => titulo.id !== tituloSeleccionado.id)); 
       setTituloSeleccionado(null); // Reiniciar selección
     } catch (error) {
       setMensaje('Error al eliminar el log. Inténtalo de nuevo.');
+    } finally {
+      setCargando(false);
     }
   };
 
@@ -54,13 +61,14 @@ const LogManager = () => {
           id="empresa"
           value={empresa}
           onChange={(e) => setEmpresa(e.target.value)}
+          disabled={cargando}
         >
           <option value="">Seleccionar empresa</option>
           {empresas.map((empresa) => (
             <option key={empresa} value={empresa}>{empresa}</option>
           ))}
         </select>
-        <button onClick={handleBuscarLogs}>Buscar</button>
+        <button onClick={handleBuscarLogs} disabled={cargando}>Buscar</button>
       </div>
 
       {mensaje && <p className="message">{mensaje}</p>}
@@ -76,15 +84,17 @@ const LogManager = () => {
                     type="radio"
                     name="titulo"
                     value={titulo.id}
-                    onChange={() => setTituloSeleccionado(titulo)} // Guardamos el objeto completo
+                    onChange={() => setTituloSeleccionado(titulo)}
                   />
-                  {titulo.titulo} - {titulo.fecha} {/* Mostrar título y fecha */}
+                  {titulo.titulo} - {titulo.fecha}
                 </label>
               </li>
             ))}
           </ul>
 
-          <button className="danger-button" onClick={handleEliminarLog}>Eliminar Log</button>
+          <button className="danger-button" onClick={handleEliminarLog} disabled={cargando}>
+            {cargando ? 'Eliminando...' : 'Eliminar Log'}
+          </button>
         </div>
       )}
     </div>
