@@ -248,7 +248,7 @@ const ChangelogGenerator = () => {
             />
           </label>
           <label className="label">
-            Nuevas Funcionalidades (una por línea):
+            Nuevas Funcionalidades:
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={newFeatures}
@@ -270,7 +270,7 @@ const ChangelogGenerator = () => {
             />
           </label>
           <label className="label">
-            Errores Solucionados (uno por línea):
+            Errores Solucionados:
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={solvedErrors}
