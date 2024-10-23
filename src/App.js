@@ -78,8 +78,6 @@ const generateHtml = () => {
                     <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                     <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                     <h3 class="titulo" id="${title}">${title}</h3>
-                    <h3 class="Maincolor">Notas de la Versión</h3>
-                    <p>${versionNotes}</p>
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
@@ -226,15 +224,6 @@ const generateHtml = () => {
                 Rubicon
               </label>
             </div>
-          </label>
-          <label className="label">
-            Notas de la versión: {/* Cambiado de lugar */}
-            <textarea
-              value={versionNotes}
-              onChange={(e) => setVersionNotes(e.target.value)}
-              required
-              className="textarea"
-            ></textarea>
           </label>
           <label className="label">
             Descripción:
