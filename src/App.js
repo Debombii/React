@@ -10,6 +10,7 @@ const ChangelogGenerator = () => {
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
+  const [title, setTitle] = useState(""); // Nuevo estado para el título
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -70,6 +71,10 @@ const ChangelogGenerator = () => {
                     <p class='date' id="date">${new Date().toLocaleDateString(
                       "es-ES"
                     )}</p>
+                    <h3>Título</h3>
+                    <p>${title}</p> <!-- Título agregado -->
+                    <h3 class="Maincolor">Notas de la Versión</h3>
+                    <p>${versionNotes}</p> <!-- Notas de la versión -->
                     <h3>Descripción</h3>
                     ${description}
                     <h3>Nuevas funcionalidades</h3>
@@ -86,8 +91,6 @@ const ChangelogGenerator = () => {
                           .map((error) => `<li>${error}</li>`)
                           .join("")}
                     </ul>
-                    <h3 class="Maincolor">Notas de la Versión</h3>
-                    <p>${versionNotes}</p>
                 </div>
             </div>
         </div>
@@ -162,6 +165,16 @@ const ChangelogGenerator = () => {
             />
           </label>
           <label className="label">
+            Título: {/* Nuevo campo para el título */}
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="input"
+            />
+          </label>
+          <label className="label">
             Proyectos:
             <div className="checkbox-group">
               <label>
@@ -217,6 +230,15 @@ const ChangelogGenerator = () => {
             </div>
           </label>
           <label className="label">
+            Notas de la versión: {/* Cambiado de lugar */}
+            <textarea
+              value={versionNotes}
+              onChange={(e) => setVersionNotes(e.target.value)}
+              required
+              className="textarea"
+            ></textarea>
+          </label>
+          <label className="label">
             Descripción:
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
@@ -252,15 +274,6 @@ const ChangelogGenerator = () => {
             <textarea
               value={solvedErrors}
               onChange={(e) => setSolvedErrors(e.target.value)}
-              required
-              className="textarea"
-            ></textarea>
-          </label>
-          <label className="label">
-            Notas de la versión:
-            <textarea
-              value={versionNotes}
-              onChange={(e) => setVersionNotes(e.target.value)}
               required
               className="textarea"
             ></textarea>
