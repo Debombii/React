@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Login from './login';
 import ProtectedRoute from './protectedRoute';
-import LogManager from './LogManager'; 
+import LogManager from './logManager'; 
 
 const MainApp = () => {
   return (
@@ -22,7 +22,7 @@ const MainApp = () => {
         />
         <Route path="/logs" element={
           <ProtectedRoute>
-            <LogManager />
+            <logManager />
           </ProtectedRoute>
         } />
 
