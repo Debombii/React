@@ -159,12 +159,11 @@ const generateHtml = () => {
             <input
               type="date"
               value={new Date().toISOString().split("T")[0]}
-              readOnly
               className="input"
             />
           </label>
           <label className="label">
-            Título: {/* Nuevo campo para el título */}
+            Título:
             <input
               type="text"
               value={title}
