@@ -91,19 +91,22 @@ const LogManager = () => {
               </li>
             ))}
           </ul>
-
-          <button className="danger-button" onClick={handleEliminarLog} disabled={cargando}>
-            {cargando ? 'Eliminando...' : 'Eliminar Log'}
-          </button>
+          
+          <div className="button-container"> {/* Contenedor para el botón */}
+            <button className="danger-button" onClick={handleEliminarLog} disabled={cargando}>
+              {cargando ? 'Eliminando...' : 'Eliminar Log'}
+            </button>
+          </div>
         </div>
       )}
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/0/340.png"
-          alt="Ir a Logs"
-          className="redirect-icon"
-          onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
-        />
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/0/340.png"
+        alt="Ir a Logs"
+        className="redirect-icon"
+        onClick={() => window.location.href = '/logs'} // Suponiendo que necesitas redirigir a /logs
+        style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
+      />
     </div>
   );
 };
