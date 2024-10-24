@@ -75,7 +75,7 @@ const LogManager = () => {
   };
 
   const handleRedirect = () => {
-    navigate('https://react-rosy-rho.vercel.app'); 
+    navigate('/'); 
   };
 
   return (
