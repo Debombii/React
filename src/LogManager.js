@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./App.css";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
@@ -9,6 +10,7 @@ const LogManager = () => {
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
 
+  const navigate = useNavigate();
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
   const handleBuscarLogs = async () => {
@@ -70,6 +72,10 @@ const LogManager = () => {
     } finally {
       setCargando(false);
     }
+  };
+
+  const handleRedirect = () => {
+    navigate('https://react-rosy-rho.vercel.app'); 
   };
 
   return (
