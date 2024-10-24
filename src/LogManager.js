@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import "./App.css"; // Asegúrate de que el archivo CSS exista
+import "./App.css";
 import axios from 'axios';
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
-  const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
+  const [titulosSeleccionados, setTitulosSeleccionados] = useState([]);
   const [mensaje, setMensaje] = useState('');
-  const [cargando, setCargando] = useState(false); 
+  const [cargando, setCargando] = useState(false);
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
@@ -18,10 +18,9 @@ const LogManager = () => {
     }
 
     try {
-      setCargando(true); // Activar el estado de carga
+      setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
-      
-      // Asegúrate de que la respuesta tenga la estructura esperada
+
       if (response.data && response.data.titulos) {
         setTitulos(response.data.titulos);
         setMensaje('');
@@ -29,31 +28,45 @@ const LogManager = () => {
         setMensaje('No se encontraron logs.');
       }
     } catch (error) {
-      console.error(error); // Para mayor claridad sobre el error
+      console.error(error); 
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
     }
   };
 
+  const handleSeleccionarLog = (id) => {
+    setTitulosSeleccionados(prevSeleccionados => {
+      if (prevSeleccionados.includes(id)) {
+        return prevSeleccionados.filter(tituloId => tituloId !== id); 
+      } else {
+        return [...prevSeleccionados, id];
+      }
+    });
+  };
+
   const handleEliminarLog = async () => {
-    if (!tituloSeleccionado) {
-      setMensaje('Por favor, selecciona un log para eliminar.');
+    if (titulosSeleccionados.length === 0) {
+      setMensaje('Por favor, selecciona al menos un log para eliminar.');
       return;
     }
 
-    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar el log "${tituloSeleccionado.titulo}"?`);
+    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar los logs seleccionados?`);
     if (!confirmacion) return;
 
     try {
-      setCargando(true); // Activar el estado de carga
-      await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { empresa, titulo: tituloSeleccionado.titulo });
-      setMensaje('Log eliminado exitosamente.');
-      setTitulos(titulos.filter(titulo => titulo.id !== tituloSeleccionado.id)); 
-      setTituloSeleccionado(null); // Reiniciar selección
+      setCargando(true);
+      await axios.post('https://flask-five-jade.vercel.app/eliminar-log', { 
+        empresa, 
+        ids: titulosSeleccionados
+      });
+
+      setMensaje('Logs eliminados exitosamente.');
+      setTitulos(titulos.filter(titulo => !titulosSeleccionados.includes(titulo.id))); 
+      setTitulosSeleccionados([]);
     } catch (error) {
-      console.error(error); // Para mayor claridad sobre el error
-      setMensaje('Error al eliminar el log. Inténtalo de nuevo.');
+      console.error(error);
+      setMensaje('Error al eliminar los logs. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
     }
@@ -89,10 +102,11 @@ const LogManager = () => {
               <li key={titulo.id}>
                 <label>
                   <input
-                    type="radio"
+                    type="checkbox" 
                     name="titulo"
                     value={titulo.id}
-                    onChange={() => setTituloSeleccionado(titulo)}
+                    checked={titulosSeleccionados.includes(titulo.id)}
+                    onChange={() => handleSeleccionarLog(titulo.id)}
                   />
                   {titulo.titulo} - {titulo.fecha}
                 </label>
@@ -100,21 +114,21 @@ const LogManager = () => {
             ))}
           </ul>
           
-          <div className="button-container"> {/* Contenedor para el botón */}
+          <div className="button-container">
             <button className="danger-button" onClick={handleEliminarLog} disabled={cargando}>
-              {cargando ? 'Eliminando...' : 'Eliminar Log'}
+              {cargando ? 'Eliminando...' : 'Eliminar Logs'}
             </button>
           </div>
         </div>
       )}
 
       <img
-          src="https://cdn-icons-png.flaticon.com/512/0/340.png"
-          alt="Volver"
-          className="redirect-icon"
-          onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
-        />
+        src="https://cdn-icons-png.flaticon.com/512/0/340.png"
+        alt="Volver"
+        className="redirect-icon"
+        onClick={handleRedirect}
+        style={{ cursor: "pointer", width: "50px", height: "50px" }} 
+      />
     </div>
   );
 };
