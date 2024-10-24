@@ -23,11 +23,12 @@ const LogManager = () => {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
 
-      if (response.data && response.data.titulos) {
+      if (response.data && response.data.titulos && response.data.titulos.length > 0) {
         setTitulos(response.data.titulos);
         setMensaje('');
       } else {
-        setMensaje('No se encontraron logs.');
+        setTitulos([]); 
+        setMensaje('No se encontraron logs en esta empresa.'); 
       }
     } catch (error) {
       console.error(error); 
@@ -36,6 +37,7 @@ const LogManager = () => {
       setCargando(false);
     }
   };
+
 
   const handleSeleccionarLog = (id) => {
     setTitulosSeleccionados(prevSeleccionados => {
@@ -83,20 +85,22 @@ const LogManager = () => {
       <h2>Gestión de Logs</h2>
 
       <div>
-        <label htmlFor="empresa">Selecciona una empresa: </label>
-        <select
-          id="empresa"
-          value={empresa}
-          onChange={(e) => setEmpresa(e.target.value)}
-          disabled={cargando}
-        >
-          <option value="">Seleccionar empresa</option>
-          {empresas.map((empresa) => (
-            <option key={empresa} value={empresa}>{empresa}</option>
-          ))}
-        </select>
-        <button onClick={handleBuscarLogs} disabled={cargando}>Buscar</button>
-      </div>
+  <label htmlFor="empresa">Selecciona una empresa: </label>
+  <select
+    id="empresa"
+    value={empresa}
+    onChange={(e) => setEmpresa(e.target.value)}
+    disabled={cargando}
+    className="SelectEmpresaManager"
+  >
+    <option value="">Seleccionar empresa</option>
+    {empresas.map((empresa) => (
+      <option key={empresa} value={empresa}>{empresa}</option>
+    ))}
+  </select>
+  <button onClick={handleBuscarLogs} disabled={cargando}>Buscar</button>
+</div>
+
 
       {mensaje && <p className="message">{mensaje}</p>}
 
