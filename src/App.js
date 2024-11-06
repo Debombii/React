@@ -121,8 +121,12 @@ const ChangelogGenerator = () => {
   const adjustEditorHeight = () => {
     if (editorRef.current) {
       const editor = editorRef.current.editor;
+
+      // Obtener la altura del contenido dentro del editor
       const contentHeight = editor.getContentAreaContainer().scrollHeight;
-      editor.theme.resizeTo("100%", contentHeight + 40); // Ajuste extra para margen
+      
+      // Ajustar la altura del editor en función del contenido
+      editor.theme.resizeTo("100%", contentHeight + 40); // Añadimos un margen de 40px
     }
   };
 
