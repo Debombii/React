@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import "./App.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -39,9 +39,9 @@ const LogManager = () => {
     }
   };
 
-  // Función para seleccionar un log
   const handleSeleccionarLog = (id) => {
     setTituloSeleccionado(id); 
+    setMensaje('');  // Limpiar mensaje si se selecciona un log
   };
 
   const handleObtenerContenidoLog = async (id) => {
@@ -74,11 +74,7 @@ const LogManager = () => {
       setMensaje('Por favor, selecciona un log para actualizar.');
       return;
     }
-    const logSeleccionado = titulos.find(titulo => titulo.id === tituloSeleccionado);
-
-    if (logSeleccionado) {
-      handleObtenerContenidoLog(tituloSeleccionado);
-    }
+    handleObtenerContenidoLog(tituloSeleccionado);
   };
 
   const handleGuardarLog = async () => {
@@ -135,14 +131,12 @@ const LogManager = () => {
           </ul>
 
           <div className="button-container">
-            <button className="danger-button" onClick={handleActualizarLog} disabled={cargando}>
+            <button className="danger-button" onClick={handleActualizarLog} disabled={cargando || !tituloSeleccionado}>
               {cargando ? 'Cargando...' : 'Actualizar Log'}
             </button>
           </div>
         </div>
       )}
-
-      {/* Aquí agregamos los campos editables */}
       {tituloSeleccionado && (
         <div className="edit-log-container">
           <h3>Editar Log</h3>
