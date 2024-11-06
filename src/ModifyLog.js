@@ -155,7 +155,7 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-              apiKey="your-tinymce-api-key"
+              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={contenido}
               onEditorChange={(newValue) => setContenido(newValue)}
               init={{
