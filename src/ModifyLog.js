@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./App.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
@@ -9,6 +10,8 @@ const LogManager = () => {
   const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
+  const [titulo, setTitulo] = useState('');
+  const [contenido, setContenido] = useState('');
   const navigate = useNavigate();
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
@@ -51,8 +54,9 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
-        // Aquí se navega al componente de modificación, pasando el contenido del log como estado
-        navigate('/modifyLogs', { state: { logContent: response.data } });
+        // Establecemos el título y el contenido para ser editados
+        setTitulo(response.data.titulo);
+        setContenido(response.data.contenido);
         setMensaje('');
       } else {
         setMensaje('No se encontró el contenido del log.');
@@ -75,6 +79,16 @@ const LogManager = () => {
     if (logSeleccionado) {
       handleObtenerContenidoLog(tituloSeleccionado);
     }
+  };
+
+  const handleGuardarLog = async () => {
+    if (!titulo || !contenido) {
+      setMensaje('Por favor, completa ambos campos (título y contenido).');
+      return;
+    }
+    // Aquí se puede enviar el log actualizado al backend para guardarlo
+    setMensaje('Log actualizado correctamente.');
+    console.log('Log actualizado:', { titulo, contenido });
   };
 
   return (
@@ -108,10 +122,10 @@ const LogManager = () => {
               <li key={titulo.id}>
                 <label>
                   <input
-                    type="radio"  // Cambio de checkbox a radio
+                    type="radio" 
                     name="titulo"
                     value={titulo.id}
-                    checked={tituloSeleccionado === titulo.id}  // Solo se selecciona un log
+                    checked={tituloSeleccionado === titulo.id}
                     onChange={() => handleSeleccionarLog(titulo.id)}
                   />
                   {titulo.titulo} - {titulo.fecha}
@@ -123,6 +137,43 @@ const LogManager = () => {
           <div className="button-container">
             <button className="danger-button" onClick={handleActualizarLog} disabled={cargando}>
               {cargando ? 'Cargando...' : 'Actualizar Log'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Aquí agregamos los campos editables */}
+      {tituloSeleccionado && (
+        <div className="edit-log-container">
+          <h3>Editar Log</h3>
+          <div>
+            <label htmlFor="titulo">Título:</label>
+            <input
+              id="titulo"
+              type="text"
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contenido">Contenido:</label>
+            <Editor
+              apiKey="your-tinymce-api-key" // Si necesitas una API key, úsala aquí
+              value={contenido}
+              onEditorChange={(newValue) => setContenido(newValue)}
+              init={{
+                height: 500,
+                menubar: false,
+                plugins: ['lists', 'link', 'image', 'table'],
+                toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+              }}
+            />
+          </div>
+
+          <div className="button-container">
+            <button className="primary-button" onClick={handleGuardarLog}>
+              Guardar Log
             </button>
           </div>
         </div>
