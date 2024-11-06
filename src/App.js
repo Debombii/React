@@ -190,30 +190,38 @@ const ChangelogGenerator = () => {
             Contenido:
             <div className="editor-wrapper">
               <Editor
-                apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-                value={description}
-                onInit={(evt, editor) => (editorRef.current = editor)}
-                init={{
-                  height: 300,
-                  menubar: false,
-                  plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table paste code help wordcount",
-                    "textcolor",
-                    "autoresize",
-                  ],
-                  toolbar:
-                    "undo redo | formatselect | bold italic backcolor | fontsize | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | removeformat | help",
-                  fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-                  autoresize_bottom_margin: 10,
-                  autoresize_max_height: 600,
-                }}
-                onEditorChange={(newValue) => setDescription(newValue)}
-                required
-              />
+  apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+  value={description}
+  onInit={(evt, editor) => (editorRef.current = editor)}
+  init={{
+    height: 300,
+    menubar: false,
+    plugins: [
+      "advlist autolink lists link image charmap print preview anchor",
+      "searchreplace visualblocks code fullscreen",
+      "insertdatetime media table paste code help wordcount",
+      "textcolor",
+      "autoresize",
+      "autosave",
+      "fontsize",
+    ],
+    toolbar:
+      "undo redo | formatselect | bold italic backcolor | fontsize | \
+      alignleft aligncenter alignright alignjustify | \
+      bullist numlist outdent indent | removeformat | help | \
+      forecolor backcolor | link image",
+    fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+    autoresize: {
+      enabled: true,
+      min_height: 200, 
+      max_height: 600, 
+    },
+    autoresize_bottom_margin: 10, 
+  }}
+  onEditorChange={(newValue) => setDescription(newValue)}
+  required
+/>
+
             </div>
           </label>
           <div className="button-container">
