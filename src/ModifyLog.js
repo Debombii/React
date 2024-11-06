@@ -12,6 +12,7 @@ const LogManager = () => {
   const navigate = useNavigate();
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
+
   const handleBuscarLogs = async () => {
     if (!empresa) {
       setMensaje('Por favor, selecciona una empresa.');
@@ -50,6 +51,7 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
+        // Aquí se navega al componente de modificación, pasando el contenido del log como estado
         navigate('/modifyLogs', { state: { logContent: response.data } });
         setMensaje('');
       } else {
