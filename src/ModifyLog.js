@@ -12,6 +12,7 @@ const LogManager = () => {
   const [cargando, setCargando] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [contenido, setContenido] = useState('');
+  const [mostrarEdicion, setMostrarEdicion] = useState(false);
   const navigate = useNavigate();
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
@@ -41,7 +42,8 @@ const LogManager = () => {
 
   const handleSeleccionarLog = (id) => {
     setTituloSeleccionado(id); 
-    setMensaje('');  // Limpiar mensaje si se selecciona un log
+    setMensaje('');
+    setMostrarEdicion(false);
   };
 
   const handleObtenerContenidoLog = async (id) => {
@@ -54,7 +56,6 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
-        // Establecemos el título y el contenido para ser editados
         setTitulo(response.data.titulo);
         setContenido(response.data.contenido);
         setMensaje('');
@@ -74,6 +75,7 @@ const LogManager = () => {
       setMensaje('Por favor, selecciona un log para actualizar.');
       return;
     }
+    setMostrarEdicion(true);
     handleObtenerContenidoLog(tituloSeleccionado);
   };
 
@@ -82,7 +84,6 @@ const LogManager = () => {
       setMensaje('Por favor, completa ambos campos (título y contenido).');
       return;
     }
-    // Aquí se puede enviar el log actualizado al backend para guardarlo
     setMensaje('Log actualizado correctamente.');
     console.log('Log actualizado:', { titulo, contenido });
   };
@@ -137,7 +138,8 @@ const LogManager = () => {
           </div>
         </div>
       )}
-      {tituloSeleccionado && (
+
+      {mostrarEdicion && tituloSeleccionado && (
         <div className="edit-log-container">
           <h3>Editar Log</h3>
           <div>
@@ -153,7 +155,7 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-              apiKey="your-tinymce-api-key" // Si necesitas una API key, úsala aquí
+              apiKey="your-tinymce-api-key"
               value={contenido}
               onEditorChange={(newValue) => setContenido(newValue)}
               init={{
