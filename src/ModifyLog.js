@@ -1,19 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import { Editor } from '@tinymce/tinymce-react';
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
-  const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
+  const [titulosSeleccionados, setTitulosSeleccionados] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
-  const [description, setDescription] = useState('');
-  const editorRef = useRef(null);
-
   const navigate = useNavigate();
+
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
   const handleBuscarLogs = async () => {
@@ -30,11 +27,11 @@ const LogManager = () => {
         setTitulos(response.data.titulos);
         setMensaje('');
       } else {
-        setTitulos([]);
-        setMensaje('No se encontraron logs en esta empresa.');
+        setTitulos([]); 
+        setMensaje('No se encontraron logs en esta empresa.'); 
       }
     } catch (error) {
-      console.error(error);
+      console.error(error); 
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
@@ -42,42 +39,27 @@ const LogManager = () => {
   };
 
   const handleSeleccionarLog = (id) => {
-    setTituloSeleccionado(id);
-    const logSeleccionado = titulos.find(titulo => titulo.id === id);
-    if (logSeleccionado) {
-      setDescription(logSeleccionado.contenido);
-    }
+    setTitulosSeleccionados(prevSeleccionados => {
+      if (prevSeleccionados.includes(id)) {
+        return prevSeleccionados.filter(tituloId => tituloId !== id); 
+      } else {
+        return [...prevSeleccionados, id];
+      }
+    });
   };
 
   const handleActualizarLog = async () => {
-    if (!tituloSeleccionado) {
+    if (titulosSeleccionados.length === 0) {
       setMensaje('Por favor, selecciona un log para actualizar.');
       return;
     }
 
-    try {
-      setCargando(true);
-      const response = await axios.post('https://flask-five-jade.vercel.app/actualizar-log', {
-        empresa,
-        id: tituloSeleccionado,
-        contenido: description
-      });
+    // Obtener el log seleccionado (asumimos que solo se puede seleccionar uno)
+    const logSeleccionado = titulos.find(titulo => titulo.id === titulosSeleccionados[0]);
 
-      if (response.data.success) {
-        setMensaje('Log actualizado exitosamente.');
-      } else {
-        setMensaje('Error al actualizar el log. Inténtalo de nuevo.');
-      }
-    } catch (error) {
-      console.error(error);
-      setMensaje('Error al actualizar el log. Inténtalo de nuevo.');
-    } finally {
-      setCargando(false);
+    if (logSeleccionado) {
+      navigate('/modifyLogs', { state: { logContent: logSeleccionado.contenido } });
     }
-  };
-
-  const handleRedirect = () => {
-    navigate('/');
   };
 
   return (
@@ -111,10 +93,10 @@ const LogManager = () => {
               <li key={titulo.id}>
                 <label>
                   <input
-                    type="radio"
+                    type="checkbox" 
                     name="titulo"
                     value={titulo.id}
-                    checked={tituloSeleccionado === titulo.id}
+                    checked={titulosSeleccionados.includes(titulo.id)}
                     onChange={() => handleSeleccionarLog(titulo.id)}
                   />
                   {titulo.titulo} - {titulo.fecha}
@@ -123,54 +105,13 @@ const LogManager = () => {
             ))}
           </ul>
 
-          {tituloSeleccionado && (
-            <div className="editor-container">
-              <h3>Actualizar Log</h3>
-              <label className="label">
-                Contenido:
-                <div className="editor-wrapper">
-                  <Editor
-                    apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-                    value={description}
-                    onInit={(evt, editor) => (editorRef.current = editor)}
-                    init={{
-                      height: 300,
-                      menubar: false,
-                      plugins: [
-                        "advlist autolink lists link image charmap print preview anchor",
-                        "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount",
-                        "textcolor",
-                        "autoresize",
-                      ],
-                      toolbar:
-                        "undo redo | formatselect | bold italic backcolor | fontsize | \
-                        alignleft aligncenter alignright alignjustify | \
-                        bullist numlist outdent indent | removeformat | help",
-                      fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-                      autoresize_bottom_margin: 10,
-                      autoresize_max_height: 600,
-                    }}
-                    onEditorChange={(newValue) => setDescription(newValue)}
-                    required
-                  />
-                </div>
-              </label>
-              <button className="primary-button" onClick={handleActualizarLog} disabled={cargando}>
-                {cargando ? 'Actualizando...' : 'Enviar Actualización'}
-              </button>
-            </div>
-          )}
+          <div className="button-container">
+            <button className="danger-button" onClick={handleActualizarLog} disabled={cargando}>
+              {cargando ? 'Cargando...' : 'Actualizar Log'}
+            </button>
+          </div>
         </div>
       )}
-
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/0/340.png"
-        alt="Volver"
-        className="redirect-icon"
-        onClick={handleRedirect}
-        style={{ cursor: "pointer", width: "50px", height: "50px" }} 
-      />
     </div>
   );
 };
