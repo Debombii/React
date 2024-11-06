@@ -6,6 +6,7 @@ import App from './App';
 import Login from './login';
 import ProtectedRoute from './protectedRoute';
 import LogManager from './LogManager'; 
+import ModifyLog from './ModifyLog'; 
 
 const MainApp = () => {
   return (
@@ -23,6 +24,11 @@ const MainApp = () => {
         <Route path="/logs" element={
           <ProtectedRoute>
             <LogManager />
+          </ProtectedRoute>
+        } />
+        <Route path="/modifyLogs" element={
+          <ProtectedRoute>
+            <ModifyLog />
           </ProtectedRoute>
         } />
 
