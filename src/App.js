@@ -117,19 +117,6 @@ const ChangelogGenerator = () => {
     window.location.href = '/logs';
   };
 
-  // Función para ajustar la altura del editor según el contenido
-  const adjustEditorHeight = () => {
-    if (editorRef.current) {
-      const editor = editorRef.current.editor;
-
-      // Obtener la altura del contenido dentro del editor
-      const contentHeight = editor.getContentAreaContainer().scrollHeight;
-      
-      // Ajustar la altura del editor en función del contenido
-      editor.theme.resizeTo("100%", contentHeight + 40); // Añadimos un margen de 40px
-    }
-  };
-
   return (
     <div>
       <header className="header">
@@ -205,31 +192,25 @@ const ChangelogGenerator = () => {
                     "searchreplace visualblocks code fullscreen",
                     "insertdatetime media table paste code help wordcount",
                     "textcolor",
+                    "autoresize", // Habilitar el plugin de autoresize
                   ],
                   toolbar:
                     "undo redo | formatselect | bold italic backcolor | fontsize | \
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat | help",
                   fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+                  autoresize_bottom_margin: 10, // Ajuste adicional para margen inferior
+                  autoresize_max_height: 600, // Máxima altura del editor (ajústalo según tus necesidades)
                 }}
                 onEditorChange={(newValue) => setDescription(newValue)}
                 required
               />
-              <button
-                type="button"
-                className="adjust-height-button"
-                onClick={adjustEditorHeight}
-              >
-                ↕
-              </button>
             </div>
           </label>
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${
-                isHovered === "generate" ? "button-hover" : ""
-              }`}
+              className={`button ${isHovered === "generate" ? "button-hover" : ""}`}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
@@ -254,9 +235,7 @@ const ChangelogGenerator = () => {
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={`download-button ${
-                  isHovered === "download" ? "download-button-hover" : ""
-                }`}
+                className={`download-button ${isHovered === "download" ? "download-button-hover" : ""}`}
                 onMouseEnter={() => setIsHovered("download")}
                 onMouseLeave={() => setIsHovered("")}
               >
