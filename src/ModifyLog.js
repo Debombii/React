@@ -89,14 +89,18 @@ const LogManager = () => {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
-        ids: [tituloSeleccionado],  // Solo pasamos el ID del log seleccionado
+        ids: [tituloSeleccionado],
         nuevoTitulo: titulo,
-        nuevoContenido: contenido // Aquí enviamos el contenido del editor TinyMCE
+        nuevoContenido: contenido 
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
         console.log('Log actualizado:', { titulo, contenido });
+        handleBuscarLogs(); 
+        setMostrarEdicion(false);
+        setTitulo('');
+        setContenido('');
       } else {
         setMensaje('Error al actualizar el log.');
       }
