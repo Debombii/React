@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
-  const [titulosSeleccionados, setTitulosSeleccionados] = useState([]);
+  const [tituloSeleccionado, setTituloSeleccionado] = useState(null); // Cambié de array a un único ID
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
   const navigate = useNavigate();
@@ -37,25 +37,16 @@ const LogManager = () => {
       setCargando(false);
     }
   };
-
   const handleSeleccionarLog = (id) => {
-    setTitulosSeleccionados(prevSeleccionados => {
-      if (prevSeleccionados.includes(id)) {
-        return prevSeleccionados.filter(tituloId => tituloId !== id); 
-      } else {
-        return [...prevSeleccionados, id];
-      }
-    });
+    setTituloSeleccionado(id);  // Sólo se guarda el ID del log seleccionado
   };
 
   const handleActualizarLog = async () => {
-    if (titulosSeleccionados.length === 0) {
+    if (!tituloSeleccionado) {
       setMensaje('Por favor, selecciona un log para actualizar.');
       return;
     }
-
-    // Obtener el log seleccionado (asumimos que solo se puede seleccionar uno)
-    const logSeleccionado = titulos.find(titulo => titulo.id === titulosSeleccionados[0]);
+    const logSeleccionado = titulos.find(titulo => titulo.id === tituloSeleccionado);
 
     if (logSeleccionado) {
       navigate('/modifyLogs', { state: { logContent: logSeleccionado.contenido } });
@@ -93,10 +84,10 @@ const LogManager = () => {
               <li key={titulo.id}>
                 <label>
                   <input
-                    type="checkbox" 
+                    type="radio"  // Cambio de checkbox a radio
                     name="titulo"
                     value={titulo.id}
-                    checked={titulosSeleccionados.includes(titulo.id)}
+                    checked={tituloSeleccionado === titulo.id}  // Solo se selecciona un log
                     onChange={() => handleSeleccionarLog(titulo.id)}
                   />
                   {titulo.titulo} - {titulo.fecha}
