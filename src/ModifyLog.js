@@ -189,10 +189,14 @@ const LogManager = () => {
               init={{
                 height: 500,
                 menubar: true,
-                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave'],
+                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
                 toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
                 fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
-                autoresize: true, // Habilitar autoajuste
+                autoresize: {
+                  enabled: true,
+                  min_height: 200, // Altura mínima
+                  max_height: 1000, // Altura máxima
+                },
               }}
             />
           </div>
