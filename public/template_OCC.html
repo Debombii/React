@@ -18,7 +18,7 @@
             --index-width: 250px;
             --header-bg-color: #ffffff;
         }
-       html {
+        html {
             scroll-behavior: smooth;
         }
         body {
@@ -81,14 +81,14 @@
             margin-bottom: 30px;
         }
         
-        .version h2 {
+        .version h2.base {
             color: var(--highlight-color);
             border-bottom: 2px solid var(--highlight-color);
             padding: 3px 0;
             font-size: 1.5rem;
         }
         
-        .version h3 {
+        .version h3.base {
             padding: 2px 0;
             font-size: 1.2rem;
             margin-bottom: 1px;
@@ -177,7 +177,7 @@
             }
         }
         
-        img {
+        img.base {
             max-height: 60px;
             max-width: fit-content;
             display: block;
@@ -185,7 +185,7 @@
         }
         
         @media (min-width: 1025px) {
-            img {
+            img.base {
                 max-width: 300px;
                 transform: scale(0.7);
                 transform-origin: top left;
@@ -193,7 +193,7 @@
         }
         
         @media (max-width: 1024px) {
-            img {
+            img.base {
                 max-width: 300px;
                 transform: scale(0.6);
                 transform-origin: top left;
@@ -201,7 +201,7 @@
         }
         
         @media (max-width: 768px) {
-            img {
+            img.base {
                 max-width: 250px;
                 transform: scale(0.5);
                 transform-origin: top left;
@@ -209,7 +209,7 @@
         }
         
         @media (max-width: 480px) {
-            img {
+            img.base {
                 max-width: 200px;
                 transform: scale(0.4);
                 transform-origin: top left;
@@ -219,7 +219,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="https://www.ckcautosport.es/img/m/70.jpg" alt="Logotipo de la empresa"> 
+        <img class="base" src="https://www.ckcautosport.es/img/m/70.jpg" alt="Logotipo de la empresa"> 
     </div>
     <div class="container">
         <div class="index">
