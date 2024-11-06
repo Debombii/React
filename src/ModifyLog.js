@@ -112,6 +112,10 @@ const LogManager = () => {
     }
   };
 
+  const handleRedirect = () => {
+    navigate('/'); // Redirige a la página principal
+  };
+
   return (
     <div className="log-manager-container">
       <h2>Gestión de Logs</h2>
@@ -198,6 +202,15 @@ const LogManager = () => {
           </div>
         </div>
       )}
+
+      {/* Botón para redirigir a la página principal */}
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/0/340.png"
+        alt="Volver"
+        className="redirect-icon"
+        onClick={handleRedirect}
+        style={{ cursor: "pointer", width: "50px", height: "50px" }} 
+      />
     </div>
   );
 };
