@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { Link } from "react-router-dom"; // Importamos Link para la redirección
+import { Link, useNavigate } from "react-router-dom";
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
@@ -13,8 +13,8 @@ const ChangelogGenerator = () => {
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Referencia al editor para acceder a sus métodos
   const editorRef = useRef(null);
+  const navigate = useNavigate();
 
   const escapeHtml = (html) => {
     return html
@@ -125,15 +125,14 @@ const ChangelogGenerator = () => {
       </header>
       <div className="container">
         <div className="icon-container">
-          {/* Botón de eliminación de logs */}
           <img
             src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
             alt="Eliminar Logs"
             className="redirect-icon"
             style={{ cursor: "pointer", width: "50px", height: "50px" }}
+            onClick={() => navigate("/logs")}
           />
           
-          {/* Botón para redirigir a /modifyLogs */}
           <Link to="/modifyLogs">
             <img
               src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png"
@@ -202,7 +201,7 @@ const ChangelogGenerator = () => {
                     "searchreplace visualblocks code fullscreen",
                     "insertdatetime media table paste code help wordcount",
                     "textcolor",
-                    "autoresize", // Habilitar el plugin de autoresize
+                    "autoresize",
                   ],
                   toolbar:
                     "undo redo | formatselect | bold italic backcolor | fontsize | \
