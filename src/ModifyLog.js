@@ -125,14 +125,6 @@ const LogManager = () => {
           </div>
         </div>
       )}
-        
-        <img
-        src="https://cdn-icons-png.flaticon.com/512/0/340.png"
-        alt="Volver"
-        className="redirect-icon"
-        onClick={handleRedirect}
-        style={{ cursor: "pointer", width: "50px", height: "50px" }} 
-      />
     </div>
   );
 };
