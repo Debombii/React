@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import "./App.css";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
-  const [tituloSeleccionado, setTituloSeleccionado] = useState(null); // Cambié de array a un único ID
+  const [tituloSeleccionado, setTituloSeleccionado] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
   const navigate = useNavigate();
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
-
   const handleBuscarLogs = async () => {
     if (!empresa) {
       setMensaje('Por favor, selecciona una empresa.');
       return;
     }
-
     try {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
-
       if (response.data && response.data.titulos && response.data.titulos.length > 0) {
         setTitulos(response.data.titulos);
         setMensaje('');
@@ -37,8 +34,33 @@ const LogManager = () => {
       setCargando(false);
     }
   };
+
+  // Función para seleccionar un log
   const handleSeleccionarLog = (id) => {
-    setTituloSeleccionado(id);  // Sólo se guarda el ID del log seleccionado
+    setTituloSeleccionado(id); 
+  };
+
+  const handleObtenerContenidoLog = async (id) => {
+    if (!id) {
+      setMensaje('Por favor, selecciona un log.');
+      return;
+    }
+    try {
+      setCargando(true);
+      const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
+
+      if (response.data && response.data.titulo && response.data.contenido) {
+        navigate('/modifyLogs', { state: { logContent: response.data } });
+        setMensaje('');
+      } else {
+        setMensaje('No se encontró el contenido del log.');
+      }
+    } catch (error) {
+      console.error(error);
+      setMensaje('Error al obtener el contenido del log.');
+    } finally {
+      setCargando(false);
+    }
   };
 
   const handleActualizarLog = async () => {
@@ -49,7 +71,7 @@ const LogManager = () => {
     const logSeleccionado = titulos.find(titulo => titulo.id === tituloSeleccionado);
 
     if (logSeleccionado) {
-      navigate('/modifyLogs', { state: { logContent: logSeleccionado.contenido } });
+      handleObtenerContenidoLog(tituloSeleccionado);
     }
   };
 
