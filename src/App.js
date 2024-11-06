@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
 
@@ -11,6 +11,9 @@ const ChangelogGenerator = () => {
   const [title, setTitle] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Referencia al editor para acceder a sus métodos
+  const editorRef = useRef(null);
 
   const escapeHtml = (html) => {
     return html
@@ -39,21 +42,13 @@ const ChangelogGenerator = () => {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = String(today.getFullYear()).slice(-2);
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
-      4,
-      "0"
-    );
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(4, "0");
     return `${month}${year}-${randomNumbers}`;
   };
 
   const generateHtml = () => {
     const version = generateVersion();
 
-    const cleanContent = (content) => {
-      return content
-        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
-        .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
-    };
     const html = `
       <!DOCTYPE html>
       <html lang='es'>
@@ -61,8 +56,7 @@ const ChangelogGenerator = () => {
           <meta charset='UTF-8'>
           <meta name='viewport' content='width=device-width, initial-scale=1.0'>
           <title>${version}</title>
-          <style>
-          </style>
+          <style></style>
       </head>
       <body>
           <div class='container'>
@@ -119,9 +113,17 @@ const ChangelogGenerator = () => {
     );
   };
 
-  // Función para redirigir al endpoint /logs
   const handleRedirect = () => {
-    window.location.href = '/logs'; // Redirige a /logs
+    window.location.href = '/logs';
+  };
+
+  // Función para ajustar la altura del editor según el contenido
+  const adjustEditorHeight = () => {
+    if (editorRef.current) {
+      const editor = editorRef.current.editor;
+      const newHeight = editor.getContentAreaContainer().scrollHeight + 20; // 20px de margen
+      editor.theme.resizeTo("100%", newHeight);
+    }
   };
 
   return (
@@ -139,7 +141,7 @@ const ChangelogGenerator = () => {
           alt="Eliminar Logs"
           className="redirect-icon"
           onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
+          style={{ cursor: "pointer", width: "50px", height: "50px" }}
         />
         <h1 className="title">Generador de Log de Cambios</h1>
         <form
@@ -170,56 +172,18 @@ const ChangelogGenerator = () => {
           <label className="label">
             Proyectos:
             <div className="checkbox-group">
-              <label>
-                <input
-                  type="checkbox"
-                  value="MRG"
-                  checked={selectedCompanies.includes("MRG")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                MRG
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="OCC"
-                  checked={selectedCompanies.includes("OCC")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                OCC
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Godiz"
-                  checked={selectedCompanies.includes("Godiz")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                Godiz
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="GERP"
-                  checked={selectedCompanies.includes("GERP")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                GERP
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Rubicon"
-                  checked={selectedCompanies.includes("Rubicon")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                Rubicon
-              </label>
+              {["MRG", "OCC", "Godiz", "GERP", "Rubicon"].map((company) => (
+                <label key={company}>
+                  <input
+                    type="checkbox"
+                    value={company}
+                    checked={selectedCompanies.includes(company)}
+                    onChange={handleCompanyChange}
+                  />
+                  <div className="custom-checkbox"></div>
+                  {company}
+                </label>
+              ))}
             </div>
           </label>
           <label className="label">
@@ -227,6 +191,7 @@ const ChangelogGenerator = () => {
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={description}
+              onInit={(evt, editor) => (editorRef.current = editor)}
               init={{
                 height: 300,
                 menubar: false,
@@ -234,17 +199,26 @@ const ChangelogGenerator = () => {
                   "advlist autolink lists link image charmap print preview anchor",
                   "searchreplace visualblocks code fullscreen",
                   "insertdatetime media table paste code help wordcount",
+                  "textcolor",
                 ],
                 toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
+                  "undo redo | formatselect | bold italic backcolor | fontsize | \
                   alignleft aligncenter alignright alignjustify | \
                   bullist numlist outdent indent | removeformat | help",
+                fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt", // Tamaños disponibles
               }}
               onEditorChange={(newValue) => setDescription(newValue)}
               required
             />
           </label>
           <div className="button-container">
+            <button
+              type="button"
+              className="button"
+              onClick={adjustEditorHeight}
+            >
+              Ajustar altura del editor
+            </button>
             <button
               type="submit"
               className={`button ${
