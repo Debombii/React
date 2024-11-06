@@ -188,9 +188,11 @@ const LogManager = () => {
               onEditorChange={(newValue) => setContenido(newValue)}
               init={{
                 height: 500,
-                menubar: false,
-                plugins: ['lists', 'link', 'image', 'table'],
-                toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+                menubar: true,
+                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave'],
+                toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+                fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+                autoresize: true, // Habilitar autoajuste
               }}
             />
           </div>
