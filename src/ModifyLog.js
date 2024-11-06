@@ -202,8 +202,6 @@ const LogManager = () => {
           </div>
         </div>
       )}
-
-      {/* Botón para redirigir a la página principal */}
       <img
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Volver"
