@@ -29,7 +29,7 @@
              color: var(--main-text-color);
              line-height: 1.6;
          }
-         
+
          .header {
              display: flex;
              justify-content: center;
@@ -38,12 +38,12 @@
              background: var(--header-bg-color);
              box-shadow: 0 2px 4px var(--box-shadow-color);
          }
-         
+
          .header img {
              max-height: 60px;
              margin-right: 20px;
          }
-         
+
          .container {
              display: flex;
              flex-direction: row;
@@ -52,7 +52,7 @@
              padding: 0;
              border-radius: 8px; 
          }
-         
+
          .content {
              flex: 1 1 0;
              margin-right: 30px;
@@ -64,7 +64,7 @@
              box-sizing: border-box; 
              background-color: transparent;
          }
-         
+
          .version {
              line-height: 0.5;
              margin-left: 2px; 
@@ -74,38 +74,38 @@
              border-radius: 5px;
              box-shadow: 0 2px 4px var(--box-shadow-color);
          }
-         
+
          h1 {
              text-align: center;
              color: var(--highlight-color);
              margin-bottom: 30px;
          }
-         
+
          .version h2.base {
              color: var(--highlight-color);
              border-bottom: 2px solid var(--highlight-color);
              padding: 3px 0;
              font-size: 1.5rem;
          }
-         
+
          .version h3 {
              padding: 2px 0;
              font-size: 1.2rem;
              margin-bottom: 1px;
          }
-         
+
          .version .date {
              font-size: 0.9rem;
              color: var(--light-text-color);
              margin-bottom: 1px;
          }
-         
+
          .version ul {
              list-style-type: disc;
              padding-left: 15px;
              margin: 1px 0; 
          }
-         
+
          .version ul li {
              margin: 1px 0;
          }
@@ -129,23 +129,23 @@
              height: auto;
              margin-right: 20px;
          }
-         
+
          .index h2 {
              font-size: 1.5rem;
              color: var(--highlight-color); 
              margin-bottom: 15px;
          }
-         
+
          .index ul {
              list-style: none;
              padding: 0;
              margin: 0;
          }
-         
+
          .index ul li {
              margin-bottom: 10px;
          }
-         
+
          .index ul li a {
              text-decoration: none;
              color: var(--main-text-color);
@@ -153,16 +153,16 @@
              display: block;
              transition: color 0.3s;
          }
-         
+
          .index ul li a:hover {
              color: var(--highlight-color);
          }
-         
+
          .index ul li a:focus {
              outline: 2px solid var(--highlight-color);
              outline-offset: 2px;
          }
-         
+
          @media (max-width: 768px) {
              .container {
                  flex-direction: column;
@@ -176,14 +176,14 @@
                  height: auto; 
              }
          }
-         
+
          img.base {
              max-height: 60px;
              max-width: fit-content;
              display: block;
              margin-left: 10px;
          }
-         
+
          @media (min-width: 1025px) {
              img.base {
                  max-width: 300px;
@@ -191,7 +191,7 @@
                  transform-origin: top left;
              }
          }
-         
+
          @media (max-width: 1024px) {
              img.base {
                  max-width: 300px;
@@ -199,7 +199,7 @@
                  transform-origin: top left;
              }
          }
-         
+
          @media (max-width: 768px) {
              img.base {
                  max-width: 250px;
@@ -207,7 +207,7 @@
                  transform-origin: top left;
              }
          }
-         
+
          @media (max-width: 480px) {
              img.base {
                  max-width: 200px;
@@ -225,88 +225,10 @@
          <div class="index">
             <h2>Índice</h2>
             <ul id="indice">
-<li><a href="#1124-0067">1124-0067 - 6/11/2024</a></li>
 
             </ul>
          </div>
          <div class="content">
-<div class='version'>
-                      <h2 id="1124-0067">1124-0067</h2>
-                      <p class='date' id="date">6/11/2024</p>
-                      <h3 class="titulo" id="version-1.1.2.1.2">Version 1.1.2.1.2</h3>
-                      <h3 class="titular">Contenido</h3><h2 id="introduction">Introduction</h2>
-<p>In the world of software management there exists a dreaded place called &ldquo;dependency hell.&rdquo; The bigger your system grows and the more packages you integrate into your software, the more likely you are to find yourself, one day, in this pit of despair.</p>
-<p>In systems with many dependencies, releasing new package versions can quickly become a nightmare. If the dependency specifications are too tight, you are in danger of version lock (the inability to upgrade a package without having to release new versions of every dependent package). If dependencies are specified too loosely, you will inevitably be bitten by version promiscuity (assuming compatibility with more future versions than is reasonable). Dependency hell is where you are when version lock and/or version promiscuity prevent you from easily and safely moving your project forward.</p>
-<p>As a solution to this problem, we propose a simple set of rules and requirements that dictate how version numbers are assigned and incremented. These rules are based on but not necessarily limited to pre-existing widespread common practices in use in both closed and open-source software. For this system to work, you first need to declare a public API. This may consist of documentation or be enforced by the code itself. Regardless, it is important that this API be clear and precise. Once you identify your public API, you communicate changes to it with specific increments to your version number. Consider a version format of X.Y.Z (Major.Minor.Patch). Bug fixes not affecting the API increment the patch version, backward compatible API additions/changes increment the minor version, and backward incompatible API changes increment the major version.</p>
-<p>We call this system &ldquo;Semantic Versioning.&rdquo; Under this scheme, version numbers and the way they change convey meaning about the underlying code and what has been modified from one version to the next.</p>
-<h2 id="semantic-versioning-specification-semver">Semantic Versioning Specification (SemVer)</h2>
-<p>The key words &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, and &ldquo;OPTIONAL&rdquo; in this document are to be interpreted as described in&nbsp;<a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
-<ol>
-<li id="spec-item-1">
-<p>Software using Semantic Versioning MUST declare a public API. This API could be declared in the code itself or exist strictly in documentation. However it is done, it SHOULD be precise and comprehensive.</p>
-</li>
-<li id="spec-item-2">
-<p>A normal version number MUST take the form X.Y.Z where X, Y, and Z are non-negative integers, and MUST NOT contain leading zeroes. X is the major version, Y is the minor version, and Z is the patch version. Each element MUST increase numerically. For instance: 1.9.0 -&gt; 1.10.0 -&gt; 1.11.0.</p>
-</li>
-<li id="spec-item-3">
-<p>Once a versioned package has been released, the contents of that version MUST NOT be modified. Any modifications MUST be released as a new version.</p>
-</li>
-<li id="spec-item-4">
-<p>Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.</p>
-</li>
-<li id="spec-item-5">
-<p>Version 1.0.0 defines the public API. The way in which the version number is incremented after this release is dependent on this public API and how it changes.</p>
-</li>
-<li id="spec-item-6">
-<p>Patch version Z (x.y.Z | x &gt; 0) MUST be incremented if only backward compatible bug fixes are introduced. A bug fix is defined as an internal change that fixes incorrect behavior.</p>
-</li>
-<li id="spec-item-7">
-<p>Minor version Y (x.Y.z | x &gt; 0) MUST be incremented if new, backward compatible functionality is introduced to the public API. It MUST be incremented if any public API functionality is marked as deprecated. It MAY be incremented if substantial new functionality or improvements are introduced within the private code. It MAY include patch level changes. Patch version MUST be reset to 0 when minor version is incremented.</p>
-</li>
-<li id="spec-item-8">
-<p>Major version X (X.y.z | X &gt; 0) MUST be incremented if any backward incompatible changes are introduced to the public API. It MAY also include minor and patch level changes. Patch and minor versions MUST be reset to 0 when major version is incremented.</p>
-</li>
-<li id="spec-item-9">
-<p>A pre-release version MAY be denoted by appending a hyphen and a series of dot separated identifiers immediately following the patch version. Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-]. Identifiers MUST NOT be empty. Numeric identifiers MUST NOT include leading zeroes. Pre-release versions have a lower precedence than the associated normal version. A pre-release version indicates that the version is unstable and might not satisfy the intended compatibility requirements as denoted by its associated normal version. Examples: 1.0.0-alpha, 1.0.0-alpha.1, 1.0.0-0.3.7, 1.0.0-x.7.z.92, 1.0.0-x-y-z.--.</p>
-</li>
-<li id="spec-item-10">
-<p>Build metadata MAY be denoted by appending a plus sign and a series of dot separated identifiers immediately following the patch or pre-release version. Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-]. Identifiers MUST NOT be empty. Build metadata MUST be ignored when determining version precedence. Thus two versions that differ only in the build metadata, have the same precedence. Examples: 1.0.0-alpha+001, 1.0.0+20130313144700, 1.0.0-beta+exp.sha.5114f85, 1.0.0+21AF26D3----117B344092BD.</p>
-</li>
-<li id="spec-item-11">
-<p>Precedence refers to how versions are compared to each other when ordered.</p>
-<ol>
-<li>
-<p>Precedence MUST be calculated by separating the version into major, minor, patch and pre-release identifiers in that order (Build metadata does not figure into precedence).</p>
-</li>
-<li>
-<p>Precedence is determined by the first difference when comparing each of these identifiers from left to right as follows: Major, minor, and patch versions are always compared numerically.</p>
-<p>Example: 1.0.0 &lt; 2.0.0 &lt; 2.1.0 &lt; 2.1.1.</p>
-</li>
-<li>
-<p>When major, minor, and patch are equal, a pre-release version has lower precedence than a normal version:</p>
-<p>Example: 1.0.0-alpha &lt; 1.0.0.</p>
-</li>
-<li>
-<p>Precedence for two pre-release versions with the same major, minor, and patch version MUST be determined by comparing each dot separated identifier from left to right until a difference is found as follows:</p>
-<ol>
-<li>
-<p>Identifiers consisting of only digits are compared numerically.</p>
-</li>
-<li>
-<p>Identifiers with letters or hyphens are compared lexically in ASCII sort order.</p>
-</li>
-<li>
-<p>Numeric identifiers always have lower precedence than non-numeric identifiers.</p>
-</li>
-<li>
-<p>A larger set of pre-release fields has a higher precedence than a smaller set, if all of the preceding identifiers are equal.</p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://cdn.pixabay.com/photo/2022/04/04/16/42/technology-7111804_640.jpg" alt="M&aacute;s de 1 000 im&aacute;genes gratis de Inform&aacute;tica y Tecnolog&iacute;a ..."></p></div>
 
          </div>
       </div>
