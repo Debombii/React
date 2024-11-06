@@ -91,7 +91,7 @@ const LogManager = () => {
         empresa,
         ids: [tituloSeleccionado],  // Solo pasamos el ID del log seleccionado
         nuevoTitulo: titulo,
-        nuevoContenido: contenido
+        nuevoContenido: contenido // Aquí enviamos el contenido del editor TinyMCE
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
@@ -176,7 +176,7 @@ const LogManager = () => {
             <label htmlFor="contenido">Contenido:</label>
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={contenido}
+              value={contenido} // Enviamos el contenido al editor
               onEditorChange={(newValue) => setContenido(newValue)}
               init={{
                 height: 500,
