@@ -4,8 +4,6 @@ import { Editor } from "@tinymce/tinymce-react";
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
-  const [newFeatures, setNewFeatures] = useState("");
-  const [solvedErrors, setSolvedErrors] = useState("");
   const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
@@ -56,21 +54,6 @@ const ChangelogGenerator = () => {
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
         .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
     };
-
-    const processedNewFeatures = cleanContent(newFeatures
-      .split("\n")
-      .map((feature) => feature.trim())
-      .filter((feature) => feature.length > 0)
-      .map((feature) => `<p>${feature}</p>`) // Cambiar a párrafos
-      .join(""));
-
-    const processedSolvedErrors = cleanContent(solvedErrors
-      .split("\n")
-      .map((error) => error.trim())
-      .filter((error) => error.length > 0)
-      .map((error) => `<p>${error}</p>`) // Cambiar a párrafos
-      .join(""));
-
     const html = `
       <!DOCTYPE html>
       <html lang='es'>
@@ -88,12 +71,8 @@ const ChangelogGenerator = () => {
                       <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                       <h3 class="titulo" id="${title}">${title}</h3>
-                      <h3>Descripción</h3>
+                      <h3>Contenido</h3>
                       ${description}
-                      <h3>Nuevas funcionalidades</h3>
-                      ${processedNewFeatures}
-                      <h3>Errores Solucionados</h3>
-                      ${processedSolvedErrors}
                   </div>
               </div>
           </div>
@@ -262,50 +241,6 @@ const ChangelogGenerator = () => {
                   bullist numlist outdent indent | removeformat | help",
               }}
               onEditorChange={(newValue) => setDescription(newValue)}
-              required
-            />
-          </label>
-          <label className="label">
-            Nuevas Funcionalidades:
-            <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={newFeatures}
-              init={{
-                height: 300,
-                menubar: false,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                ],
-                toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help",
-              }}
-              onEditorChange={(newValue) => setNewFeatures(newValue)}
-              required
-            />
-          </label>
-          <label className="label">
-            Errores Solucionados:
-            <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={solvedErrors}
-              init={{
-                height: 300,
-                menubar: false,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                ],
-                toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help",
-              }}
-              onEditorChange={(newValue) => setSolvedErrors(newValue)}
               required
             />
           </label>
