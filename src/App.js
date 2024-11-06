@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
+import { Link } from "react-router-dom"; // Importamos Link para la redirección
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
@@ -113,10 +114,6 @@ const ChangelogGenerator = () => {
     );
   };
 
-  const handleRedirect = () => {
-    window.location.href = '/logs';
-  };
-
   return (
     <div>
       <header className="header">
@@ -127,13 +124,26 @@ const ChangelogGenerator = () => {
         <h1 className="title">Generador de Log de Cambios</h1>
       </header>
       <div className="container">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
-          alt="Eliminar Logs"
-          className="redirect-icon"
-          onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }}
-        />
+        <div className="icon-container">
+          {/* Botón de eliminación de logs */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
+            alt="Eliminar Logs"
+            className="redirect-icon"
+            style={{ cursor: "pointer", width: "50px", height: "50px" }}
+          />
+          
+          {/* Botón para redirigir a /modifyLogs */}
+          <Link to="/modifyLogs">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/25/25472.png" // Cambia esta URL por el icono que prefieras
+              alt="Modificar Logs"
+              className="redirect-icon"
+              style={{ cursor: "pointer", width: "50px", height: "50px", marginLeft: "10px" }} // Le damos un margen al icono
+            />
+          </Link>
+        </div>
+
         <h1 className="title">Generador de Log de Cambios</h1>
         <form
           onSubmit={(e) => {
