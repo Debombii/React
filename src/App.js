@@ -121,8 +121,8 @@ const ChangelogGenerator = () => {
   const adjustEditorHeight = () => {
     if (editorRef.current) {
       const editor = editorRef.current.editor;
-      const newHeight = editor.getContentAreaContainer().scrollHeight + 20; // 20px de margen
-      editor.theme.resizeTo("100%", newHeight);
+      const contentHeight = editor.getContentAreaContainer().scrollHeight;
+      editor.theme.resizeTo("100%", contentHeight + 40); // Ajuste extra para margen
     }
   };
 
@@ -188,37 +188,39 @@ const ChangelogGenerator = () => {
           </label>
           <label className="label">
             Contenido:
-            <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={description}
-              onInit={(evt, editor) => (editorRef.current = editor)}
-              init={{
-                height: 300,
-                menubar: false,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                  "textcolor",
-                ],
-                toolbar:
-                  "undo redo | formatselect | bold italic backcolor | fontsize | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help",
-                fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt", // Tamaños disponibles
-              }}
-              onEditorChange={(newValue) => setDescription(newValue)}
-              required
-            />
+            <div className="editor-wrapper">
+              <Editor
+                apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+                value={description}
+                onInit={(evt, editor) => (editorRef.current = editor)}
+                init={{
+                  height: 300,
+                  menubar: false,
+                  plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount",
+                    "textcolor",
+                  ],
+                  toolbar:
+                    "undo redo | formatselect | bold italic backcolor | fontsize | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help",
+                  fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+                }}
+                onEditorChange={(newValue) => setDescription(newValue)}
+                required
+              />
+              <button
+                type="button"
+                className="adjust-height-button"
+                onClick={adjustEditorHeight}
+              >
+                ↕
+              </button>
+            </div>
           </label>
           <div className="button-container">
-            <button
-              type="button"
-              className="button"
-              onClick={adjustEditorHeight}
-            >
-              Ajustar altura del editor
-            </button>
             <button
               type="submit"
               className={`button ${
