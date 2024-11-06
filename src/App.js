@@ -199,8 +199,8 @@ const ChangelogGenerator = () => {
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat | help",
                   fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-                  autoresize_bottom_margin: 10, // Ajuste adicional para margen inferior
-                  autoresize_max_height: 600, // Máxima altura del editor (ajústalo según tus necesidades)
+                  autoresize_bottom_margin: 10,
+                  autoresize_max_height: 600,
                 }}
                 onEditorChange={(newValue) => setDescription(newValue)}
                 required
