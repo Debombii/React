@@ -136,10 +136,10 @@ const ChangelogGenerator = () => {
           {/* Botón para redirigir a /modifyLogs */}
           <Link to="/modifyLogs">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/25/25472.png" // Cambia esta URL por el icono que prefieras
+              src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png"
               alt="Modificar Logs"
               className="redirect-icon"
-              style={{ cursor: "pointer", width: "50px", height: "50px", marginLeft: "10px" }} // Le damos un margen al icono
+              style={{ cursor: "pointer", width: "50px", height: "50px", marginLeft: "10px" }}
             />
           </Link>
         </div>
