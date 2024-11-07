@@ -29,11 +29,11 @@ const LogManager = () => {
         setTitulos(response.data.titulos);
         setMensaje('');
       } else {
-        setTitulos([]); 
-        setMensaje('No se encontraron logs en esta empresa.'); 
+        setTitulos([]);
+        setMensaje('No se encontraron logs en esta empresa.');
       }
     } catch (error) {
-      console.error(error); 
+      console.error(error);
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
@@ -41,7 +41,7 @@ const LogManager = () => {
   };
 
   const handleSeleccionarLog = (id) => {
-    setTituloSeleccionado(id); 
+    setTituloSeleccionado(id);
     setMensaje('');
     setMostrarEdicion(false);
   };
@@ -54,15 +54,14 @@ const LogManager = () => {
     try {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
-
       if (response.data && response.data.titulo && response.data.contenido) {
         setTitulo(response.data.titulo);
-        setContenido(response.data.contenido); // Establecer contenido recibido
+        setContenido(response.data.contenido);
         setMensaje('');
-        setMostrarEdicion(true); // Mostrar el editor si se encuentra contenido
+        setMostrarEdicion(true);
       } else {
         setMensaje('No se encontró el contenido del log.');
-        setMostrarEdicion(false); // No mostrar el editor si no hay contenido
+        setMostrarEdicion(false);
       }
     } catch (error) {
       console.error(error);
@@ -83,40 +82,11 @@ const LogManager = () => {
   };
 
   const handleGuardarLog = async () => {
-  if (!titulo || !contenido) {
-    setMensaje('Por favor, completa ambos campos (título y contenido).');
-    return;
-  }
-
-  const contenidoBase64 = btoa(unescape(encodeURIComponent(contenido)));
-
-  try {
-    setCargando(true);
-    const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
-      empresa,
-      ids: [tituloSeleccionado],
-      nuevoTitulo: titulo,
-      nuevoContenido: contenidoBase64
-    });
-
-    if (response.data && response.data.message === 'Logs modificados correctamente') {
-      setMensaje('Log actualizado correctamente.');
-      console.log('Log actualizado:', { titulo, contenidoBase64 });
-      handleBuscarLogs();
-      setMostrarEdicion(false);
-      setTitulo('');
-      setContenido('');
-    } else {
-      setMensaje('Error al actualizar el log.');
+    if (!titulo || !contenido) {
+      setMensaje('Por favor, completa ambos campos (título y contenido).');
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    setMensaje('Error al guardar el log. Inténtalo de nuevo.');
-  } finally {
-    setCargando(false);
-  }
-};
-
+    const contenidoBase64 = btoa(unescape(encodeURIComponent(contenido)));
 
     try {
       setCargando(true);
@@ -124,13 +94,13 @@ const LogManager = () => {
         empresa,
         ids: [tituloSeleccionado],
         nuevoTitulo: titulo,
-        nuevoContenido: contenido 
+        nuevoContenido: contenidoBase64
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
-        console.log('Log actualizado:', { titulo, contenido });
-        handleBuscarLogs(); 
+        console.log('Log actualizado:', { titulo, contenidoBase64 });
+        handleBuscarLogs();
         setMostrarEdicion(false);
         setTitulo('');
         setContenido('');
@@ -152,7 +122,6 @@ const LogManager = () => {
   return (
     <div className="log-manager-container">
       <h2>Gestión de Logs</h2>
-
       <div>
         <label htmlFor="empresa">Selecciona una empresa: </label>
         <select
@@ -180,7 +149,7 @@ const LogManager = () => {
               <li key={titulo.id}>
                 <label>
                   <input
-                    type="radio" 
+                    type="radio"
                     name="titulo"
                     value={titulo.id}
                     checked={tituloSeleccionado === titulo.id}
@@ -191,7 +160,6 @@ const LogManager = () => {
               </li>
             ))}
           </ul>
-
           <div className="button-container">
             <button className="danger-button" onClick={handleActualizarLog} disabled={cargando || !tituloSeleccionado}>
               {cargando ? 'Cargando...' : 'Seleccionar Log'}
@@ -216,7 +184,7 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+              apiKey="your-api-key"
               value={contenido}
               onEditorChange={(newValue) => setContenido(newValue)}
               init={{
@@ -241,7 +209,7 @@ const LogManager = () => {
           </div>
         </div>
       )}
-      
+
       <img
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Volver"
