@@ -43,7 +43,7 @@ const ChangelogGenerator = () => {
       4,
       "0"
     );
-    return ${month}${year}-${randomNumbers};
+    return `${month}${year}-${randomNumbers}`;
   };
 
   const generateHtml = () => {
@@ -54,7 +54,7 @@ const ChangelogGenerator = () => {
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
         .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
     };
-    const html = 
+    const html = `
       <!DOCTYPE html>
       <html lang='es'>
       <head>
@@ -78,7 +78,7 @@ const ChangelogGenerator = () => {
           </div>
       </body>
       </html>
-    ;
+    `;
 
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
@@ -247,9 +247,9 @@ const ChangelogGenerator = () => {
           <div className="button-container">
             <button
               type="submit"
-              className={button ${
+              className={`button ${
                 isHovered === "generate" ? "button-hover" : ""
-              }}
+              }`}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
@@ -274,9 +274,9 @@ const ChangelogGenerator = () => {
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={download-button ${
+                className={`download-button ${
                   isHovered === "download" ? "download-button-hover" : ""
-                }}
+                }`}
                 onMouseEnter={() => setIsHovered("download")}
                 onMouseLeave={() => setIsHovered("")}
               >
