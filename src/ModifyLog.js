@@ -83,10 +83,40 @@ const LogManager = () => {
   };
 
   const handleGuardarLog = async () => {
-    if (!titulo || !contenido) {
-      setMensaje('Por favor, completa ambos campos (título y contenido).');
-      return;
+  if (!titulo || !contenido) {
+    setMensaje('Por favor, completa ambos campos (título y contenido).');
+    return;
+  }
+
+  const contenidoBase64 = btoa(unescape(encodeURIComponent(contenido)));
+
+  try {
+    setCargando(true);
+    const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
+      empresa,
+      ids: [tituloSeleccionado],
+      nuevoTitulo: titulo,
+      nuevoContenido: contenidoBase64
+    });
+
+    if (response.data && response.data.message === 'Logs modificados correctamente') {
+      setMensaje('Log actualizado correctamente.');
+      console.log('Log actualizado:', { titulo, contenidoBase64 });
+      handleBuscarLogs();
+      setMostrarEdicion(false);
+      setTitulo('');
+      setContenido('');
+    } else {
+      setMensaje('Error al actualizar el log.');
     }
+  } catch (error) {
+    console.error(error);
+    setMensaje('Error al guardar el log. Inténtalo de nuevo.');
+  } finally {
+    setCargando(false);
+  }
+};
+
 
     try {
       setCargando(true);
