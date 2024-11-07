@@ -227,7 +227,7 @@ const ChangelogGenerator = () => {
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${isHovered === "generate" ? "button-hover" : ""}`}
+              className={`download-button ${isHovered === "download" ? "download-button-hover" : ""}`}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
