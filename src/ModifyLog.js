@@ -1,8 +1,9 @@
-import React, { useState } from 'react'; 
-import "./App.css";
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
+import pako from 'pako';
+import { useNavigate } from 'react-router-dom';
+import "./App.css";
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
@@ -56,13 +57,15 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
+        const decodedData = atob(response.data.contenido); 
+        const decompressedData = pako.ungzip(decodedData, { to: 'string' });
         setTitulo(response.data.titulo);
-        setContenido(response.data.contenido); // Establecer contenido recibido
+        setContenido(decompressedData); 
         setMensaje('');
-        setMostrarEdicion(true); // Mostrar el editor si se encuentra contenido
+        setMostrarEdicion(true); 
       } else {
         setMensaje('No se encontró el contenido del log.');
-        setMostrarEdicion(false); // No mostrar el editor si no hay contenido
+        setMostrarEdicion(false);
       }
     } catch (error) {
       console.error(error);
@@ -79,7 +82,7 @@ const LogManager = () => {
       return;
     }
     setMostrarEdicion(true);
-    handleObtenerContenidoLog(tituloSeleccionado); // Actualizamos el contenido del log seleccionado
+    handleObtenerContenidoLog(tituloSeleccionado);
   };
 
   const handleGuardarLog = async () => {
@@ -90,11 +93,16 @@ const LogManager = () => {
 
     try {
       setCargando(true);
+
+      // Comprimir el contenido (opcional) y luego codificarlo en Base64
+      const compressedContent = pako.gzip(contenido, { to: 'string' }); // Comprimir
+      const base64Content = btoa(compressedContent); // Codificar en Base64
+
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
-        id_log: tituloSeleccionado, // Ahora pasamos el ID del log y no un array
+        id_log: tituloSeleccionado, 
         nuevoTitulo: titulo,
-        nuevoContenido: contenido 
+        nuevoContenido: base64Content // Enviar el contenido codificado en Base64
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
@@ -113,10 +121,6 @@ const LogManager = () => {
     } finally {
       setCargando(false);
     }
-  };
-
-  const handleRedirect = () => {
-    navigate('/'); // Redirige a la página principal
   };
 
   return (
@@ -188,7 +192,7 @@ const LogManager = () => {
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={contenido} // El contenido recibido se pasa aquí
-              onEditorChange={(newValue) => setContenido(newValue)} // Actualiza el contenido cuando se edite
+              onEditorChange={(newValue) => setContenido(newValue)} 
               init={{
                 height: 500,
                 menubar: true,
