@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { Link, useNavigate } from "react-router-dom";
+import "./App.css";
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
-  const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
   const [title, setTitle] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const editorRef = useRef(null);
+  const navigate = useNavigate();
 
   const escapeHtml = (html) => {
     return html
@@ -39,21 +42,20 @@ const ChangelogGenerator = () => {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = String(today.getFullYear()).slice(-2);
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
-      4,
-      "0"
-    );
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(4, "0");
     return `${month}${year}-${randomNumbers}`;
   };
 
   const generateHtml = () => {
     const version = generateVersion();
 
+    // Limpiamos el contenido antes de guardarlo
     const cleanContent = (content) => {
       return content
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
         .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
     };
+
     const html = `
       <!DOCTYPE html>
       <html lang='es'>
@@ -80,6 +82,7 @@ const ChangelogGenerator = () => {
       </html>
     `;
 
+    // Limpiar y actualizar el contenido
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
   };
@@ -92,6 +95,7 @@ const ChangelogGenerator = () => {
 
     setIsLoading(true);
 
+    // Enviar el JSON a la API
     fetch("https://flask-five-jade.vercel.app/upload-file", {
       method: "POST",
       headers: {
@@ -119,11 +123,6 @@ const ChangelogGenerator = () => {
     );
   };
 
-  // Función para redirigir al endpoint /logs
-  const handleRedirect = () => {
-    window.location.href = '/logs'; // Redirige a /logs
-  };
-
   return (
     <div>
       <header className="header">
@@ -134,13 +133,25 @@ const ChangelogGenerator = () => {
         <h1 className="title">Generador de Log de Cambios</h1>
       </header>
       <div className="container">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
-          alt="Eliminar Logs"
-          className="redirect-icon"
-          onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
-        />
+        <div className="icon-container">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25008.png"
+            alt="Eliminar Logs"
+            className="redirect-icon"
+            style={{ cursor: "pointer", width: "50px", height: "50px" }}
+            onClick={() => navigate("/logs")}
+          />
+          
+          <Link to="/modifyLogs">
+            <img
+              src="https://icons.veryicon.com/png/o/miscellaneous/currency/update-12.png"
+              alt="Modificar Logs"
+              className="redirect-icon"
+              style={{ cursor: "pointer", width: "50px", height: "50px", marginLeft: "10px" }}
+            />
+          </Link>
+        </div>
+
         <h1 className="title">Generador de Log de Cambios</h1>
         <form
           onSubmit={(e) => {
@@ -170,63 +181,26 @@ const ChangelogGenerator = () => {
           <label className="label">
             Proyectos:
             <div className="checkbox-group">
-              <label>
-                <input
-                  type="checkbox"
-                  value="MRG"
-                  checked={selectedCompanies.includes("MRG")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                MRG
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="OCC"
-                  checked={selectedCompanies.includes("OCC")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                OCC
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Godiz"
-                  checked={selectedCompanies.includes("Godiz")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                Godiz
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="GERP"
-                  checked={selectedCompanies.includes("GERP")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                GERP
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="Rubicon"
-                  checked={selectedCompanies.includes("Rubicon")}
-                  onChange={handleCompanyChange}
-                />
-                <div className="custom-checkbox"></div>
-                Rubicon
-              </label>
+              {["MRG", "OCC", "Godiz", "GERP", "Rubicon"].map((company) => (
+                <label key={company}>
+                  <input
+                    type="checkbox"
+                    value={company}
+                    checked={selectedCompanies.includes(company)}
+                    onChange={handleCompanyChange}
+                  />
+                  <div className="custom-checkbox"></div>
+                  {company}
+                </label>
+              ))}
             </div>
           </label>
           <label className="label">
-            Descripción:
+            Contenido:
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
               value={description}
+              onInit={(evt, editor) => (editorRef.current = editor)}
               init={{
                 height: 300,
                 menubar: false,
@@ -234,11 +208,23 @@ const ChangelogGenerator = () => {
                   "advlist autolink lists link image charmap print preview anchor",
                   "searchreplace visualblocks code fullscreen",
                   "insertdatetime media table paste code help wordcount",
+                  "textcolor",
+                  "autoresize",
+                  "autosave",
+                  "fontsize",
                 ],
                 toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
+                  "undo redo | formatselect | bold italic backcolor | fontsize | \
                   alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help",
+                  bullist numlist outdent indent | removeformat | help | \
+                  forecolor backcolor | link image",
+                fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+                autoresize: {
+                  enabled: true,
+                  min_height: 200, 
+                  max_height: 600, 
+                },
+                autoresize_bottom_margin: 10, 
               }}
               onEditorChange={(newValue) => setDescription(newValue)}
               required
@@ -247,50 +233,27 @@ const ChangelogGenerator = () => {
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${
-                isHovered === "generate" ? "button-hover" : ""
-              }`}
+              className={`button ${isHovered === "generate" ? "button-hover" : ""}`}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
-              Generar HTML
+              Generar Log
             </button>
           </div>
         </form>
+
         {generatedHtml && (
-          <div className="generated-html">
-            <h2 className="generated-title">HTML Generado:</h2>
-            <textarea
-              className="generated-textarea"
-              readOnly
-              value={generatedHtml}
-            />
-            <h2 className="generated-title">Código Fuente del Body:</h2>
-            <textarea
-              className="body-source-textarea"
-              readOnly
-              value={bodyContent}
-            />
-            <div className="button-container">
-              <button
-                onClick={sendJson}
-                className={`download-button ${
-                  isHovered === "download" ? "download-button-hover" : ""
-                }`}
-                onMouseEnter={() => setIsHovered("download")}
-                onMouseLeave={() => setIsHovered("")}
-              >
-                Enviar JSON
-              </button>
-            </div>
-          </div>
-        )}
-        {isLoading && (
-          <div className="loading-overlay">
-            <div className="loading-popup">
-              <div className="loading-spinner"></div>
-              <p>Cargando...</p>
-            </div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={`button ${isHovered === "send" ? "button-hover" : ""}`}
+              onMouseEnter={() => setIsHovered("send")}
+              onMouseLeave={() => setIsHovered("")}
+              onClick={sendJson}
+              disabled={isLoading}
+            >
+              {isLoading ? "Enviando..." : "Enviar JSON"}
+            </button>
           </div>
         )}
       </div>
