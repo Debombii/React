@@ -4,16 +4,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 
-// Función para convertir el contenido a Base64 de manera segura
-const encodeBase64 = (str) => {
-  try {
-    return btoa(unescape(encodeURIComponent(str)));
-  } catch (e) {
-    console.error('Error al convertir a Base64:', e);
-    return null;
-  }
-};
-
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
@@ -28,30 +18,29 @@ const LogManager = () => {
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
   const handleBuscarLogs = () => {
-  if (!empresa) {
-    setMensaje('Por favor, selecciona una empresa.');
-    return;
-  }
-  setCargando(true);
-  axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa })
-    .then((response) => {
-      if (response.data && response.data.titulos && response.data.titulos.length > 0) {
-        setTitulos(response.data.titulos);
-        setMensaje('');
-      } else {
-        setTitulos([]);
-        setMensaje('No se encontraron logs en esta empresa.');
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
-    })
-    .finally(() => {
-      setCargando(false);
-    });
-};
-
+    if (!empresa) {
+      setMensaje('Por favor, selecciona una empresa.');
+      return;
+    }
+    setCargando(true);
+    axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa })
+      .then((response) => {
+        if (response.data && response.data.titulos && response.data.titulos.length > 0) {
+          setTitulos(response.data.titulos);
+          setMensaje('');
+        } else {
+          setTitulos([]);
+          setMensaje('No se encontraron logs en esta empresa.');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
+      })
+      .finally(() => {
+        setCargando(false);
+      });
+  };
 
   const handleSeleccionarLog = (id) => {
     setTituloSeleccionado(id);
@@ -100,35 +89,20 @@ const LogManager = () => {
       return;
     }
 
-    // Convertir el contenido a Base64 de manera segura
-    const contenidoBase64 = encodeBase64(contenido);
-
-    if (!contenidoBase64) {
-      setMensaje('Error al convertir el contenido. Verifica el texto.');
-      return;
-    }
-    
-    console.log('Datos a enviar:', {
-      empresa,
-      ids: [tituloSeleccionado],
-      nuevoTitulo: titulo,
-      nuevoContenido: contenidoBase64
-    });
-
     try {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
         ids: [tituloSeleccionado],
         nuevoTitulo: titulo,
-        nuevoContenido: contenidoBase64
+        nuevoContenido: contenido
       });
 
       console.log('Respuesta de la API:', response); 
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
-        console.log('Log actualizado:', { titulo, contenidoBase64 });
+        console.log('Log actualizado:', { titulo, contenido });
         handleBuscarLogs();
         setMostrarEdicion(false);
         setTitulo('');
