@@ -45,12 +45,6 @@ const ChangelogGenerator = () => {
   const generateHtml = () => {
     const version = generateVersion();
 
-    const cleanContent = (content) => {
-      return content
-        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
-        .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
-    };
-
     const html = `
       <!DOCTYPE html>
       <html lang='es'>
@@ -58,17 +52,15 @@ const ChangelogGenerator = () => {
           <meta charset='UTF-8'>
           <meta name='viewport' content='width=device-width, initial-scale=1.0'>
           <title>${version}</title>
-          <style>
-          </style>
       </head>
       <body>
           <div class='container'>
               <div class='content'>
                   <div class='version'>
-                      <h2 class="base" id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                      <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                       <h3 class="titulo" id="${title}">${title}</h3>
-                      <h3 class="titular">Contenido</h3>
+                      <h3>Contenido</h3>
                       ${description}
                   </div>
               </div>
@@ -135,9 +127,8 @@ const ChangelogGenerator = () => {
           alt="Eliminar Logs"
           className="redirect-icon"
           onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
+          style={{ cursor: "pointer", width: "50px", height: "50px" }}
         />
-        <h1 className="title">Generador de Log de Cambios</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -173,7 +164,6 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("MRG")}
                   onChange={handleCompanyChange}
                 />
-                <div className="custom-checkbox"></div>
                 MRG
               </label>
               <label>
@@ -183,7 +173,6 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("OCC")}
                   onChange={handleCompanyChange}
                 />
-                <div className="custom-checkbox"></div>
                 OCC
               </label>
               <label>
@@ -193,7 +182,6 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("Godiz")}
                   onChange={handleCompanyChange}
                 />
-                <div className="custom-checkbox"></div>
                 Godiz
               </label>
               <label>
@@ -203,7 +191,6 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("GERP")}
                   onChange={handleCompanyChange}
                 />
-                <div className="custom-checkbox"></div>
                 GERP
               </label>
               <label>
@@ -213,7 +200,6 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("Rubicon")}
                   onChange={handleCompanyChange}
                 />
-                <div className="custom-checkbox"></div>
                 Rubicon
               </label>
             </div>
@@ -251,6 +237,7 @@ const ChangelogGenerator = () => {
             </button>
           </div>
         </form>
+
         {generatedHtml && (
           <div className="generated-html">
             <h2 className="generated-title">HTML Generado:</h2>
