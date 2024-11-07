@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
-import pako from 'pako';
 import { useNavigate } from 'react-router-dom';
 import "./App.css";
 
@@ -57,10 +56,10 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
-        const decodedData = atob(response.data.contenido); 
-        const decompressedData = pako.ungzip(decodedData, { to: 'string' });
+        // Decodificar Base64
+        const decodedData = atob(response.data.contenido); // Decodificamos el contenido
         setTitulo(response.data.titulo);
-        setContenido(decompressedData); 
+        setContenido(decodedData); // El contenido decodificado se establece aquí
         setMensaje('');
         setMostrarEdicion(true); 
       } else {
@@ -94,20 +93,18 @@ const LogManager = () => {
     try {
       setCargando(true);
 
-      // Comprimir el contenido (opcional) y luego codificarlo en Base64
-      const compressedContent = pako.gzip(contenido, { to: 'string' }); // Comprimir
-      const base64Content = btoa(compressedContent); // Codificar en Base64
+      // Codificar el contenido en Base64
+      const encodedContent = btoa(contenido); // Codificar en Base64
 
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
         id_log: tituloSeleccionado, 
         nuevoTitulo: titulo,
-        nuevoContenido: base64Content // Enviar el contenido codificado en Base64
+        nuevoContenido: encodedContent // Enviar el contenido codificado en Base64
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
-        console.log('Log actualizado:', { titulo, contenido });
         handleBuscarLogs(); 
         setMostrarEdicion(false);
         setTitulo(''); 
@@ -220,7 +217,7 @@ const LogManager = () => {
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Volver"
         className="redirect-icon"
-        onClick={handleRedirect}
+        onClick={() => navigate('/')}
         style={{ cursor: "pointer", width: "50px", height: "50px" }} 
       />
     </div>
