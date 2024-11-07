@@ -57,14 +57,17 @@ const LogManager = () => {
 
       if (response.data && response.data.titulo && response.data.contenido) {
         setTitulo(response.data.titulo);
-        setContenido(response.data.contenido);
+        setContenido(response.data.contenido); // Establecer contenido recibido
         setMensaje('');
+        setMostrarEdicion(true); // Mostrar el editor si se encuentra contenido
       } else {
         setMensaje('No se encontró el contenido del log.');
+        setMostrarEdicion(false); // No mostrar el editor si no hay contenido
       }
     } catch (error) {
       console.error(error);
       setMensaje('Error al obtener el contenido del log.');
+      setMostrarEdicion(false);
     } finally {
       setCargando(false);
     }
@@ -167,7 +170,7 @@ const LogManager = () => {
         </div>
       )}
 
-      {mostrarEdicion && tituloSeleccionado && (
+      {mostrarEdicion && tituloSeleccionado && contenido && (
         <div className="edit-log-container">
           <h3>Editar Log</h3>
           <div>
@@ -183,23 +186,22 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-  apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-  value={contenido} 
-  onEditorChange={(newValue) => setContenido(newValue)}
-  init={{
-    height: 500,
-    menubar: true,
-    plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
-    toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
-    fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
-    autoresize: {
-      enabled: true,
-      min_height: 200,
-      max_height: 1000,
-    },
-  }}
-/>
-
+              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+              value={contenido} // El contenido recibido se pasa aquí
+              onEditorChange={(newValue) => setContenido(newValue)} // Actualiza el contenido cuando se edite
+              init={{
+                height: 500,
+                menubar: true,
+                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
+                toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+                fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+                autoresize: {
+                  enabled: true,
+                  min_height: 200,
+                  max_height: 1000,
+                },
+              }}
+            />
           </div>
 
           <div className="button-container">
@@ -209,6 +211,7 @@ const LogManager = () => {
           </div>
         </div>
       )}
+      
       <img
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Volver"
