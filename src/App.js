@@ -46,16 +46,15 @@ const ChangelogGenerator = () => {
     return `${month}${year}-${randomNumbers}`;
   };
 
-  const cleanContent = (content) => {
-    return content
-      .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
-      .replace(/<p><\/p>/g, '');
-  };
-
   const generateHtml = () => {
     const version = generateVersion();
-    const cleanedDescription = cleanContent(description);
     
+    const cleanContent = (content) => {
+      return content
+        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
+        .replace(/<p><\/p>/g, '');
+    };
+
     const html = `
       <!DOCTYPE html>
       <html lang='es'>
@@ -70,13 +69,11 @@ const ChangelogGenerator = () => {
           <div class='container'>
               <div class='content'>
                   <div class='version'>
-                      <h2 class="base" id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                      <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
-                      <h3 class="titular" id="${title}">${title}</h3>
+                      <h3 class="titulo" id="${title}">${title}</h3>
                       <h3 class="titular">Contenido</h3>
-                      <div class="description-content">
-                        ${cleanedDescription}
-                      </div>
+                      ${description}
                   </div>
               </div>
           </div>
