@@ -164,7 +164,7 @@ const LogManager = () => {
 
           <div className="button-container">
             <button className="danger-button" onClick={handleActualizarLog} disabled={cargando || !tituloSeleccionado}>
-              {cargando ? 'Cargando...' : 'Actualizar Log'}
+              {cargando ? 'Cargando...' : 'Seleccionar Log'}
             </button>
           </div>
         </div>
@@ -187,8 +187,8 @@ const LogManager = () => {
             <label htmlFor="contenido">Contenido:</label>
             <Editor
               apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={contenido} // El contenido recibido se pasa aquí
-              onEditorChange={(newValue) => setContenido(newValue)} // Actualiza el contenido cuando se edite
+              value={contenido}
+              onEditorChange={(newValue) => setContenido(newValue)}
               init={{
                 height: 500,
                 menubar: true,
