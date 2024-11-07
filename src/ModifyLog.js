@@ -183,22 +183,23 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={contenido} // Enviamos el contenido al editor
-              onEditorChange={(newValue) => setContenido(newValue)}
-              init={{
-                height: 500,
-                menubar: true,
-                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
-                toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
-                fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
-                autoresize: {
-                  enabled: true,
-                  min_height: 200, // Altura mínima
-                  max_height: 1000, // Altura máxima
-                },
-              }}
-            />
+  apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+  value={contenido} 
+  onEditorChange={(newValue) => setContenido(newValue)}
+  init={{
+    height: 500,
+    menubar: true,
+    plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
+    toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+    fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+    autoresize: {
+      enabled: true,
+      min_height: 200,
+      max_height: 1000,
+    },
+  }}
+/>
+
           </div>
 
           <div className="button-container">
