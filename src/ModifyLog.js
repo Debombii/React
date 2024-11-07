@@ -4,6 +4,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 
+// Función para convertir el contenido a Base64 de manera segura
+const encodeBase64 = (str) => {
+  try {
+    return btoa(unescape(encodeURIComponent(str)));
+  } catch (e) {
+    console.error('Error al convertir a Base64:', e);
+    return null;
+  }
+};
+
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
   const [titulos, setTitulos] = useState([]);
@@ -86,7 +96,22 @@ const LogManager = () => {
       setMensaje('Por favor, completa ambos campos (título y contenido).');
       return;
     }
-    const contenidoBase64 = btoa(unescape(encodeURIComponent(contenido)));
+
+    // Convertir el contenido a Base64 de manera segura
+    const contenidoBase64 = encodeBase64(contenido);
+
+    if (!contenidoBase64) {
+      setMensaje('Error al convertir el contenido. Verifica el texto.');
+      return;
+    }
+
+    // Validación de datos antes de enviarlos
+    console.log('Datos a enviar:', {
+      empresa,
+      ids: [tituloSeleccionado],
+      nuevoTitulo: titulo,
+      nuevoContenido: contenidoBase64
+    });
 
     try {
       setCargando(true);
@@ -96,6 +121,8 @@ const LogManager = () => {
         nuevoTitulo: titulo,
         nuevoContenido: contenidoBase64
       });
+
+      console.log('Respuesta de la API:', response); 
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
@@ -108,7 +135,7 @@ const LogManager = () => {
         setMensaje('Error al actualizar el log.');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error al guardar log:', error);
       setMensaje('Error al guardar el log. Inténtalo de nuevo.');
     } finally {
       setCargando(false);
@@ -116,7 +143,7 @@ const LogManager = () => {
   };
 
   const handleRedirect = () => {
-    navigate('/'); // Redirige a la página principal
+    navigate('/');
   };
 
   return (
