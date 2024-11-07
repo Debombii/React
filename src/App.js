@@ -31,7 +31,6 @@ const ChangelogGenerator = () => {
   };
 
   const extractContent = (html) => {
-    // Extrae el contenido dentro del div con la clase 'version' 
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
       return contentMatch[0];
@@ -49,8 +48,7 @@ const ChangelogGenerator = () => {
 
   const generateHtml = () => {
     const version = generateVersion();
-
-    // Limpiamos el contenido antes de guardarlo
+    
     const cleanContent = (content) => {
       return content
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
@@ -71,10 +69,10 @@ const ChangelogGenerator = () => {
           <div class='container'>
               <div class='content'>
                   <div class='version'>
-                      <h2 class="base" id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                      <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                       <h3 class="titulo" id="${title}">${title}</h3>
-                      <h3 class="titular">Contenido</h3>
+                      <h3>Contenido</h3>
                       ${description}
                   </div>
               </div>
@@ -82,11 +80,8 @@ const ChangelogGenerator = () => {
       </body>
       </html>
     `;
-
-    // Limpiar y actualizar el contenido
-    const cleanedHtml = cleanContent(html);
-    setGeneratedHtml(cleanedHtml);
-    setBodyContent(unescapeHtml(extractContent(cleanedHtml)));
+    setGeneratedHtml(html);
+    setBodyContent(unescapeHtml(extractContent(html)));
   };
 
   const sendJson = () => {
@@ -243,17 +238,31 @@ const ChangelogGenerator = () => {
         </form>
 
         {generatedHtml && (
-          <div className="button-container">
-            <button
-              type="button"
-              className={`button ${isHovered === "send" ? "button-hover" : ""}`}
-              onMouseEnter={() => setIsHovered("send")}
-              onMouseLeave={() => setIsHovered("")}
-              onClick={sendJson}
-              disabled={isLoading}
-            >
-              {isLoading ? "Enviando..." : "Enviar JSON"}
-            </button>
+          <div className="generated-html">
+            <h2 className="generated-title">HTML Generado:</h2>
+            <textarea
+              className="generated-textarea"
+              readOnly
+              value={generatedHtml}
+            />
+            <h2 className="generated-title">Código Fuente del Body:</h2>
+            <textarea
+              className="body-source-textarea"
+              readOnly
+              value={bodyContent}
+            />
+            <div className="button-container">
+              <button
+                type="button"
+                className={`button ${isHovered === "send" ? "button-hover" : ""}`}
+                onMouseEnter={() => setIsHovered("send")}
+                onMouseLeave={() => setIsHovered("")}
+                onClick={sendJson}
+                disabled={isLoading}
+              >
+                {isLoading ? "Enviando..." : "Enviar JSON"}
+              </button>
+            </div>
           </div>
         )}
       </div>
