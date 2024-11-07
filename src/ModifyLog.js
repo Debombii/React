@@ -84,39 +84,48 @@ const LogManager = () => {
   };
 
   const handleGuardarLog = async () => {
-    if (!titulo || !contenido) {
-      setMensaje('Por favor, completa ambos campos (título y contenido).');
-      return;
+  if (!titulo || !contenido) {
+    setMensaje('Por favor, completa ambos campos (título y contenido).');
+    return;
+  }
+  const contenidoBase64 = encodeBase64(contenido);
+
+  if (!contenidoBase64) {
+    setMensaje('Error al convertir el contenido. Verifica el texto.');
+    return;
+  }
+  console.log('Datos a enviar:', {
+    empresa,
+    id: tituloSeleccionado,  // Cambiado de 'ids' a 'id' para enviar un solo ID
+    nuevoTitulo: titulo,
+    nuevoContenido: contenidoBase64
+  });
+  try {
+    setCargando(true);
+    const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
+      empresa,
+      id: tituloSeleccionado,  // Cambiado de 'ids' a 'id'
+      nuevoTitulo: titulo,
+      nuevoContenido: contenidoBase64
+    });
+    console.log('Respuesta de la API:', response); 
+    if (response.data && response.data.message === 'Logs modificados correctamente') {
+      setMensaje('Log actualizado correctamente.');
+      console.log('Log actualizado:', { titulo, contenidoBase64 });
+      handleBuscarLogs();
+      setMostrarEdicion(false);
+      setTitulo('');
+      setContenido('');
+    } else {
+      setMensaje('Error al actualizar el log.');
     }
-
-    try {
-      setCargando(true);
-      const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
-        empresa,
-        ids: [tituloSeleccionado],
-        nuevoTitulo: titulo,
-        nuevoContenido: contenido
-      });
-
-      console.log('Respuesta de la API:', response); 
-
-      if (response.data && response.data.message === 'Logs modificados correctamente') {
-        setMensaje('Log actualizado correctamente.');
-        console.log('Log actualizado:', { titulo, contenido });
-        handleBuscarLogs();
-        setMostrarEdicion(false);
-        setTitulo('');
-        setContenido('');
-      } else {
-        setMensaje('Error al actualizar el log.');
-      }
-    } catch (error) {
-      console.error('Error al guardar log:', error);
-      setMensaje('Error al guardar el log. Inténtalo de nuevo.');
-    } finally {
-      setCargando(false);
-    }
-  };
+  } catch (error) {
+    console.error('Error al guardar log:', error);
+    setMensaje('Error al guardar el log. Inténtalo de nuevo.');
+  } finally {
+    setCargando(false);
+  }
+};
 
   const handleRedirect = () => {
     navigate('/');
