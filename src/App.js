@@ -6,7 +6,6 @@ import "./App.css";
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
-  const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
   const [title, setTitle] = useState("");
   const [isHovered, setIsHovered] = useState("");
@@ -48,7 +47,7 @@ const ChangelogGenerator = () => {
 
   const generateHtml = () => {
     const version = generateVersion();
-    
+
     const cleanContent = (content) => {
       return content
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
@@ -79,8 +78,8 @@ const ChangelogGenerator = () => {
       </body>
       </html>
     `;
-    setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
+    return html;
   };
 
   const sendJson = () => {
@@ -117,6 +116,12 @@ const ChangelogGenerator = () => {
     );
   };
 
+  const handleGenerateLog = (e) => {
+    e.preventDefault();
+    const generatedHtml = generateHtml(); // Genera el HTML
+    sendJson(); // Envia el JSON con el contenido generado
+  };
+
   return (
     <div>
       <header className="header">
@@ -147,13 +152,7 @@ const ChangelogGenerator = () => {
         </div>
 
         <h1 className="title">Generador de Log de Cambios</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            generateHtml();
-          }}
-          className="form"
-        >
+        <form onSubmit={handleGenerateLog} className="form">
           <label className="label">
             Fecha:
             <input
@@ -231,39 +230,10 @@ const ChangelogGenerator = () => {
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
-              Generar Log
+              {isLoading ? "Enviando..." : "Generar Log"}
             </button>
           </div>
         </form>
-
-        {generatedHtml && (
-          <div className="generated-html">
-            <h2 className="generated-title">HTML Generado:</h2>
-            <textarea
-              className="generated-textarea"
-              readOnly
-              value={generatedHtml}
-            />
-            <h2 className="generated-title">Código Fuente del Body:</h2>
-            <textarea
-              className="body-source-textarea"
-              readOnly
-              value={bodyContent}
-            />
-            <div className="button-container">
-              <button
-                type="button"
-                className={`button ${isHovered === "send" ? "button-hover" : ""}`}
-                onMouseEnter={() => setIsHovered("send")}
-                onMouseLeave={() => setIsHovered("")}
-                onClick={sendJson}
-                disabled={isLoading}
-              >
-                {isLoading ? "Enviando..." : "Enviar JSON"}
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
