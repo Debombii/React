@@ -72,7 +72,6 @@ const ChangelogGenerator = () => {
                       <h2 id="${version.trim().replace(/\s+/g, "-")}" class="base">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                       <h3 class="titulo" id="${title}">${title}</h3>
-                      <h3 class="titular">Contenido</h3>
                       ${description}
                   </div>
               </div>
