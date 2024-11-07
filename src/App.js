@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 const ChangelogGenerator = () => {
   const [description, setDescription] = useState("");
+  const [versionNotes, setVersionNotes] = useState("");
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [bodyContent, setBodyContent] = useState("");
@@ -38,20 +39,30 @@ const ChangelogGenerator = () => {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = String(today.getFullYear()).slice(-2);
-    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(4, "0");
-    return `${month}${year}-${randomNumbers}`;
+    const randomNumbers = String(Math.floor(Math.random() * 1000)).padStart(
+      4,
+      "0"
+    );
+    return ${month}${year}-${randomNumbers};
   };
 
   const generateHtml = () => {
     const version = generateVersion();
 
-    const html = `
+    const cleanContent = (content) => {
+      return content
+        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
+        .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
+    };
+    const html = 
       <!DOCTYPE html>
       <html lang='es'>
       <head>
           <meta charset='UTF-8'>
           <meta name='viewport' content='width=device-width, initial-scale=1.0'>
           <title>${version}</title>
+          <style>
+          </style>
       </head>
       <body>
           <div class='container'>
@@ -67,7 +78,7 @@ const ChangelogGenerator = () => {
           </div>
       </body>
       </html>
-    `;
+    ;
 
     setGeneratedHtml(html);
     setBodyContent(unescapeHtml(extractContent(html)));
@@ -108,6 +119,7 @@ const ChangelogGenerator = () => {
     );
   };
 
+  // Función para redirigir al endpoint /logs
   const handleRedirect = () => {
     window.location.href = '/logs'; // Redirige a /logs
   };
@@ -127,8 +139,9 @@ const ChangelogGenerator = () => {
           alt="Eliminar Logs"
           className="redirect-icon"
           onClick={handleRedirect}
-          style={{ cursor: "pointer", width: "50px", height: "50px" }}
+          style={{ cursor: "pointer", width: "50px", height: "50px" }} // Ajusta el tamaño aquí
         />
+        <h1 className="title">Generador de Log de Cambios</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -164,6 +177,7 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("MRG")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 MRG
               </label>
               <label>
@@ -173,6 +187,7 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("OCC")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 OCC
               </label>
               <label>
@@ -182,6 +197,7 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("Godiz")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 Godiz
               </label>
               <label>
@@ -191,6 +207,7 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("GERP")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 GERP
               </label>
               <label>
@@ -200,6 +217,7 @@ const ChangelogGenerator = () => {
                   checked={selectedCompanies.includes("Rubicon")}
                   onChange={handleCompanyChange}
                 />
+                <div className="custom-checkbox"></div>
                 Rubicon
               </label>
             </div>
@@ -229,7 +247,9 @@ const ChangelogGenerator = () => {
           <div className="button-container">
             <button
               type="submit"
-              className={`button ${isHovered === "generate" ? "button-hover" : ""}`}
+              className={button ${
+                isHovered === "generate" ? "button-hover" : ""
+              }}
               onMouseEnter={() => setIsHovered("generate")}
               onMouseLeave={() => setIsHovered("")}
             >
@@ -237,7 +257,6 @@ const ChangelogGenerator = () => {
             </button>
           </div>
         </form>
-
         {generatedHtml && (
           <div className="generated-html">
             <h2 className="generated-title">HTML Generado:</h2>
@@ -255,7 +274,9 @@ const ChangelogGenerator = () => {
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={`download-button ${isHovered === "download" ? "download-button-hover" : ""}`}
+                className={download-button ${
+                  isHovered === "download" ? "download-button-hover" : ""
+                }}
                 onMouseEnter={() => setIsHovered("download")}
                 onMouseLeave={() => setIsHovered("")}
               >
