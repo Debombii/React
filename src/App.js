@@ -252,7 +252,9 @@ const ChangelogGenerator = () => {
             <div className="button-container">
               <button
                 onClick={sendJson}
-                className={`download-button ${isHovered === "download" ? "download-button-hover" : ""}`}
+                className={download-button ${
+                  isHovered === "download" ? "download-button-hover" : ""
+                }}
                 onMouseEnter={() => setIsHovered("download")}
                 onMouseLeave={() => setIsHovered("")}
               >
