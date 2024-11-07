@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Editor } from '@tinymce/tinymce-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'; 
 import "./App.css";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
 
 const LogManager = () => {
   const [empresa, setEmpresa] = useState('');
@@ -56,20 +56,15 @@ const LogManager = () => {
       const response = await axios.post('https://flask-five-jade.vercel.app/obtener-log', { empresa, id });
 
       if (response.data && response.data.titulo && response.data.contenido) {
-        // Decodificar Base64
-        const decodedData = atob(response.data.contenido); // Decodificamos el contenido
         setTitulo(response.data.titulo);
-        setContenido(decodedData); // El contenido decodificado se establece aquí
+        setContenido(response.data.contenido);
         setMensaje('');
-        setMostrarEdicion(true); 
       } else {
         setMensaje('No se encontró el contenido del log.');
-        setMostrarEdicion(false);
       }
     } catch (error) {
       console.error(error);
       setMensaje('Error al obtener el contenido del log.');
-      setMostrarEdicion(false);
     } finally {
       setCargando(false);
     }
@@ -92,22 +87,19 @@ const LogManager = () => {
 
     try {
       setCargando(true);
-
-      // Codificar el contenido en Base64
-      const encodedContent = btoa(contenido); // Codificar en Base64
-
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
-        id_log: tituloSeleccionado, 
+        ids: [tituloSeleccionado],
         nuevoTitulo: titulo,
-        nuevoContenido: encodedContent // Enviar el contenido codificado en Base64
+        nuevoContenido: contenido 
       });
 
       if (response.data && response.data.message === 'Logs modificados correctamente') {
         setMensaje('Log actualizado correctamente.');
+        console.log('Log actualizado:', { titulo, contenido });
         handleBuscarLogs(); 
         setMostrarEdicion(false);
-        setTitulo(''); 
+        setTitulo('');
         setContenido('');
       } else {
         setMensaje('Error al actualizar el log.');
@@ -118,6 +110,10 @@ const LogManager = () => {
     } finally {
       setCargando(false);
     }
+  };
+
+  const handleRedirect = () => {
+    navigate('/'); // Redirige a la página principal
   };
 
   return (
@@ -171,7 +167,7 @@ const LogManager = () => {
         </div>
       )}
 
-      {mostrarEdicion && tituloSeleccionado && contenido && (
+      {mostrarEdicion && tituloSeleccionado && (
         <div className="edit-log-container">
           <h3>Editar Log</h3>
           <div>
@@ -187,22 +183,23 @@ const LogManager = () => {
           <div>
             <label htmlFor="contenido">Contenido:</label>
             <Editor
-              apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
-              value={contenido} // El contenido recibido se pasa aquí
-              onEditorChange={(newValue) => setContenido(newValue)} 
-              init={{
-                height: 500,
-                menubar: true,
-                plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
-                toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
-                fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
-                autoresize: {
-                  enabled: true,
-                  min_height: 200,
-                  max_height: 1000,
-                },
-              }}
-            />
+  apiKey="7a1g5nuzi6ya3heq0tir17f9lxstt7xlljnlavx1agc1n70n"
+  value={contenido} 
+  onEditorChange={(newValue) => setContenido(newValue)}
+  init={{
+    height: 500,
+    menubar: true,
+    plugins: ['lists', 'link', 'image', 'table', 'textcolor', 'fontsize', 'autosave', 'autoresize'],
+    toolbar: 'undo redo | formatselect | bold italic | fontselect | fontsize | forecolor | backcolor | alignleft aligncenter alignright | outdent indent | bullist numlist | link image',
+    fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+    autoresize: {
+      enabled: true,
+      min_height: 200,
+      max_height: 1000,
+    },
+  }}
+/>
+
           </div>
 
           <div className="button-container">
@@ -212,12 +209,11 @@ const LogManager = () => {
           </div>
         </div>
       )}
-      
       <img
         src="https://cdn-icons-png.flaticon.com/512/0/340.png"
         alt="Volver"
         className="redirect-icon"
-        onClick={() => navigate('/')}
+        onClick={handleRedirect}
         style={{ cursor: "pointer", width: "50px", height: "50px" }} 
       />
     </div>
