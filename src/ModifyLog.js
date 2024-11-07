@@ -27,14 +27,14 @@ const LogManager = () => {
 
   const empresas = ['MRG', 'Rubicon', 'GERP', 'Godiz', 'OCC'];
 
-  const handleBuscarLogs = async () => {
-    if (!empresa) {
-      setMensaje('Por favor, selecciona una empresa.');
-      return;
-    }
-    try {
-      setCargando(true);
-      const response = await axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa });
+  const handleBuscarLogs = () => {
+  if (!empresa) {
+    setMensaje('Por favor, selecciona una empresa.');
+    return;
+  }
+  setCargando(true);
+  axios.post('https://flask-five-jade.vercel.app/listar-titulos', { empresa })
+    .then((response) => {
       if (response.data && response.data.titulos && response.data.titulos.length > 0) {
         setTitulos(response.data.titulos);
         setMensaje('');
@@ -42,13 +42,16 @@ const LogManager = () => {
         setTitulos([]);
         setMensaje('No se encontraron logs en esta empresa.');
       }
-    } catch (error) {
+    })
+    .catch((error) => {
       console.error(error);
       setMensaje('Error al buscar los logs. Inténtalo de nuevo.');
-    } finally {
+    })
+    .finally(() => {
       setCargando(false);
-    }
-  };
+    });
+};
+
 
   const handleSeleccionarLog = (id) => {
     setTituloSeleccionado(id);
@@ -104,8 +107,7 @@ const LogManager = () => {
       setMensaje('Error al convertir el contenido. Verifica el texto.');
       return;
     }
-
-    // Validación de datos antes de enviarlos
+    
     console.log('Datos a enviar:', {
       empresa,
       ids: [tituloSeleccionado],
