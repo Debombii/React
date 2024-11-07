@@ -79,7 +79,7 @@ const LogManager = () => {
       return;
     }
     setMostrarEdicion(true);
-    handleObtenerContenidoLog(tituloSeleccionado);
+    handleObtenerContenidoLog(tituloSeleccionado); // Actualizamos el contenido del log seleccionado
   };
 
   const handleGuardarLog = async () => {
@@ -92,7 +92,7 @@ const LogManager = () => {
       setCargando(true);
       const response = await axios.post('https://flask-five-jade.vercel.app/modificar-log', {
         empresa,
-        ids: [tituloSeleccionado],
+        id_log: tituloSeleccionado, // Ahora pasamos el ID del log y no un array
         nuevoTitulo: titulo,
         nuevoContenido: contenido 
       });
@@ -102,7 +102,7 @@ const LogManager = () => {
         console.log('Log actualizado:', { titulo, contenido });
         handleBuscarLogs(); 
         setMostrarEdicion(false);
-        setTitulo('');
+        setTitulo(''); 
         setContenido('');
       } else {
         setMensaje('Error al actualizar el log.');
