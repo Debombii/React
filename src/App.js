@@ -31,6 +31,7 @@ const ChangelogGenerator = () => {
   };
 
   const extractContent = (html) => {
+    // Extrae el contenido dentro del div con la clase 'version' 
     const contentMatch = html.match(/<div class='version'>([\s\S]*?)<\/div>/);
     if (contentMatch) {
       return contentMatch[0];
@@ -52,8 +53,8 @@ const ChangelogGenerator = () => {
     // Limpiamos el contenido antes de guardarlo
     const cleanContent = (content) => {
       return content
-        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>') // Reemplaza <p><p>...</p></p>
-        .replace(/<p><\/p>/g, ''); // Elimina párrafos vacíos
+        .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
+        .replace(/<p><\/p>/g, '');
     };
 
     const html = `
@@ -70,10 +71,10 @@ const ChangelogGenerator = () => {
           <div class='container'>
               <div class='content'>
                   <div class='version'>
-                      <h2 id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
+                      <h2 class="base" id="${version.trim().replace(/\s+/g, "-")}">${version}</h2>
                       <p class='date' id="date">${new Date().toLocaleDateString("es-ES")}</p>
                       <h3 class="titulo" id="${title}">${title}</h3>
-                      <h3>Contenido</h3>
+                      <h3 class="titular">Contenido</h3>
                       ${description}
                   </div>
               </div>
@@ -83,8 +84,9 @@ const ChangelogGenerator = () => {
     `;
 
     // Limpiar y actualizar el contenido
-    setGeneratedHtml(html);
-    setBodyContent(unescapeHtml(extractContent(html)));
+    const cleanedHtml = cleanContent(html);
+    setGeneratedHtml(cleanedHtml);
+    setBodyContent(unescapeHtml(extractContent(cleanedHtml)));
   };
 
   const sendJson = () => {
@@ -94,8 +96,6 @@ const ChangelogGenerator = () => {
     };
 
     setIsLoading(true);
-
-    // Enviar el JSON a la API
     fetch("https://flask-five-jade.vercel.app/upload-file", {
       method: "POST",
       headers: {
