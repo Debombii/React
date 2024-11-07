@@ -11,7 +11,6 @@ const ChangelogGenerator = () => {
   const [title, setTitle] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const editorRef = useRef(null);
   const navigate = useNavigate();
 
