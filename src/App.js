@@ -88,7 +88,7 @@ const ChangelogGenerator = () => {
     };
 
     setIsLoading(true);
-    fetch("https://flask-five-jade.vercel.app/upload-file", {
+    fetch("http://127.0.0.1:5000/upload-file", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -194,7 +194,7 @@ const ChangelogGenerator = () => {
               value={description}
               onInit={(evt, editor) => (editorRef.current = editor)}
               init={{
-                height: 300,
+                height: 3000,
                 menubar: false,
                 plugins: [
                   "advlist autolink lists link image charmap print preview anchor",
@@ -213,10 +213,10 @@ const ChangelogGenerator = () => {
                 fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                 autoresize: {
                   enabled: true,
-                  min_height: 200, 
-                  max_height: 600, 
+                  min_height: 2000, 
+                  max_height: 6000, 
                 },
-                autoresize_bottom_margin: 10, 
+                autoresize_bottom_margin: 200, 
               }}
               onEditorChange={(newValue) => setDescription(newValue)}
               required
