@@ -88,7 +88,7 @@ const ChangelogGenerator = () => {
     };
 
     setIsLoading(true);
-    fetch("http://127.0.0.1:5000/upload-file", {
+    fetch("https://flask-five-jade.vercel.app/upload-file", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
