@@ -13,6 +13,7 @@ const ChangelogGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const editorRef = useRef(null);
   const navigate = useNavigate();
+
   const escapeHtml = (html) => {
     return html
       .replace(/&/g, "&amp;")
@@ -46,7 +47,6 @@ const ChangelogGenerator = () => {
 
   const generateHtml = () => {
     const version = generateVersion();
-    
     const cleanContent = (content) => {
       return content
         .replace(/<p><p>(.*?)<\/p><\/p>/g, '<p>$1</p>')
